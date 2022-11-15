@@ -18,7 +18,7 @@ class Candidate(models.Model):
 class Recruiter(models.Model):
     name = models.CharField(max_length=200)
     company = models.CharField(max_length=300)
-    zipcode = models.TextField()
+    zipcode = models.CharField(max_length=10)
     username =  models.CharField(max_length=200)
     password = models.CharField(max_length=200)
     
@@ -26,10 +26,14 @@ class Recruiter(models.Model):
         return f"Name:{self.name}\Company: {self.company}"
 
 class Post(models.Model):
-    title = models.CharField(max_length=200)
-    content = models.TextField()
-    author_name = models.CharField(max_length=200)
-    pub_date = models.DateTimeField('date published')
+    position_title = models.CharField(max_length=200)
+    position_type = models.CharField(max_length=200)
+    location = models.CharField(max_length=200)
+    preferred_skills = models.TextField()
+    description = models.TextField()
+    company = models.CharField(max_length=200)
+    expiration_date = models.DateTimeField('date published')
+    status = models.CharField(max_length=200)
 
     def __str__(self):
         return f"{self.title} by {self.author_name} ({self.pub_date})"
