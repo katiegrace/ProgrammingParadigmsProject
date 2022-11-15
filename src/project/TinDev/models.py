@@ -32,8 +32,8 @@ class Post(models.Model):
     preferred_skills = models.TextField()
     description = models.TextField()
     company = models.CharField(max_length=200)
-    expiration_date = models.DateTimeField('date published')
+    expiration_date = models.DateTimeField('expiration date')
     status = models.CharField(max_length=200)
 
     def __str__(self):
-        return f"{self.title} by {self.author_name} ({self.pub_date})"
+        return f"{self.position_title}\n{self.company}\n{self.location}\n{self.description}"
