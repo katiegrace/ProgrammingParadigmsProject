@@ -1,15 +1,4 @@
 {% extends "TinDev/base.html" %}
-{% block title %}List all job postings{% endblock %}
-
-<!--Create Profile-->
-
-<div class="container py-5"
-    <h1>Create Profile</h1>
-    <form method="POST"
-        {% csrf_token %}
-        <button class="btn btn-primary" type="submit">Create Profile</button>
-	</form>
-	<p class="text-center">If you already have an account, <a href="/login">login</a> instead.</p>
-</div>
+{% block content %}
 
 {% endblock %}
