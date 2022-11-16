@@ -1,7 +1,8 @@
-'''from django.contrib.auth.models import User  # add this
+
 from django.db import models
-from django.db.models.signals import post_save  # add this
-from django.dispatch import receiver  # add this
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+
+'''
 from django.shortcuts import render,redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate,login
@@ -49,8 +50,6 @@ class Post(models.Model):
     def __str__(self):
         return f"{self.position_title}\n{self.company}\n{self.location}\n{self.description}"
         '''
-from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 # Create your models here.
 
@@ -83,14 +82,14 @@ class UserModel(AbstractBaseUser):
     name = models.CharField(max_length=100)
     bio = models.CharField(max_length=500, null=True, blank=True)
     company = models.CharField(max_length=100)
-    zip_code = models.CharField(max_length=5)
+    zipcode = models.CharField(max_length=5)
     skills = models.CharField(max_length=500, null=True, blank=True)
-    github = models.CharField(max_length=100, null=True, blank=True)
-    experience_years = models.IntegerField(null=True, blank=True)
+    git_username = models.CharField(max_length=100, null=True, blank=True)
+    years_exp = models.IntegerField(null=True, blank=True)
     education = models.CharField(max_length=100, null=True, blank=True)
-    username = models.CharField(
-        max_length=100, unique=True, null=False, blank=False)
+    username = models.CharField(max_length=100, unique=True, null=False, blank=False)
     password = models.CharField(max_length=100)
+    
     USERNAME_FIELD = "username"
     REQUIRED_FIELDS = []
 

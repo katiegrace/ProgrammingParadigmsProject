@@ -1,5 +1,5 @@
-from django.urls import path
-from . import views
+from django.urls import include,path
+from django.contrib import admin
 
 '''
 app_name='TinDev'
@@ -9,12 +9,8 @@ urlpatterns = [
     #path('<int:pk>/',views.PostDetailView.as_view(), name='detail'),
 ]
 '''
-
-from django.urls import path, include
-from django.conf import settings
-from . import views
-from django.conf.urls.static import static
  
 urlpatterns = [
-         path('', views.index, name='index'),
+    path('admin/', admin.site.urls),
+    path('', include('project.urls')),
 ]
