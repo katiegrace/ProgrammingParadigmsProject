@@ -1,18 +1,21 @@
 {% extends "TinDev/base.html" %}
-{% block title %}List all blog posts{% endblock %}
+{% block title %}List all job postings{% endblock %}
 <b>
     <h1>"TinDev"</h1>
 </b>
 {% block content %}
-    {% if blogs %}
+    {% if jobs %}
     <b>
         <h1><u>TinDev</u></h1>
     </b>
         <ul>
-        {% for blog in blogs%}
+        {% for job in jobs%}
             <li>
-                <a href="/blog/{{ blog.id }}/">{{blog.title}} by
-                   <i>{{blog.author_name}}</i> ({{blog.pub_date}})
+                <a>{{job.position_title}}
+                   {{job.company}}
+                   {{job.status}}
+                   {{job.type}}
+                   {{job.num_interested}}
                 </a>
             </li>
         {% endfor %}

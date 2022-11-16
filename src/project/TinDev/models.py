@@ -34,6 +34,7 @@ class Post(models.Model):
     company = models.CharField(max_length=200)
     expiration_date = models.DateTimeField('expiration date')
     status = models.CharField(max_length=200)
+    num_interested = models.CharField(max_length=100)
 
     def __str__(self):
         return f"{self.position_title}\n{self.company}\n{self.location}\n{self.description}"
