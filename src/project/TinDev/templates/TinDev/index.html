@@ -1,0 +1,23 @@
+{% extends "TinDev/base.html" %}
+{% block title %}List all blog posts{% endblock %}
+<b>
+    <h1>"TinDev"</h1>
+</b>
+{% block content %}
+    {% if blogs %}
+    <b>
+        <h1><u>TinDev</u></h1>
+    </b>
+        <ul>
+        {% for blog in blogs%}
+            <li>
+                <a href="/blog/{{ blog.id }}/">{{blog.title}} by
+                   <i>{{blog.author_name}}</i> ({{blog.pub_date}})
+                </a>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No blogs are available.</p>
+    {% endif %}
+{% endblock %}

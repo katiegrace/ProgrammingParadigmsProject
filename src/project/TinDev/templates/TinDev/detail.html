@@ -1,0 +1,18 @@
+{% extends "TinDev/base.html" %}
+{% block title %}{{ post.title}}{% endblock %}
+{% block content %}
+<!-- Post-->
+	<body>
+		<h1>{{post.position_title}}</h1>
+		<br><br>
+		<h2>
+			<b>Company: </b>
+			({{post.company}})
+		</h2>
+        <p> 
+			<b>Type: </b>
+			<i>{{post.position_type}}</i>
+		</p>
+		<br><br>
+		<p4>{{post.content}}</p4>	 
+{% endblock %}
