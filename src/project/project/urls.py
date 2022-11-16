@@ -20,5 +20,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('TinDev', include('TinDev.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('login/', include('login.urls')),
+    path('login/', include('login.urls')),hi
 ]
