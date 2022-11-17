@@ -86,9 +86,14 @@ from project.models import CandidateProfile
 from project.forms import RecruiterForm
 from project.models import RecruiterProfile
 
-
+def index(request):
+    return render(request, 'project/index.html', {'title':'index'})
+  
 def login(request):
     return render(request, 'project/login.html')
+
+def login_rec(request):
+    return render(request, 'project/login_rec.html')
 
 def candidateProfile(request):
     if request.POST:

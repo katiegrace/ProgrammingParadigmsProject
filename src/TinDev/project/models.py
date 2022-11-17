@@ -88,3 +88,14 @@ class RecruiterProfile(models.Model):
     zipcode = models.CharField(max_length=10)
     username =  models.CharField(max_length=200)
     password = models.CharField(max_length=200)
+
+class Post(models.Model):
+    position_title = models.CharField(max_length=200)
+    position_type = models.CharField(max_length=200)
+    location = models.CharField(max_length=200)
+    preferred_skills = models.TextField()
+    description = models.TextField()
+    company = models.CharField(max_length=200)
+    expiration_date = models.DateTimeField('expiration date')
+    status = models.CharField(max_length=200)
+    num_interested = models.CharField(max_length=100)
