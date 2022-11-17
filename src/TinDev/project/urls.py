@@ -23,5 +23,5 @@ urlpatterns = [
     path('candidateprofile/', views.candidateProfile, name='CandidateProfile'),
     path('recruiterprofile/', views.recruiterProfile, name='RecruiterProfile'),
     path('login/', views.login, name='login'),
-    path('login_rec/', views.login_rec, name='login_rec')
+    path('logout/', views.logout, name='logout')
 ]

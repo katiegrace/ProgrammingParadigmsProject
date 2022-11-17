@@ -92,8 +92,8 @@ def index(request):
 def login(request):
     return render(request, 'project/login.html')
 
-def login_rec(request):
-    return render(request, 'project/login_rec.html')
+def logout(request):
+    return render(request, 'project/logout.html')
 
 def candidateProfile(request):
     if request.POST:
