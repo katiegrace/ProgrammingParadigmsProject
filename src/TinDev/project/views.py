@@ -1,3 +1,6 @@
+'''
+
+
 from django.shortcuts import render, redirect
 from django.views.generic import CreateView, View
 from django.contrib.auth import login, authenticate, logout
@@ -72,3 +75,33 @@ class user_login(CreateView):
 def user_logout(request):
     logout(request)
     return redirect('index')
+'''
+
+from django.shortcuts import render
+from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404, render, redirect
+from django.urls import reverse
+from project.forms import CandidateForm
+from project.models import CandidateProfile
+from project.forms import RecruiterForm
+from project.models import RecruiterProfile
+
+
+def login(request):
+    return render(request, 'project/login.html')
+
+def candidateProfile(request):
+    if request.POST:
+        form = CandidateForm(request.POST)
+        if form.is_valid():
+            form.save()
+        return redirect(login)
+    return render(request, 'project/candidateProfile.html', {'form':CandidateForm}) 
+
+def recruiterProfile(request):
+    if request.POST:
+        form = RecruiterForm(request.POST)
+        if form.is_valid():
+            form.save()
+        return redirect(login)
+    return render(request, 'project/recruiterProfile.html', {'form':RecruiterForm}) 

@@ -1,3 +1,4 @@
+'''
 from django.urls import path
 from . import views
 
@@ -12,4 +13,14 @@ urlpatterns = [
      path('logout/', views.user_logout, name='user_logout')
    #path('', views.feature1, name='index'), # the path for our index view
    #path('<int:blog_id>/', views.feature2, name='detail')
+]
+'''
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    #path('', views.index),  #the path for our index view
+    path('candidateprofile/', views.candidateProfile, name='CandidateProfile'),
+    path('recruiterprofile/', views.recruiterProfile, name='RecruiterProfile'),
+    path('', views.login, name='login')
 ]
