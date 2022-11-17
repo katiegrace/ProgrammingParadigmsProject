@@ -31,13 +31,17 @@ ALLOWED_HOSTS = ['129.74.152.125','0.0.0.0','127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
+    'project.apps.ProjectConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'crispy_forms'
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
