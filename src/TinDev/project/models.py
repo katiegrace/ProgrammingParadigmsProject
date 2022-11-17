@@ -45,6 +45,9 @@ class UserModel(AbstractBaseUser):
     staff = models.BooleanField(default=False)  # a admin user; non super-user
     admin = models.BooleanField(default=False)  # a superuser
 
+class displayRecruiter(AbstractBaseUser):
+    def post
+
     def has_perm(self, perm, obj=None):
         return True
 

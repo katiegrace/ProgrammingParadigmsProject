@@ -19,6 +19,7 @@ class RecruiterForm(forms.ModelForm):
     name = forms.CharField(max_length=100, required=True)
     zip_code = forms.CharField(max_length=5, required=True)
     username = forms.CharField(max_length=100, required=True)
+    
 
     class Meta:
         model = UserModel
