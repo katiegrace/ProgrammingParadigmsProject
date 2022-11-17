@@ -7,7 +7,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from .forms import CandidateForm, RecruiterForm, Login
 
 # Create your views here.
-v# Class view for the home page
+# Class view for the home page
 
 
 class index(View):
