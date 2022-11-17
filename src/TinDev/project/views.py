@@ -5,6 +5,7 @@ from models import Userfrom forms import CandidateSignUpForm
 from models import Userfrom forms import RecruiterSignUpForm
 
 # Create your views here.
+# need an index
 class CandidateSignUpView(CreateView):
     model = User
     form_class = CandidateSignUpForm
@@ -18,7 +19,7 @@ class CandidateSignUpView(CreateView):
         user = form.save()
         login(self.request, user)
         #where do we want to redirect?
-        return redirect('candidates:job_list')
+        return redirect('index')
 
 
 class RecruiterSignUpView(CreateView):
@@ -33,4 +34,7 @@ class RecruiterSignUpView(CreateView):
     def form_valid(self, form):
         user = form.save()
         login(self.request, user)
-        return redirect('recruiter:job_list')
+        return redirect('index')
+
+# need a log in
+# need a log out
