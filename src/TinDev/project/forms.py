@@ -1,33 +1,30 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
-from django.db import transaction
-from project.models import User, Candidate, Recruiter
+from project.models import UserModel
 
-class CandidateSignUpForm(UserCreationForm):
-    #this form automatically sets a username and password 
+class CandidateForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput, required=True)
     name = forms.CharField(max_length=100, required=True)
     zip_code = forms.CharField(max_length=5, required=True)
     skills = forms.CharField(max_length=500, required=True)
     experience_years = forms.IntegerField(required=True)
+    username = forms.CharField(max_length=100, required=True)
 
-    class Meta(UserCreationForm.Meta):
-        model = User
+    class Meta:
+        model = UserModel
+        fields = ['name', 'bio', 'zip_code', 'skills', 'github',
+                  'experience_years', 'education', 'username', 'password']
 
-    @transaction.atomic
-    def save(self):
-        user = super().save(commit=False)
-        user.is_candidate = True
-        user.save()
-        candidate = Candidate.objects.create(user=user)
-        return user
+class RecruiterForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput, required=True)
+    name = forms.CharField(max_length=100, required=True)
+    zip_code = forms.CharField(max_length=5, required=True)
+    username = forms.CharField(max_length=100, required=True)
 
-class RecruiterSignUpForm(UserCreationForm):
-    class Meta(UserCreationForm.Meta):
-        model = User
+    class Meta:
+        model = UserModel
+        fields = ['name', 'company', 'zip_code', 'username', 'password']
 
-    def save(self, commit=True):
-        user = super().save(commit=False)
-        user.is_recruiter = True
-        if commit:
-            user.save()
-        return user
+
+class Login(forms.Form):
+    username = forms.CharField(required=True)
+    password = forms.CharField(widget=forms.PasswordInput, required=True)
