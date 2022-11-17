@@ -20,8 +20,8 @@ from . import views
 
 urlpatterns = [
     path('', views.index ),  #the path for our index view
-    path('candidateprofile/', views.candidateProfile, name='CandidateProfile'),
-    path('recruiterprofile/', views.recruiterProfile, name='RecruiterProfile'),
+    path('candidateProfile/', views.candidateProfile, name='CandidateProfile'),
+    path('recruiterProfile/', views.recruiterProfile, name='RecruiterProfile'),
     path('login/', views.login, name='login'),
     path('logout/', views.logout, name='logout')
 ]
