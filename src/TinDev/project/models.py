@@ -1,5 +1,6 @@
+'''
 from django.db import models
-from django.contrib.auth.models import AbstractUser, BaseUserManager
+from django.contrib.auth.models import BaseUserManager
 
 #models go here
 class UserModelManager(BaseUserManager):
@@ -64,3 +65,26 @@ class displayRecruiter(AbstractBaseUser):
 
     def __str__(self):
         return self.username
+'''
+from django.db import models
+
+# Create your models here.
+
+class CandidateProfile(models.Model):
+
+    name = models.CharField(max_length=200)
+    bio = models.TextField(max_length=200) # added
+    zipcode = models.CharField(max_length=10)
+    skills = models.TextField(max_length=200)
+    git_username = models.CharField(max_length=200) # added
+    years_exp = models.CharField(max_length=3)
+    username =  models.CharField(max_length=200)
+    password = models.CharField(max_length=200)
+
+class RecruiterProfile(models.Model):
+
+    name = models.CharField(max_length=200)
+    company = models.CharField(max_length=300)
+    zipcode = models.CharField(max_length=10)
+    username =  models.CharField(max_length=200)
+    password = models.CharField(max_length=200)
