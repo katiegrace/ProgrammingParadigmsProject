@@ -114,7 +114,7 @@ def recruiterProfile(request):
             form.save()
         return redirect(login)
     return render(request, 'project/recruiterProfile.html', {'form':RecruiterForm}) 
-
+'''
 def register_request(request):
 	if request.method == "POST":
 		form = NewUserForm(request.POST)
@@ -132,3 +132,5 @@ def logout_request(request):
 	logout(request)
 	messages.info(request, "You have successfully logged out.") 
 	return redirect("main:homepage")
+
+'''
