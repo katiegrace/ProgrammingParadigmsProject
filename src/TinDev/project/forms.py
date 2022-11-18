@@ -36,6 +36,22 @@ from django.forms import ModelForm
 from django import forms
 from .models import CandidateProfile
 from .models import RecruiterProfile
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+
+class NewUserForm(UserCreationForm):
+	email = forms.EmailField(required=True)
+
+	class Meta:
+		model = User
+		fields = ("username", "email", "password1", "password2")
+
+	def save(self, commit=True):
+		user = super(NewUserForm, self).save(commit=False)
+		user.email = self.cleaned_data['email']
+		if commit:
+			user.save()
+		return user
 
 class CandidateForm(ModelForm):
     name = forms.CharField(max_length=200)
@@ -52,6 +68,7 @@ class CandidateForm(ModelForm):
         fields = ['name', 'bio', 'zipcode', 'skills', 'git_username', 'years_exp', 'username', 'password']
 
 class RecruiterForm(ModelForm):
+
     name = forms.CharField(max_length=200)
     company = forms.CharField(max_length=300)
     zipcode = forms.CharField(max_length=10)
@@ -61,9 +78,3 @@ class RecruiterForm(ModelForm):
     class Meta:
         model = RecruiterProfile
         fields = ['name', 'company', 'zipcode','username','password']
-
-#im not sure if we need this or not
-class LogIn(ModelForm):
-    username = forms.CharField(max_length=200)
-    password = forms.CharField(max_length=200)
-
