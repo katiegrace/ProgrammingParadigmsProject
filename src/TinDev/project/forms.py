@@ -52,7 +52,6 @@ class CandidateForm(ModelForm):
         fields = ['name', 'bio', 'zipcode', 'skills', 'git_username', 'years_exp', 'username', 'password']
 
 class RecruiterForm(ModelForm):
-
     name = forms.CharField(max_length=200)
     company = forms.CharField(max_length=300)
     zipcode = forms.CharField(max_length=10)
