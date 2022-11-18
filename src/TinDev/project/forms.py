@@ -61,3 +61,9 @@ class RecruiterForm(ModelForm):
     class Meta:
         model = RecruiterProfile
         fields = ['name', 'company', 'zipcode','username','password']
+
+#im not sure if we need this or not
+class LogIn(ModelForm):
+    username = forms.CharField(max_length=200)
+    password = forms.CharField(max_length=200)
+
