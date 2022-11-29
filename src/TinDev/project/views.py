@@ -94,10 +94,27 @@ def index(request):
     return render(request, 'project/index.html', {'title':'index'})
   
 def login(request):
-    return render(request, 'project/login.html')
+    # if request.Polls
+    # unmame = request.POST["username"]
+    # pwd = request.POST["password"]
+    # cand = cprof.objects.filter(username=uname, password=pwc)
+    #if cand == NONE
+    #    restruiter = RecProfile
+    #    if recruiter == None:
+    #        return render(request, 'project/login.html', error: {})
+    #    else:
+    #        return redirect("/successURL") # DASHBOARD
+    #else:
+    #        # candidate authenticated
+    #        request.session["logged_user"] = username
+    #// request.session["user"] = username
+    return redirect("/successURL") # DASHBOARD
+    
 
 def logout(request):
+    # del request.session["logged_user"] 
     return render(request, 'project/logout.html')
+    # redriect to login page
 
 def candidateProfile(request):
     if request.POST:
