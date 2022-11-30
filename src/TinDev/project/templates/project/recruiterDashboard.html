@@ -1,0 +1,23 @@
+<!--
+{% block title %}List all posts{% endblock %}
+{% block content %}
+   <h1> List of all posts </h1>
+    {% if post_list %}
+        <ul>
+        {% for post in post_list %}
+            <li>
+                <a>
+                    {{ post.position_title }} 
+                    {{post.company}}
+                    {{post.status}}
+                    {{post.position_type}}
+                    {{post.num_interested}}
+                </a>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No posts are available.</p>
+    {% endif %}
+{% endblock %}
+    --> 
