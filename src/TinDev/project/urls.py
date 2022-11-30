@@ -25,12 +25,7 @@ urlpatterns = [
     path('', views.index ),  #the path for our index view
     path('candidateProfile/', views.candidateProfile, name='CandidateProfile'),
     path('recruiterProfile/', views.recruiterProfile, name='RecruiterProfile'),
-    #path('register/', views.register_request, name="register"),
     path("login/", views.login, name="login"),
-    #path("logout/", views.logout_request, name= "logout"),
-    #path('login/', views.login, name='login'),
-    #path('logout/', views.logout, name='logout'),
-    #re_path(r'^$', TemplateView.as_view(template_name='base.html'), name='base'),
-    #path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
-    #path('logout/', auth_views.LogoutView.as_view(template_name='logout.html'), name='logout'),
+    path('candidateDashboard/', views.candidateDashboard, name='CandidateDashboard'),
+    path('recruiterDashboard/', views.recruiterDashboard, name='RecruiterDashboard'),
 ]

@@ -104,15 +104,15 @@ def login(request):
                 return render(request, 'project/login.html', {"error":"Auth fail"})
             else:
                 request.session["logged_user"] = uname
-                return redirect("/successURLForRecruiter")
+                return redirect("/recruiterDashboard.html")
         else:
             # the candidate authenticated
             request.session["logged_user"] = uname
-            return redirect("/successURLForCandidate")
+            return redirect("/candidateDashboard.html")
 
 def logout(request):
     del request.session["logged_user"]
-    return redirect("loginPage")
+    return redirect("/login")
 
 def candidateProfile(request):
     if request.POST:
@@ -129,6 +129,12 @@ def recruiterProfile(request):
             form.save()
         return redirect(login)
     return render(request, 'project/recruiterProfile.html', {'form':RecruiterForm}) 
+
+def candidateDashBoard(request):
+    return render(request, 'project/candidateDashBoard.html', {'title':'Candidate'})
+
+def recruiterDashBoard(request):
+    return render(request, 'project/recruiterDashBoard.html', {'title':'Recruiter'})
 '''
 def register_request(request):
 	if request.method == "POST":
