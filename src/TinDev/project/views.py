@@ -106,7 +106,6 @@ def login(request):
         uname = request.POST["username"]
         pwd = request.POST["password"]
         cand = CandidateProfile.objects.filter(username=uname, password=pwd)
-        raise NotImplementedError(str(cand))
         if cand == None:
             recruiter = RecruiterProfile.objects.filter(username=uname, password=pwd)
             if recruiter == None:
