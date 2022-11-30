@@ -94,27 +94,25 @@ def index(request):
     return render(request, 'project/index.html', {'title':'index'})
   
 def login(request):
-    # if request.Polls
-    # unmame = request.POST["username"]
-    # pwd = request.POST["password"]
-    # cand = cprof.objects.filter(username=uname, password=pwc)
-    #if cand == NONE
-    #    restruiter = RecProfile
-    #    if recruiter == None:
-    #        return render(request, 'project/login.html', error: {})
-    #    else:
-    #        return redirect("/successURL") # DASHBOARD       
-    #else:
-    #        # candidate authenticated
-    #        request.session["logged_user"] = username
-    #// request.session["user"] = username
-    return redirect("/successURL") # DASHBOARD
-    
+    if request.POST:
+        uname = request.POST["username"]
+        pwd = request.POST["password"]
+        cand = CandidateProfile.objects.filter(username=uname, password=pwd)
+        if cand == None:
+            recruiter = RecruiterProfile.objects.filter(username=uname, password=pwd)
+            if recruiter == None:
+                return render(request, 'project/login.html', {"error":"Auth fail"})
+            else:
+                request.session["logged_user"] = uname
+                return redirect("/successURLForRecruiter")
+        else:
+            # the candidate authenticated
+            request.session["logged_user"] = uname
+            return redirect("/successURLForCandidate")
 
 def logout(request):
-    # del request.session["logged_user"] 
-    return render(request, 'project/logout.html')
-    # redriect to login page
+    del request.session["logged_user"]
+    return redirect("loginPage")
 
 def candidateProfile(request):
     if request.POST:
