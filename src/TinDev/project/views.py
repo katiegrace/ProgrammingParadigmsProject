@@ -94,7 +94,15 @@ def index(request):
     return render(request, 'project/index.html', {'title':'index'})
   
 def login(request):
+    #This ONLY fires if someone has entered login details
+    #When first opening the page, the browser will send a
+    #GET request
+    #This will make request.POST, which is
+    #A dictionary-like object containing all given HTTP POST parameters
+    #See - https://docs.djangoproject.com/en/4.1/ref/request-response/
+    #Always falsey when opening the login page for the 1st time
     if request.POST:
+        #This case makes sense only if these is post data
         uname = request.POST["username"]
         pwd = request.POST["password"]
         cand = CandidateProfile.objects.filter(username=uname, password=pwd)
@@ -109,6 +117,14 @@ def login(request):
             # the candidate authenticated
             request.session["logged_user"] = uname
             return redirect("/candidateDashboard.html")
+    #The case above always return, so no need for else here
+    #Also if it did not work in some edge case, the app
+    #Will degrade gracefully, showing a login form instead
+    #of error
+    #If no post data (opening for 1st time or page reload)
+    #Just render the login page
+    return render(request, 'project/login.html')
+    
 
 def logout(request):
     del request.session["logged_user"]
