@@ -36,6 +36,7 @@ from django.forms import ModelForm
 from django import forms
 from .models import CandidateProfile
 from .models import RecruiterProfile
+#from .models import Post
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
@@ -78,3 +79,21 @@ class RecruiterForm(ModelForm):
     class Meta:
         model = RecruiterProfile
         fields = ['name', 'company', 'zipcode','username','password']
+'''
+creating a post
+
+class PostForm(ModelForm):
+    position_title = models.CharField(max_length=200)
+    position_type = models.CharField(max_length=200)
+    location = models.CharField(max_length=200)
+    preferred_skills = models.TextField()
+    description = models.TextField()
+    company = models.CharField(max_length=200)
+    expiration_date = models.DateTimeField('expiration date')
+    status = models.CharField(max_length=200)
+    num_interested = models.CharField(max_length=100)
+
+    class Meta:
+        model = post
+        fields = ['position_title', 'position_type', 'location', 'preferred_skills', 'description', 'company', 'expiration_date', 'status', 'num_interested']
+'''
