@@ -106,7 +106,9 @@ def login(request):
         uname = request.POST["username"]
         pwd = request.POST["password"]
         cand = CandidateProfile.objects.filter(username=uname, password=pwd)
+        
         if cand == None:
+            print("got it")
             recruiter = RecruiterProfile.objects.filter(username=uname, password=pwd)
             if recruiter == None:
                 return render(request, 'project/login.html', {"error":"Auth fail"})
