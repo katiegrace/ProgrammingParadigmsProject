@@ -103,7 +103,7 @@ def login(request):
     #    if recruiter == None:
     #        return render(request, 'project/login.html', error: {})
     #    else:
-    #        return redirect("/successURL") # DASHBOARD
+    #        return redirect("/successURL") # DASHBOARD       
     #else:
     #        # candidate authenticated
     #        request.session["logged_user"] = username
