@@ -130,11 +130,11 @@ def recruiterProfile(request):
         return redirect(login)
     return render(request, 'project/recruiterProfile.html', {'form':RecruiterForm}) 
 
-def candidateDashBoard(request):
-    return render(request, 'project/candidateDashBoard.html', {'title':'Candidate'})
+def candidateDashboard(request):
+    return render(request, 'project/candidateDashboard.html', {'title':'Candidate'})
 
-def recruiterDashBoard(request):
-    return render(request, 'project/recruiterDashBoard.html', {'title':'Recruiter'})
+def recruiterDashboard(request):
+    return render(request, 'project/recruiterDashboard.html', {'title':'Recruiter'})
 '''
 def register_request(request):
 	if request.method == "POST":
