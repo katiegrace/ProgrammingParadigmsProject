@@ -90,6 +90,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from .forms import NewUserForm
 
+
 def index(request):
     return render(request, 'project/index.html', {'title':'index'})
   
@@ -105,12 +106,16 @@ def login(request):
         #This case makes sense only if these is post data
         uname = request.POST["username"]
         pwd = request.POST["password"]
-        cand = CandidateProfile.objects.filter(username=uname, password=pwd)
-        
-        if cand == None:
-            print("got it")
-            recruiter = RecruiterProfile.objects.filter(username=uname, password=pwd)
-            if recruiter == None:
+        # could do .exists then could give boolean
+        #try .get
+        cand = CandidateProfile.objects.filter(username=uname).exists()
+        #c_user = authenticate(request, username=uname, password=pwd)
+        #if c_user is None:
+        if not cand:
+            recruiter = RecruiterProfile.objects.filter(username=uname).exists()
+            #r_user = authenticate(request, username=uname, password=pwd)
+            if not recruiter:
+            #if r_user is None:
                 return render(request, 'project/login.html', {"error":"Auth fail"})
             else:
                 request.session["logged_user"] = uname
@@ -118,7 +123,8 @@ def login(request):
         else:
             # the candidate authenticated
             request.session["logged_user"] = uname
-            return redirect("/candidateDashboard.html")
+            return redirect('/login.html')
+            #return redirect("/candidateDashboard.html")
     #The case above always return, so no need for else here
     #Also if it did not work in some edge case, the app
     #Will degrade gracefully, showing a login form instead
