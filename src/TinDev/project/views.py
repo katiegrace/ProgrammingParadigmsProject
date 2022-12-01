@@ -74,11 +74,12 @@ def candidateDashboard(request):
 
 def recruiterDashboard(request):
     return render(request, 'project/recruiterDashboard.html', {'title':'Recruiter'})
+
 '''
 class IndexView(ListView):
     template_name = 'project/recruiterDashboard.html'
     context_object_name = 'post_list'
-
+    
     def get_queryset(self):
         ##this is where we put the logic in for the recruiter to filter 
         return Post.objects.order_by('-expiration_date')
@@ -87,23 +88,22 @@ class IndexView(ListView):
         #active/ inactive - status
         #posts with at least 1 interested candidate - num_interested 
 '''
-'''
-def register_request(request):
-	if request.method == "POST":
-		form = NewUserForm(request.POST)
-		if form.is_valid():
-			user = form.save()
-			login(request, user)
-			messages.success(request, "Registration successful." )
-			return redirect("main:homepage")
-		messages.error(request, "Unsuccessful registration. Invalid information.")
-	form = NewUserForm()
-	return render (request=request, template_name="main/register.html", context={"register_form":form})
 
+def create_post(request):
+    context = {}
+    form = PostForm(request.POST or None)
+    if request.method == "POST":
+        if form.is_valid():
+            print("\n\n form is valid")
+            postition_title = CandidateProfile.objects.get(user=request.user)
+            new_post = form.save(commit=False)
+            new_post.user = postition_title
+            new_post.save()
 
-def logout_request(request):
-	logout(request)
-	messages.info(request, "You have successfully logged out.") 
-	return redirect("main:homepage")
-
-'''
+            return redirect('forums')
+        
+    context.update({
+            'form': form,
+            'title': 'Create New Post'
+    })
+    return render(request, 'forums/create_post.html', context)

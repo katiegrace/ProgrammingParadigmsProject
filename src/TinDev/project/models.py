@@ -25,9 +25,15 @@ class Post(models.Model):
     position_title = models.CharField(max_length=200)
     position_type = models.CharField(max_length=200)
     location = models.CharField(max_length=200)
-    preferred_skills = models.TextField()
-    description = models.TextField()
+    preferred_skills = models.TextField(max_length=200)
+    description = models.TextField(max_length=200)
     company = models.CharField(max_length=200)
     expiration_date = models.DateTimeField('expiration date')
     status = models.CharField(max_length=200)
     num_interested = models.CharField(max_length=100)
+    
+    def save(self, *args, **kwargs):
+        super(Post, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return self.title

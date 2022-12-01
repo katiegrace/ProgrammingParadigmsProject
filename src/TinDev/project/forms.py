@@ -45,21 +45,18 @@ class RecruiterForm(ModelForm):
     class Meta:
         model = RecruiterProfile
         fields = ['name', 'company', 'zipcode','username','password']
-'''
-creating a post
 
 class PostForm(ModelForm):
-    position_title = models.CharField(max_length=200)
-    position_type = models.CharField(max_length=200)
-    location = models.CharField(max_length=200)
-    preferred_skills = models.TextField()
-    description = models.TextField()
-    company = models.CharField(max_length=200)
-    expiration_date = models.DateTimeField('expiration date')
-    status = models.CharField(max_length=200)
-    num_interested = models.CharField(max_length=100)
+    position_title = forms.CharField(max_length=200)
+    position_type = forms.CharField(max_length=200)
+    location = forms.CharField(max_length=200)
+    preferred_skills = forms.CharField(max_length=200)
+    description = forms.CharField(max_length=200)
+    company = forms.CharField(max_length=200)
+    expiration_date = forms.DateTimeField('expiration date')
+    status = forms.CharField(max_length=200)
+    num_interested = forms.CharField(max_length=100)
 
     class Meta:
-        model = post
+        model = Post
         fields = ['position_title', 'position_type', 'location', 'preferred_skills', 'description', 'company', 'expiration_date', 'status', 'num_interested']
-'''
