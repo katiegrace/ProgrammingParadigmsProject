@@ -32,21 +32,21 @@ def login(request):
             recruiter = RecruiterProfile.objects.filter(username=uname, password=pwd)
        # if len(recruiter) != 0:
             #len(recruiter) will be 0 if no recruiters found
-        if len(recruiter) == 0:
-            return render(request, 'project/login.html', {"error":"Auth fail"})
-        else:
+            if len(recruiter) == 0:
+                return render(request, 'project/login.html', {"error":"Auth fail"})
+            else:
                 #We should have 0 or 1, never more
                 #assert len(recruiter) == 1
-            request.session["logged_user"] = uname
-            return redirect("/recruiterDashboard.html")
-    else:
-            #We should have 0 or 1 candidates, never more
-        assert len(cand) == 1
-            # the candidate authenticated
-        #request.session["logged_user"] = uname
-        #return redirect("/login.html")
-            #redirect to candidate dashboard
-        return redirect("/candidateDashboard.html")
+                request.session["logged_user"] = uname
+                return redirect("/recruiterDashboard.html")
+        else:
+                #We should have 0 or 1 candidates, never more
+            assert len(cand) == 1
+                # the candidate authenticated
+            #request.session["logged_user"] = uname
+            #return redirect("/login.html")
+                #redirect to candidate dashboard
+            return redirect("/candidateDashboard.html")
     # shows a login form instead of error
     return render(request, 'project/login.html')
     
