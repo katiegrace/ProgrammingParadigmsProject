@@ -10,6 +10,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from .forms import NewUserForm
+from .forms import PostForm
 #from .models import post
 #from django.views.generic import ListView
 
@@ -17,35 +18,36 @@ def index(request):
     return render(request, 'project/index.html', {'title':'index'})
   
 def login(request):
-    #This ONLY fires if someone has entered login details
-    #When first opening the page, the browser will send a
-    #GET request
-    #This will make request.POST, which is
-    #A dictionary-like object containing all given HTTP POST parameters
-    #See - https://docs.djangoproject.com/en/4.1/ref/request-response/
-    #Always falsey when opening the login page for the 1st time
+    #This ONLY works if someone has entered login details
+    #When first opening the page, the browser will send a GET request
+    #This will make request.POST, which is similar to a dict
     if request.POST:
         #This case makes sense only if these is post data
         uname = request.POST["username"]
         pwd = request.POST["password"]
         cand = CandidateProfile.objects.filter(username=uname, password=pwd)
-        if cand == None:
+     #   if len(cand) != 0:
+        #len(cand) will be 0 if no candidates found and we need to check recruiters
+        if len(cand) == 0:
             recruiter = RecruiterProfile.objects.filter(username=uname, password=pwd)
-            if recruiter == None:
-                return render(request, 'project/login.html', {"error":"Auth fail"})
-            else:
-                request.session["logged_user"] = uname
-                return redirect("/recruiterDashboard.html")
+       # if len(recruiter) != 0:
+            #len(recruiter) will be 0 if no recruiters found
+        if len(recruiter) == 0:
+            return render(request, 'project/login.html', {"error":"Auth fail"})
         else:
-            # the candidate authenticated
+                #We should have 0 or 1, never more
+                #assert len(recruiter) == 1
             request.session["logged_user"] = uname
-            return redirect("/candidateDashboard.html")
-    #The case above always return, so no need for else here
-    #Also if it did not work in some edge case, the app
-    #Will degrade gracefully, showing a login form instead
-    #of error
-    #If no post data (opening for 1st time or page reload)
-    #Just render the login page
+            return redirect("/recruiterDashboard.html")
+    else:
+            #We should have 0 or 1 candidates, never more
+        assert len(cand) == 1
+            # the candidate authenticated
+        #request.session["logged_user"] = uname
+        #return redirect("/login.html")
+            #redirect to candidate dashboard
+        return redirect("/candidateDashboard.html")
+    # shows a login form instead of error
     return render(request, 'project/login.html')
     
 
@@ -88,7 +90,7 @@ class IndexView(ListView):
         #active/ inactive - status
         #posts with at least 1 interested candidate - num_interested 
 '''
-
+'''
 def create_post(request):
     context = {}
     form = PostForm(request.POST or None)
@@ -107,3 +109,5 @@ def create_post(request):
             'title': 'Create New Post'
     })
     return render(request, 'forums/create_post.html', context)
+
+'''

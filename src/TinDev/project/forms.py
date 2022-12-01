@@ -46,6 +46,7 @@ class RecruiterForm(ModelForm):
         model = RecruiterProfile
         fields = ['name', 'company', 'zipcode','username','password']
 
+'''
 class PostForm(ModelForm):
     position_title = forms.CharField(max_length=200)
     position_type = forms.CharField(max_length=200)
@@ -60,3 +61,5 @@ class PostForm(ModelForm):
     class Meta:
         model = Post
         fields = ['position_title', 'position_type', 'location', 'preferred_skills', 'description', 'company', 'expiration_date', 'status', 'num_interested']
+
+'''

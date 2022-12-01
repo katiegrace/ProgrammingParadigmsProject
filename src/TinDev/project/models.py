@@ -21,6 +21,7 @@ class RecruiterProfile(models.Model):
     username =  models.CharField(max_length=200)
     password = models.CharField(max_length=200)
 
+'''
 class Post(models.Model):
     position_title = models.CharField(max_length=200)
     position_type = models.CharField(max_length=200)
@@ -37,3 +38,4 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+'''
