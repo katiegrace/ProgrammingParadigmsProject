@@ -10,6 +10,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from .forms import NewUserForm
+from project.forms import PostForm
 #from .models import post
 #from django.views.generic import ListView
 
@@ -95,9 +96,10 @@ def create_post(request):
     if request.method == "POST":
         if form.is_valid():
             print("\n\n form is valid")
-            postition_title = CandidateProfile.objects.get(user=request.user)
+            author = RecruiterProfile.objects.get(name=request.name)
+            #postition_type = RecruiterProfile.objects.get(name=request.name)
             new_post = form.save(commit=False)
-            new_post.user = postition_title
+            new_post.name = author
             new_post.save()
 
             return redirect('forums')
