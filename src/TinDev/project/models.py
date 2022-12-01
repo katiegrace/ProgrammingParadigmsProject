@@ -21,7 +21,7 @@ class RecruiterProfile(models.Model):
     username =  models.CharField(max_length=200)
     password = models.CharField(max_length=200)
 
-'''
+
 class Post(models.Model):
     position_title = models.CharField(max_length=200)
     position_type = models.CharField(max_length=200)
@@ -29,7 +29,7 @@ class Post(models.Model):
     preferred_skills = models.TextField(max_length=200)
     description = models.TextField(max_length=200)
     company = models.CharField(max_length=200)
-    expiration_date = models.DateTimeField('expiration date')
+    expiration_date = models.DateTimeField()
     status = models.CharField(max_length=200)
     num_interested = models.CharField(max_length=100)
     
@@ -38,4 +38,3 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
-'''

@@ -36,17 +36,17 @@ def login(request):
                 return render(request, 'project/login.html', {"error":"Auth fail"})
             else:
                 #We should have 0 or 1, never more
-                assert len(recruiter) == 1
+                assert len(recruiter) > 0
                 request.session["logged_user"] = uname
-                return redirect("/recruiterDashboard.html")
+                return redirect("/recruiterDashboard")
         else:
                 #We should have 0 or 1 candidates, never more
-            assert len(cand) == 1
+            assert len(cand) > 0
                 # the candidate authenticated
             request.session["logged_user"] = uname
             #return redirect("/login.html")
                 #redirect to candidate dashboard
-            return redirect("/candidateDashboard.html")
+            return redirect("/candidateDashboard")
     # shows a login form instead of error
     return render(request, 'project/login.html')
     
