@@ -10,7 +10,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from .forms import NewUserForm
-from .forms import PostForm
+#from .forms import PostForm
 #from .models import post
 #from django.views.generic import ListView
 
