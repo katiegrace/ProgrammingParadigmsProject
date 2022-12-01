@@ -1,13 +1,12 @@
 # About The Project
 
-Here's a blank template for your group to use.
+For this project, we created a website called TinDev, that allows recruiters and canidates searching for jobs to connect virtually. Our website include .....
 
 ## Built With
 List here all the dependencies of your project (including version). For example:
 
 * [Python](https://www.python.org/)
 * [Django](https://www.djangoproject.com/)
-* [TkInter](https://docs.python.org/3/library/tkinter.html)
 * [Bootstrap](https://getbootstrap.com)
 * [JQuery](https://jquery.com)
 
