@@ -1,41 +1,13 @@
-<!--
-% extends "TinDev/base.html" %}
-{% block title %}List all job postings{% endblock %}
-<b>
-    <h1>"TinDev"</h1>
-</b>
-{% block content %}
-    {% if jobs %}
-    <b>
-        <h1><u>TinDev</u></h1>
-    </b>
-        <ul>
-        {% for job in jobs%}
-            <li>
-                <a>{{job.position_title}}
-                   {{job.company}}
-                   {{job.status}}
-                   {{job.type}}
-                   {{job.num_interested}}
-                </a>
-            </li>
-        {% endfor %}
-        </ul>
-    {% else %}
-        <p>No blogs are available.</p>
-    {% endif %}
-{% endblock %}
-    -->
-    <div class="container">
-        <div class="page-header">
-            <h1>Welcome to TinDev</h1>
-        <a href="login" class="btn btn-info" role="button">Login</a>
-        </div>
-          <p>Don't have an account? Sign up below!</p>
-        </div>
-        <a href="candidateProfile" class="btn btn-info" role="button">Sign up as Candidate</a>
-        <br><br>
-        <a href="recruiterProfile" class="btn btn-info" role="button">Sign up as Recruiter</a>
-      </div>
+<div class="container">
+    <div class="page-header">
+        <h1>Welcome to TinDev</h1>
+    <a href="login" class="btn btn-info" role="button">Login</a>
+    </div>
+        <p>Don't have an account? Sign up below!</p>
+    </div>
+    <a href="candidateProfile" class="btn btn-info" role="button">Sign up as Candidate</a>
+    <br><br>
+    <a href="recruiterProfile" class="btn btn-info" role="button">Sign up as Recruiter</a>
+</div>
     
     

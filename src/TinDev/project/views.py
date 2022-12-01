@@ -1,82 +1,3 @@
-'''
-
-
-from django.shortcuts import render, redirect
-from django.views.generic import CreateView, View
-from django.contrib.auth import login, authenticate, logout
-from project.models import UserModel
-from django.contrib import messages
-from django.contrib.auth.forms import AuthenticationForm
-from .forms import CandidateForm, RecruiterForm, Login
-
-# Create your views here.
-# Class view for the home page
-
-
-class index(View):
-    def get(self, request):
-        return render(request, 'project/index.html')
-
-# Class view for creating a candidate
-
-
-class create_candidate(CreateView):
-    def get(self, request):
-        return render(request, 'project/create_candidate.html', {'form': CandidateForm()})
-
-    def post(self, request):
-        form = CandidateForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('index')
-
-# Class view for creating a recruiter
-
-
-class create_recruiter(CreateView):
-    def get(self, request):
-        return render(request, 'project/create_recruiter.html', {'form': RecruiterForm()})
-
-    def post(self, request):
-        form = RecruiterForm(request.POST)
-        if form.is_valid():
-            user = form.save(commit=False)
-            user.set_password(
-                form.cleaned_data["password"]
-            )
-            user.is_recruiter = True
-            form.save()
-            return redirect('index')
-        else:
-            messages.info(request, "Count not create account.")
-
-# Class view for a user to login
-
-
-class user_login(CreateView):
-    def get(self, request):
-        return render(request, 'project/login.html', {'form': Login()})
-
-    def post(self, request):
-        form = Login(request.POST)
-        if form.is_valid():
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password']
-            user = authenticate(username=username, password=password)
-            if user is not None:
-                login(request, user)
-                return redirect('index')
-            else:
-                messages.error(request, "Invalid username or password.")
-                return redirect('user_login')
-
-# Function to logout a user and then redirect them to home page
-
-def user_logout(request):
-    logout(request)
-    return redirect('index')
-'''
-
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render, redirect
@@ -89,7 +10,8 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from .forms import NewUserForm
-
+#from .models import post
+#from django.views.generic import ListView
 
 def index(request):
     return render(request, 'project/index.html', {'title':'index'})
@@ -106,16 +28,10 @@ def login(request):
         #This case makes sense only if these is post data
         uname = request.POST["username"]
         pwd = request.POST["password"]
-        # could do .exists then could give boolean
-        #try .get
-        cand = CandidateProfile.objects.filter(username=uname).exists()
-        #c_user = authenticate(request, username=uname, password=pwd)
-        #if c_user is None:
-        if not cand:
-            recruiter = RecruiterProfile.objects.filter(username=uname).exists()
-            #r_user = authenticate(request, username=uname, password=pwd)
-            if not recruiter:
-            #if r_user is None:
+        cand = CandidateProfile.objects.filter(username=uname, password=pwd)
+        if cand == None:
+            recruiter = RecruiterProfile.objects.filter(username=uname, password=pwd)
+            if recruiter == None:
                 return render(request, 'project/login.html', {"error":"Auth fail"})
             else:
                 request.session["logged_user"] = uname
@@ -123,8 +39,7 @@ def login(request):
         else:
             # the candidate authenticated
             request.session["logged_user"] = uname
-            return redirect('/login.html')
-            #return redirect("/candidateDashboard.html")
+            return redirect("/candidateDashboard.html")
     #The case above always return, so no need for else here
     #Also if it did not work in some edge case, the app
     #Will degrade gracefully, showing a login form instead
@@ -159,6 +74,19 @@ def candidateDashboard(request):
 
 def recruiterDashboard(request):
     return render(request, 'project/recruiterDashboard.html', {'title':'Recruiter'})
+'''
+class IndexView(ListView):
+    template_name = 'project/recruiterDashboard.html'
+    context_object_name = 'post_list'
+
+    def get_queryset(self):
+        ##this is where we put the logic in for the recruiter to filter 
+        return Post.objects.order_by('-expiration_date')
+
+        #all posts- expiration date
+        #active/ inactive - status
+        #posts with at least 1 interested candidate - num_interested 
+'''
 '''
 def register_request(request):
 	if request.method == "POST":
