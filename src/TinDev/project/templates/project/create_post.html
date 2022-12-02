@@ -4,7 +4,7 @@
     </div>
   </div>
   
-  <form action="/create_post" method="PostForm">
+  <form method="POST" action="{% url 'Post' %}" enctype="multipart/form-data">
     <div class="container">
         {{form}}
         
