@@ -32,6 +32,6 @@ class Post(models.Model):
     expiration_date = models.DateTimeField()
     status = models.CharField(max_length=200)
     #num_interested = models.CharField(max_length=100)
-    recruiter= models.ForeignKey(RecruiterProfile)
+    recruiter= models.ForeignKey(RecruiterProfile, on_delete=models.CASCADE, default="")
     #def __str__(self):
         #return self.title
