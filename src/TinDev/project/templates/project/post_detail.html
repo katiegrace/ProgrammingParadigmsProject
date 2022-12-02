@@ -1,0 +1,18 @@
+{% extends "project/post.html" %}
+{% block title %}{{ post.title}}{% endblock %}
+{% block content %}
+	<body>
+		<h1>{{post.position_title}}</h1>
+		<p2> 
+			<b>Company: </b>
+			<i>{{post.company}}</i>
+		
+		</p2>
+		<br><br>
+		<p3>
+			<b>Position Type: </b>
+			({{post.position_type}})
+		</p3>
+		<br><br>
+		<p4>{{post.content}}</p4>	 
+{% endblock %}

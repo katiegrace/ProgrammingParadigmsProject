@@ -1,6 +1,33 @@
-<text>
-    Hello Recruiter u suck
-</text>
+<div class="container">
+    <div class="page-header">
+        <h1>Recruiter Dashboard</h1>
+    </div>
+  </div>
+  
+  <form action="/recruiterDashboard/" method="post">
+    <div class="container">
+  
+      <!--DO NOT REMOVE!! THIS IS NECESSARY FOR THE FORM TO WORK!!!-->
+      <!--SEE https://docs.djangoproject.com/en/4.1/howto/csrf/#using-csrf-->
+      {% csrf_token %} 
+  
+    </div>
+    {%if error%}
+      Error: {{error}}
+    {%endif%}
+  
+      <br>
+      <button type="submit">
+           <a href='/create_post/'>Create Post</a>
+      </button>
+
+      <button type="submit">
+        <a href='/viewAllPosts/'>View all posts</a>
+    </button>
+
+
+
+  </form>
 
 <!--
 {% block title %}List all posts{% endblock %}

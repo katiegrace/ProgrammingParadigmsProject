@@ -5,6 +5,7 @@ from .models import RecruiterProfile
 from .models import Post
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from .models import Post
 
 class NewUserForm(UserCreationForm):
 	email = forms.EmailField(required=True)
@@ -56,10 +57,10 @@ class PostForm(ModelForm):
     company = forms.CharField(max_length=200)
     expiration_date = forms.DateTimeField()
     status = forms.CharField(max_length=200)
-    num_interested = forms.CharField(max_length=100)
+    #num_interested = forms.CharField(max_length=100)
 
     class Meta:
         model = Post
-        fields = ['position_title', 'position_type', 'location', 'preferred_skills', 'description', 'company', 'expiration_date', 'status', 'num_interested']
+        fields = ['position_title', 'position_type', 'location', 'preferred_skills', 'description', 'company', 'expiration_date', 'status']
 
 

@@ -1,17 +1,11 @@
-{% block title %}{{ post.title}}{% endblock %}
-{% block content %}
-	<body>
-		<h1>{{post.position_title}}</h1>
-		<p2> 
-			<b>Name: </b>
-			<i>{{post.name}}</i>
-		
-		</p2>
-		<br><br>
-		<p3>
-			<b>Company: </b>
-			({{post.company}})
-		</p3>
-		<br><br>
-		<p4>{{post.position_type}}</p4>	 
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{% block title %}Default title{% endblock %}</title>
+</head>
+<body>
+    <div id="content">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

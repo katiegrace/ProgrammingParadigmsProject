@@ -5,12 +5,15 @@ from django.urls import reverse
 from project.forms import CandidateForm
 from project.models import CandidateProfile
 from project.forms import RecruiterForm
+from django.views.generic import ListView, DetailView
 from project.models import RecruiterProfile
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from .forms import NewUserForm
-#from .forms import PostForm
+from project.forms import Post
+from .forms import Post
+from .forms import PostForm
 #from .models import post
 #from django.views.generic import ListView
 
@@ -26,11 +29,9 @@ def login(request):
         uname = request.POST["username"]
         pwd = request.POST["password"]
         cand = CandidateProfile.objects.filter(username=uname, password=pwd)
-     #   if len(cand) != 0:
         #len(cand) will be 0 if no candidates found and we need to check recruiters
         if len(cand) == 0:
             recruiter = RecruiterProfile.objects.filter(username=uname, password=pwd)
-       # if len(recruiter) != 0:
             #len(recruiter) will be 0 if no recruiters found
             if len(recruiter) == 0:
                 return render(request, 'project/login.html', {"error":"Auth fail"})
@@ -44,7 +45,6 @@ def login(request):
             assert len(cand) > 0
                 # the candidate authenticated
             request.session["logged_user"] = uname
-            #return redirect("/login.html")
                 #redirect to candidate dashboard
             return redirect("/candidateDashboard")
     # shows a login form instead of error
@@ -71,17 +71,31 @@ def recruiterProfile(request):
         return redirect(login)
     return render(request, 'project/recruiterProfile.html', {'form':RecruiterForm}) 
 
+# added context for scaalbility, before it said {'title':'Candidate'} but added context dictionary
 def candidateDashboard(request):
-    return render(request, 'project/candidateDashboard.html', {'title':'Candidate'})
+    context={
+        'home_page': "active",
+    }
+    return render(request, 'project/candidateDashboard.html', {'title':'Candidate'} )
 
 def recruiterDashboard(request):
-    return render(request, 'project/recruiterDashboard.html', {'title':'Recruiter'})
+    context={
+        'home_page': "active",
+    }
+    return render(request, 'project/recruiterDashboard.html',{'title':'Recruiter'} )
 
-'''
+
+def create_post(request):
+    if request.POST:
+        form = PostForm(request.POST)
+        if form.is_valid():
+            form.save()
+        return redirect(create_post)
+    return render(request, 'project/create_post.html', {'form':PostForm}) 
+
 class IndexView(ListView):
-    template_name = 'project/recruiterDashboard.html'
+    template_name = 'project/viewAllPosts.html'
     context_object_name = 'post_list'
-    
     def get_queryset(self):
         ##this is where we put the logic in for the recruiter to filter 
         return Post.objects.order_by('-expiration_date')
@@ -89,7 +103,11 @@ class IndexView(ListView):
         #all posts- expiration date
         #active/ inactive - status
         #posts with at least 1 interested candidate - num_interested 
-'''
+
+class PostDetailView(DetailView):
+    model = Post
+    template_name = 'project/post_detail.html'
+
 '''
 def create_post(request):
     context = {}
@@ -101,13 +119,11 @@ def create_post(request):
             new_post = form.save(commit=False)
             new_post.user = postition_title
             new_post.save()
-
             return redirect('forums')
         
     context.update({
             'form': form,
             'title': 'Create New Post'
     })
-    return render(request, 'forums/create_post.html', context)
-
+    return render(request, '/create_post', context)
 '''
