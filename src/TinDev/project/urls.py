@@ -11,7 +11,7 @@ urlpatterns = [
     path("login/", views.login, name="login"),
     path('candidateDashboard/', views.candidateDashboard, name='CandidateDashboard'),
     path('recruiterDashboard/', views.recruiterDashboard, name='RecruiterDashboard'),
-    path('create_post/', views.create_post, name='Post'),
-    path('viewAllPosts/', views.IndexView.as_view(), name='Post'),
+    path('create_post/', views.create_post, name='CreatePost'),
+    path('viewAllPosts/', views.IndexView.as_view(), name='ViewAllPost'),
     path('<int:pk>/',views.PostDetailView.as_view(), name='Post'),
 ]
