@@ -97,8 +97,11 @@ def create_post(request):
         form = PostForm(request.POST)
         if form.is_valid():
             form.save()
+            return redirect("/viewAllPosts")
+        else:
+            #TODO: Add proper error reporting to the user
+            raise ValueError(f"Form is not valid, errors {form.errors}")
         #if they create a post we want it to take them to view all posts 
-        return redirect("/viewAllPosts")
     return render(request, 'project/create_post.html', {'form':PostForm}) 
 
 class IndexView(ListView):
