@@ -110,6 +110,7 @@ def create_post(request):
         #if they create a post we want it to take them to view all posts 
     return render(request, 'project/create_post.html', {'form':PostForm}) 
 
+
 class IndexView(ListView):
     template_name = 'project/viewAllPosts.html'
     context_object_name = 'post_list'

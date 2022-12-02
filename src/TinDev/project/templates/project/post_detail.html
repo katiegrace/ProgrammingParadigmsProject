@@ -13,7 +13,23 @@
 			<b>Position Type: </b>
 			({{post.position_type}})
 		</p3>
-		<br><br>
-		<p4>{{post.content}}</p4>	 
+		<br>Job location:<br>
+		<p4>{{post.location}}</p4>	 
+		<p5><b>
+			Preferred Skils:
+		</b>{{post.preferred_skills}}</p5>	 
+		<b>
+			Description:
+		</b>{{post.description}}</p5>	 
+		<b>
+			Expiration Date:
+		</b>{{post.expiration_date}}</p5>	 
+		><b>
+			Status:
+		</b>{{post.status}}</p5>	 
+
+		<button type="submit">
+			<a href='/edit_post/'>Edit Post</a>
+	   </button>
 {% endblock %}
 

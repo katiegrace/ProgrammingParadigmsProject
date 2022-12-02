@@ -4,18 +4,6 @@
     </div>
   </div>
   
-  <!-- why do we need this? the recruiter dashboard is not a form nor a model-->
-  <form action="/recruiterDashboard/" method="post">
-    <div class="container">
-  
-      <!--DO NOT REMOVE!! THIS IS NECESSARY FOR THE FORM TO WORK!!!-->
-      <!--SEE https://docs.djangoproject.com/en/4.1/howto/csrf/#using-csrf-->
-      {% csrf_token %} 
-  
-    </div>
-    {%if error%}
-      Error: {{error}}
-    {%endif%}
   
       <br>
       <button type="submit">
@@ -26,30 +14,3 @@
         <a href='/viewAllPosts/'>View all posts</a>
     </button>
 
-
-
-  </form>
-
-<!--
-{% block title %}List all posts{% endblock %}
-{% block content %}
-   <h1> List of all posts </h1>
-    {% if post_list %}
-        <ul>
-        {% for post in post_list %}
-            <li>
-                <a>
-                    {{ post.position_title }} 
-                    {{post.company}}
-                    {{post.status}}
-                    {{post.position_type}}
-                    {{post.num_interested}}
-                </a>
-            </li>
-        {% endfor %}
-        </ul>
-    {% else %}
-        <p>No posts are available.</p>
-    {% endif %}
-{% endblock %}
-    --> 
