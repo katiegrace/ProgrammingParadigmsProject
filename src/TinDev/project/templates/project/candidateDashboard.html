@@ -1,13 +1,26 @@
-<text>
-    Hello Candidate u suck
-</text>
+<div class="container">
+    <div class="page-header">
+        <h1>Candidate Dashboard</h1>
+    </div>
+  </div>
+  
+  <form action="/candidateDashboard/" method="post">
+    <div class="container">
+  
+      <!--DO NOT REMOVE!! THIS IS NECESSARY FOR THE FORM TO WORK!!!-->
+      <!--SEE https://docs.djangoproject.com/en/4.1/howto/csrf/#using-csrf-->
+      {% csrf_token %} 
+  
+    </div>
+    {%if error%}
+      Error: {{error}}
+    {%endif%}
+  
+    
+      <button type="submit">
+        <a href='/viewAllPosts/'>View all job postings</a>
+    </button>
 
 
-<!-- 
-What we need:
-- when open, have all job postings
-- thumbs up or thumbs down a posting
-- have a button or tab where they can see only jobs theyre interested in
-- tab with view offers
-- have buttons to accept or decline (if before expiration date)
--->
+
+  </form>
