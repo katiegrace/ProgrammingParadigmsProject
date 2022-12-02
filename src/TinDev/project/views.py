@@ -110,6 +110,13 @@ def create_post(request):
         #if they create a post we want it to take them to view all posts 
     return render(request, 'project/create_post.html', {'form':PostForm}) 
 
+'''
+def edit_post(request):
+    to update an object in the Django data base Model.objects.filter(id=id).update(field=value)
+    Post.objects.filter(id= )
+    return redirect("/post_detail")
+'''
+
 
 class IndexView(ListView):
     template_name = 'project/viewAllPosts.html'
