@@ -84,15 +84,20 @@ def recruiterDashboard(request):
     }
     return render(request, 'project/recruiterDashboard.html',{'title':'Recruiter'} )
 
+'''
+dont know if u need this 
+    # redirct to view all posts
+        return redirect("/viewAllPosts")
+        #return redirect(create_post)
+        by line 100
+'''
 
 def create_post(request):
     if request.POST:
         form = PostForm(request.POST)
         if form.is_valid():
             form.save()
-            # redirct to view all posts
-        return redirect("/viewAllPosts")
-        #return redirect(create_post)
+        return redirect(create_post)
     return render(request, 'project/create_post.html', {'form':PostForm}) 
 
 class IndexView(ListView):
@@ -101,7 +106,6 @@ class IndexView(ListView):
     def get_queryset(self):
         ##this is where we put the logic in for the recruiter to filter 
         return Post.objects.order_by('-expiration_date')
-
         #all posts- expiration date
         #active/ inactive - status
         #posts with at least 1 interested candidate - num_interested 
