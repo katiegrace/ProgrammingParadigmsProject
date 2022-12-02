@@ -12,6 +12,6 @@ urlpatterns = [
     path('candidateDashboard/', views.candidateDashboard, name='CandidateDashboard'),
     path('recruiterDashboard/', views.recruiterDashboard, name='RecruiterDashboard'),
     path('create_post/', views.create_post, name='CreatePost'),
-    path('viewAllPosts/', views.IndexView.as_view(), name='ViewAllPost'),
+    path('viewAllPosts/', views.IndexView.as_view(), name='ViewAllPosts'),
     #path('<int:pk>/',views.PostDetailView.as_view(), name='Post'),
 ]
