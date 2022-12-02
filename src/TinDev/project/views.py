@@ -34,7 +34,7 @@ def login(request):
             recruiter = RecruiterProfile.objects.filter(username=uname, password=pwd)
             #len(recruiter) will be 0 if no recruiters found
             if len(recruiter) == 0:
-                return render(request, 'project/login.html', {"error":"Auth fail"})
+                return render(request, 'project/login.html', {"error":"Incorrect username or password"})
             else:
                 #We should have 0 or 1, never more
                 assert len(recruiter) > 0
@@ -100,7 +100,8 @@ def create_post(request):
             return redirect("/viewAllPosts")
         else:
             #TODO: Add proper error reporting to the user
-            raise ValueError(f"Form is not valid, errors {form.errors}")
+            #raise ValueError(f"Form is not valid, errors {form.errors}")
+            return render(request, 'project/create_post.html', {"error":"Invaild Job Posting"})
         #if they create a post we want it to take them to view all posts 
     return render(request, 'project/create_post.html', {'form':PostForm}) 
 
