@@ -97,7 +97,8 @@ def create_post(request):
         form = PostForm(request.POST)
         if form.is_valid():
             form.save()
-        return redirect(create_post)
+        #if they create a post we want it to take them to view all posts 
+        return redirect("/viewAllPosts")
     return render(request, 'project/create_post.html', {'form':PostForm}) 
 
 class IndexView(ListView):
