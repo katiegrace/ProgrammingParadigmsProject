@@ -32,9 +32,6 @@ class Post(models.Model):
     expiration_date = models.DateTimeField()
     status = models.CharField(max_length=200)
     #num_interested = models.CharField(max_length=100)
-    
-    def save(self, *args, **kwargs):
-        super(Post, self).save(*args, **kwargs)
 
     #def __str__(self):
         #return self.title
