@@ -93,10 +93,15 @@ dont know if u need this
 '''
 
 def create_post(request):
+    myPost = None
     if request.POST:
-        form = PostForm(request.POST)
+        form = PostForm(request.POST, instance=myPost)
         if form.is_valid():
+            recruiter = RecruiterProfile.objects.filter(username=request.session['logged_user'])[0]
+            myPost.recruiter = recruiter
             form.save()
+            
+            # filter returns an array either 
             return redirect("/viewAllPosts")
         else:
             #TODO: Add proper error reporting to the user
