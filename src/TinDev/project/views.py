@@ -114,6 +114,14 @@ class PostDetailView(DetailView):
     model = Post
     template_name = 'project/post_detail.html'
 
+
+'''
+NEXT STEPS: update a post, delete a post
+     to delete an instance from a Django data bsae Model.objects.filter(id=id).delete()
+    to update an object in the Django data base Model.objects.filter(id=id).update(field=value)
+'''
+
+
 '''
 def create_post(request):
     context = {}
