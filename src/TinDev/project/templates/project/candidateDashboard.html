@@ -1,27 +1,15 @@
 <div class="container">
-    <div class="page-header">
-        <h1>Candidate Dashboard</h1>
-    </div>
+  <div class="page-header">
+      <h1>Candidate Dashboard</h1>
   </div>
-  
-  <!-- why do we need this? the candidate dashboard is not a form nor a model-->
-  <form action="/candidateDashboard/" method="post">
-    <div class="container">
-  
-      <!--DO NOT REMOVE!! THIS IS NECESSARY FOR THE FORM TO WORK!!!-->
-      <!--SEE https://docs.djangoproject.com/en/4.1/howto/csrf/#using-csrf-->
-      {% csrf_token %} 
-  
-    </div>
-    {%if error%}
-      Error: {{error}}
-    {%endif%}
-  
-    
-      <button type="submit">
-        <a href='/viewAllPosts/'>View all job postings</a>
+</div>
+
+
+    <br>
+    <button type="submit">
+         <a href='/candidateViewPosts/'>Create Post</a>
     </button>
 
-
-
-  </form>
+    <button type="submit">
+      <a href='/interestedJobs/'>View all posts</a>
+  </button>
