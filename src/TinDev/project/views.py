@@ -138,6 +138,5 @@ def delete(request, id):
 
 def edit(request, id):
     post = Post.objects.get(id=id)
-    post.position_title = "test"
-    post.save()
-    return redirect('/viewAllPosts')
+    form = PostForm(instance = post)
+    return render(request, '/post_update', {'form':PostForm} )
