@@ -106,7 +106,7 @@ def create_post(request):
             # filter returns an array either 
             return redirect("/viewAllPosts")
         else:
-            #TODO: Add proper error reporting to the user
+            #Add proper error reporting to the user
             #raise ValueError(f"Form is not valid, errors {form.errors}")
             return render(request, 'project/create_post.html', {'form':form,"error":"Form is invalid"})
         #if they create a post we want it to take them to view all posts 
