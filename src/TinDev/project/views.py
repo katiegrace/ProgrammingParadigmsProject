@@ -126,7 +126,9 @@ class IndexView(ListView):
     def get_queryset(self):
         ##this is where we put the logic in for the recruiter to filter 
         print(Post.objects.all().order_by('-expiration_date'))
-        return Post.objects.all().order_by('-expiration_date')
+        #for the recruiter we need to get only the ones they posted! right now we are showing all?
+        #return Post.objects.filter(username=request.session['logged_user'])[0].order_by('-expiration_date')
+        return (Post.objects.all().order_by('-expiration_date'))
         #all posts- expiration date
         #active/ inactive - status
         #posts with at least 1 interested candidate - num_interested 

@@ -17,6 +17,13 @@
                 </a>
             </li>
         {% endfor %}
+        <label for="d">Filter Posts:</label>
+        <select name="filter" id="filter">
+        <option value="all">All Posts</option>
+        <option value="active">Active</option>
+        <option value="inactive">Inactive</option>
+        <option value="interested">Interested Candidates</option>
+        </select>  
         </ul>
     {% else %}
         <p>No jobs are available.</p>
