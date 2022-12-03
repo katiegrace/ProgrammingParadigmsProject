@@ -51,7 +51,7 @@ class RecruiterForm(ModelForm):
 class PostForm(ModelForm):
     position_title = forms.CharField(max_length=200,widget=forms.TextInput(attrs={'placeholder': 'Title', 'style': 'width: 300px;', 'class': 'form-control'}))
     position_type = forms.CharField(max_length=200,widget=forms.TextInput(attrs={'placeholder': 'Type', 'style': 'width: 300px;', 'class': 'form-control'}))
-    location = forms.CharField(max_length=200,widget=forms.TextInput(attrs={'placeholder': 'Loaction', 'style': 'width: 300px;', 'class': 'form-control'}))
+    location = forms.CharField(max_length=200,widget=forms.TextInput(attrs={'placeholder': 'Location', 'style': 'width: 300px;', 'class': 'form-control'}))
     preferred_skills = forms.CharField(max_length=200,widget=forms.TextInput(attrs={'placeholder': 'Skills', 'style': 'width: 300px;', 'class': 'form-control'}))
     description = forms.CharField(max_length=200,widget=forms.TextInput(attrs={'placeholder': 'Description', 'style': 'width: 300px;', 'class': 'form-control'}))
     company = forms.CharField(max_length=200,widget=forms.TextInput(attrs={'placeholder': 'Company', 'style': 'width: 300px;', 'class': 'form-control'}))
