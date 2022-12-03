@@ -55,7 +55,7 @@ class PostForm(ModelForm):
     preferred_skills = forms.CharField(max_length=200,widget=forms.TextInput(attrs={'placeholder': 'Skills', 'style': 'width: 300px;', 'class': 'form-control'}))
     description = forms.CharField(max_length=200,widget=forms.TextInput(attrs={'placeholder': 'Description', 'style': 'width: 300px;', 'class': 'form-control'}))
     company = forms.CharField(max_length=200,widget=forms.TextInput(attrs={'placeholder': 'Company', 'style': 'width: 300px;', 'class': 'form-control'}))
-    expiration_date = forms.DateTimeField(widget=forms.DateTimeInput(attrs={'placeholder': 'Date', 'style': 'width: 300px;', 'class': 'form-control'}))
+    expiration_date = forms.DateTimeField(widget=forms.DateTimeInput(attrs={'placeholder': 'Date (mm/dd/yyyy)', 'style': 'width: 300px;', 'class': 'form-control'}))
     status = forms.CharField(max_length=200,widget=forms.TextInput(attrs={'placeholder': 'Status', 'style': 'width: 300px;', 'class': 'form-control'}))
     #num_interested = forms.CharField(max_length=100)
 
