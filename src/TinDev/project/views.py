@@ -139,7 +139,7 @@ def delete(request, id):
 def edit(request, id):
     post = Post.objects.get(id=id)
     if request.method == 'POST':
-        form = PostForm(instance = post)
+        form = PostForm(request.POST, instance = post)
 
         if form.is_valid():
             form.save()
