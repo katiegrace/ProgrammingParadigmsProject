@@ -23,9 +23,9 @@ class NewUserForm(UserCreationForm):
 
 class CandidateForm(ModelForm):
     name = forms.CharField(max_length=200,widget=forms.TextInput(attrs={'placeholder': 'Name', 'style': 'width: 300px;', 'class': 'form-control'}))
-    bio = forms.TextInput(widget=forms.TextInput(attrs={'placeholder': 'Bio', 'style': 'width: 300px;', 'class': 'form-control'}))
+    bio = forms.CharField(max_length=300,widget=forms.TextInput(attrs={'placeholder': 'Bio', 'style': 'width: 300px;', 'class': 'form-control'}))
     zipcode = forms.CharField(max_length=10,widget=forms.TextInput(attrs={'placeholder': 'Zipcode', 'style': 'width: 300px;', 'class': 'form-control'}))
-    skills = forms.TextInput(widget=forms.TextInput(attrs={'Skills': 'Title', 'style': 'width: 300px;', 'class': 'form-control'}))
+    skills = forms.CharField(max_length=300,widget=forms.TextInput(attrs={'placeholder': 'Skills', 'style': 'width: 300px;', 'class': 'form-control'}))
     git_username = forms.CharField(max_length=200,widget=forms.TextInput(attrs={'placeholder': 'Github', 'style': 'width: 300px;', 'class': 'form-control'}))
     years_exp = forms.CharField(max_length=3,widget=forms.TextInput(attrs={'placeholder': 'Experience', 'style': 'width: 300px;', 'class': 'form-control'}))
     username =  forms.CharField(max_length=200,widget=forms.TextInput(attrs={'placeholder': 'Username', 'style': 'width: 300px;', 'class': 'form-control'}))
@@ -37,7 +37,7 @@ class CandidateForm(ModelForm):
 
 class RecruiterForm(ModelForm):
 
-    name = forms.(max_length=200,widget=forms.TextInput(attrs={'placeholder': 'Name', 'style': 'width: 300px;', 'class': 'form-control'}))
+    name = forms.CharField(max_length=200,widget=forms.TextInput(attrs={'placeholder': 'Name', 'style': 'width: 300px;', 'class': 'form-control'}))
     company = forms.CharField(max_length=300,widget=forms.TextInput(attrs={'placeholder': 'Company', 'style': 'width: 300px;', 'class': 'form-control'}))
     zipcode = forms.CharField(max_length=10,widget=forms.TextInput(attrs={'placeholder': 'Zipcode', 'style': 'width: 300px;', 'class': 'form-control'}))
     username =  forms.CharField(max_length=200,widget=forms.TextInput(attrs={'placeholder': 'Username', 'style': 'width: 300px;', 'class': 'form-control'}))
