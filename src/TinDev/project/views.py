@@ -129,7 +129,7 @@ class IndexView(ListView):
 
 class PostDetailView(DetailView):
     model = Post
-    template_name = 'project/post_detail.html'
+    template_name = 'project/base_post_detail.html'
 
 def delete(request, id):
   post = Post.objects.get(id=id)

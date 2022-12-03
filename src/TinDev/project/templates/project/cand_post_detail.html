@@ -1,0 +1,11 @@
+{% extends "project/base_post_detail.html" %}
+{% block title %}{{ post.title}}{% endblock %}
+{% block content %}
+	<body>
+		<button type="submit">
+			<a href='/edit/{{post.id}}'>Interested</a>
+		</button>
+		<button type="submit">
+			<a href='/delete/{{post.id}}/'>Not Interested</a>
+	   </button>
+{% endblock %}
