@@ -156,6 +156,11 @@ def Dropdown(self):
 
     return render(self, 'app/viewer.html',context)
 
+def delete(request, id):
+  post = Post.objects.get(id=id)
+  post.delete()
+  return redirect('/viewAllPosts')
+
 '''
 NEXT STEPS: update a post, delete a post
      to delete an instance from a Django data bsae Model.objects.filter(id=id).delete()
