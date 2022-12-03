@@ -16,6 +16,7 @@ from .forms import Post
 from .forms import PostForm
 #from .models import post
 #from django.views.generic import ListView
+from .forms import TitleChoiceField
 
 def index(request):
     return render(request, 'project/index.html', {'title':'index'})
@@ -137,6 +138,23 @@ class PostDetailView(DetailView):
     model = Post
     template_name = 'project/post_detail.html'
 
+def Dropdown(self):
+
+    status_list = TitleChoiceField()
+    #publisher_list = PublisherChoiceField()
+    #sellingnotes_list = NotesChoiceField()
+    #category_list = CategoryChoiceField()
+
+    if self.GET.get('status'): # On screen drop down Filter for status
+        selected_status = self.GET.get('status')
+        displayStatus=Post.objects.filter(status=selected_status,uid=self.user)       
+    else:
+        displayStatus=Post.objects.filter(uid=self.user)
+    context = {
+        'status_list': status_list,
+    }
+
+    return render(self, 'app/viewer.html',context)
 
 '''
 NEXT STEPS: update a post, delete a post
