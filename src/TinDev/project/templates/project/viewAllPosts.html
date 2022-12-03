@@ -11,13 +11,9 @@
         <ul>
         {% for post in post_list%}
             <li>
-                <a href="/post/{{ post.id }}/">{{post.position_title}} at
-                   <i>{{post.company}}</i> ({{post.pub_date}})
-                   {{post.description}}
-                   {{post.preferred_skills}}
-                   {{post.description}}
-                   {{post.expiration_date}}
-                   {{post.status}}
+                <a href="/{{ post.id }}/">{{post.position_title}}, 
+                   <i>{{post.company}}</i>, 
+                   {{post.location}}
                 </a>
             </li>
         {% endfor %}
