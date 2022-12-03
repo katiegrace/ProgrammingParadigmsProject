@@ -113,12 +113,6 @@ def create_post(request):
         #if they create a post we want it to take them to view all posts 
     return render(request, 'project/create_post.html', {'form':PostForm}) 
 
-'''
-def edit_post(request):
-    to update an object in the Django data base Model.objects.filter(id=id).update(field=value)
-    Post.objects.filter(id= )
-    return redirect("/post_detail")
-'''
 
 
 class IndexView(ListView):
@@ -143,29 +137,15 @@ def delete(request, id):
   post.delete()
   return redirect('/viewAllPosts')
 
-'''
-NEXT STEPS: update a post, delete a post
-     to delete an instance from a Django data bsae Model.objects.filter(id=id).delete()
-    to update an object in the Django data base Model.objects.filter(id=id).update(field=value)
-'''
-
-
-'''
-def create_post(request):
-    context = {}
-    form = PostForm(request.POST or None)
-    if request.method == "POST":
-        if form.is_valid():
-            print("\n\n form is valid")
-            postition_title = CandidateProfile.objects.get(user=request.user)
-            new_post = form.save(commit=False)
-            new_post.user = postition_title
-            new_post.save()
-            return redirect('forums')
-        
-    context.update({
-            'form': form,
-            'title': 'Create New Post'
-    })
-    return render(request, '/create_post', context)
-'''
+def edit_post(request, id):
+    post = Post.objects.get(id=id)
+    post.position_title = request.POST.get('position_title')
+    post.position_type = request.POST.get('position_type')
+    post.location = request.POST.get('location')
+    post.preferred_skills = request.POST.get('preferred_skills')
+    post.description = request.POST.get('description')
+    post.company = request.POST.get('company')
+    post.expiration_date = request.POST.get('expiration_date')
+    post.status = request.POST.get('status')
+    post.save()
+    return redirect('/post_detail')
