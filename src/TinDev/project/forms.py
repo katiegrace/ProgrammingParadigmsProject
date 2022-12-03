@@ -49,14 +49,14 @@ class RecruiterForm(ModelForm):
 
 
 class PostForm(ModelForm):
-    position_title = forms.CharField(max_length=200)
-    position_type = forms.CharField(max_length=200)
-    location = forms.CharField(max_length=200)
-    preferred_skills = forms.CharField(max_length=200)
-    description = forms.CharField(max_length=200)
-    company = forms.CharField(max_length=200)
-    expiration_date = forms.DateTimeField()
-    status = forms.CharField(max_length=200)
+    position_title = forms.CharField(max_length=200,widget=forms.TextInput(attrs={'placeholder': 'Title', 'style': 'width: 300px;', 'class': 'form-control'}))
+    position_type = forms.CharField(max_length=200,widget=forms.TextInput(attrs={'placeholder': 'Title', 'style': 'width: 300px;', 'class': 'form-control'}))
+    location = forms.CharField(max_length=200,widget=forms.TextInput(attrs={'placeholder': 'Title', 'style': 'width: 300px;', 'class': 'form-control'}))
+    preferred_skills = forms.CharField(max_length=200,widget=forms.TextInput(attrs={'placeholder': 'Title', 'style': 'width: 300px;', 'class': 'form-control'}))
+    description = forms.CharField(max_length=200,widget=forms.TextInput(attrs={'placeholder': 'Title', 'style': 'width: 300px;', 'class': 'form-control'}))
+    company = forms.CharField(max_length=200,widget=forms.TextInput(attrs={'placeholder': 'Title', 'style': 'width: 300px;', 'class': 'form-control'}))
+    expiration_date = forms.DateTimeField(widget=forms.DateTimeInput(attrs={'placeholder': 'Title', 'style': 'width: 300px;', 'class': 'form-control'}))
+    status = forms.CharField(max_length=200,widget=forms.TextInput(attrs={'placeholder': 'Title', 'style': 'width: 300px;', 'class': 'form-control'}))
     #num_interested = forms.CharField(max_length=100)
 
     class Meta:

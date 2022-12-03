@@ -93,20 +93,22 @@ dont know if u need this
 '''
 
 def create_post(request):
-    myPost = None
+    
     if request.POST:
-        form = PostForm(request.POST, instance=myPost)
+        form = PostForm(request.POST)
+        
         if form.is_valid():
             recruiter = RecruiterProfile.objects.filter(username=request.session['logged_user'])[0]
-            myPost.recruiter = recruiter
+            form.instance.recruiter = recruiter
             form.save()
             
+            print(form.instance)
             # filter returns an array either 
             return redirect("/viewAllPosts")
         else:
             #TODO: Add proper error reporting to the user
             #raise ValueError(f"Form is not valid, errors {form.errors}")
-            return render(request, 'project/create_post.html', {"error":"Invaild Job Posting"})
+            return render(request, 'project/create_post.html', {'form':form,"error":"Form is invalid"})
         #if they create a post we want it to take them to view all posts 
     return render(request, 'project/create_post.html', {'form':PostForm}) 
 
@@ -123,7 +125,8 @@ class IndexView(ListView):
     context_object_name = 'post_list'
     def get_queryset(self):
         ##this is where we put the logic in for the recruiter to filter 
-        return Post.objects.order_by('-expiration_date')
+        print(Post.objects.all().order_by('-expiration_date'))
+        return Post.objects.all().order_by('-expiration_date')
         #all posts- expiration date
         #active/ inactive - status
         #posts with at least 1 interested candidate - num_interested 
