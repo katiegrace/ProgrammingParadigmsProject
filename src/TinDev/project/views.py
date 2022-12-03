@@ -138,5 +138,14 @@ def delete(request, id):
 
 def edit(request, id):
     post = Post.objects.get(id=id)
-    form = PostForm(instance = post)
-    return render(request, '/post_update', {'form':PostForm} )
+    if request.method == 'POST':
+        form = PostForm(instance = post)
+
+        if form.is_valid():
+            form.save()
+            return redirect("/viewAllPosts")
+    else:
+        form = PostForm(instance=post)
+    #if they create a post we want it to take them to view all posts 
+    return render(request, 'project/post_update.html', {'form':form})
+    return redirect('')

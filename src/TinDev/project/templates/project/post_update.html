@@ -1,4 +1,4 @@
-{%extends "project/base.html" %}
+{%extends "project/post.html" %}
 {% block title %}
 TinDev - Update Post
 {% endblock %}
@@ -9,7 +9,7 @@ TinDev - Update Post
   </div>
 </div>
 
-<form method="POST" action="">
+<form method="post" action="">
   {% csrf_token %}
   {{form.as_p}}
   {%if error%}
@@ -18,5 +18,6 @@ TinDev - Update Post
   <button class="btn btn-info">
       Update
   </button>
+
 </form>
 {% endblock %}
