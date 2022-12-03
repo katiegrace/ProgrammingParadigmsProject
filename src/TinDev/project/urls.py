@@ -13,9 +13,9 @@ urlpatterns = [
     path('recruiterDashboard/', views.recruiterDashboard, name='RecruiterDashboard'),
     path('create_post/', views.create_post, name='CreatePost'),
     path('viewAllPosts/', views.IndexView.as_view(), name='ViewAllPosts'),
-    path('edit_post/<int:id>', views.edit_post, name='EditPost'),
     path('<int:pk>/',views.PostDetailView.as_view(), name='Post'),
     path('candidateViewPosts/', views.create_post, name='CandidatePosts'),
     path('interestedJobs/', views.IndexView.as_view(), name='Interest'),
     path('delete/<int:id>/', views.delete, name='Delete'),
+    path('edit/<int:id>', views.edit, name='Edit'),
 ]

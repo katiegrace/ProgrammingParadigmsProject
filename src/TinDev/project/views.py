@@ -137,7 +137,7 @@ def delete(request, id):
   post.delete()
   return redirect('/viewAllPosts')
 
-def edit_post(request, id):
+def edit(request, id):
     post = Post.objects.get(id=id)
     post.position_title = request.POST.get('position_title')
     post.position_type = request.POST.get('position_type')
