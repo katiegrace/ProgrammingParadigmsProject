@@ -9,6 +9,7 @@ urlpatterns = [
     path('candidateProfile/', views.candidateProfile, name='CandidateProfile'),
     path('recruiterProfile/', views.recruiterProfile, name='RecruiterProfile'),
     path("login/", views.login, name="login"),
+    path("logout/", views.logout, name="logout"),
     path('candidateDashboard/', views.candidateDashboard, name='CandidateDashboard'),
     path('recruiterDashboard/', views.recruiterDashboard, name='RecruiterDashboard'),
     path('create_post/', views.create_post, name='CreatePost'),
@@ -19,4 +20,5 @@ urlpatterns = [
     path('delete/<int:id>/', views.delete, name='Delete'),
     path('edit/<int:id>', views.edit, name='Edit'),
     path('post_update/', views.IndexView.as_view(), name='Update')
+    
 ]
