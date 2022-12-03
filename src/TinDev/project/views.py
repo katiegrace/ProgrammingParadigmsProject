@@ -16,7 +16,6 @@ from .forms import Post
 from .forms import PostForm
 #from .models import post
 #from django.views.generic import ListView
-from .forms import TitleChoiceField
 
 def index(request):
     return render(request, 'project/index.html', {'title':'index'})
@@ -139,13 +138,6 @@ def delete(request, id):
 
 def edit(request, id):
     post = Post.objects.get(id=id)
-    post.position_title = request.POST.get('position_title')
-    post.position_type = request.POST.get('position_type')
-    post.location = request.POST.get('location')
-    post.preferred_skills = request.POST.get('preferred_skills')
-    post.description = request.POST.get('description')
-    post.company = request.POST.get('company')
-    post.expiration_date = request.POST.get('expiration_date')
-    post.status = request.POST.get('status')
+    post.position_title = "test"
     post.save()
-    return redirect('<int:pk>/')
+    return redirect('/viewAllPosts')

@@ -62,19 +62,3 @@ class PostForm(ModelForm):
     class Meta:
         model = Post
         fields = ['position_title', 'position_type', 'location', 'preferred_skills', 'description', 'company', 'expiration_date', 'status']
-
-
-class TitleChoiceField(forms.Form):
-    class Meta:
-        model = Post
-        fields = ('status')
-    
-    titles = forms.ModelChoiceField(queryset = Post.objects.all())
-
-    def __init__(self, uid=None, *args, **kwargs):
-        super(TitleChoiceField, self).__init__(*args, **kwargs)
-        
-        self.user = uid
-        usrqry = Post.objects.filter(uid=self.user).values_list('status', flat=True).distinct().order_by('status')
-        
-        self.fields['status'].queryset=usrqry
