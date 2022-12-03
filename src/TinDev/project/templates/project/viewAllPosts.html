@@ -21,10 +21,19 @@
         <label for="d">Filter Posts:</label>
         <select name="filter" id="filter">
         <option value="all">All Posts</option>
-        <option value="active">Active</option>
-        <option value="inactive">Inactive</option>
-        <option value="interested">Interested Candidates</option>
+        <option value="active">Active Posts Only</option>
+        <option value="inactive">Inactive Posts Only</option>
+        <option value="interested">Posts with at least 1 interested Candidate</option>
         </select>  
+        <button onclick="myFunction()">Filter</button>
+        <p id="demo"></p>
+
+        <script>
+            function myFunction() {
+              var x = document.getElementById("filter").options[0].text;
+              document.getElementById("demo").innerHTML = x;
+            }
+            </script>
         </ul>
     {% else %}
         <p>No jobs are available.</p>
