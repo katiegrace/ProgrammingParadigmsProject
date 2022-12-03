@@ -148,4 +148,4 @@ def edit_post(request, id):
     post.expiration_date = request.POST.get('expiration_date')
     post.status = request.POST.get('status')
     post.save()
-    return redirect('/post_detail')
+    return redirect('<int:pk>/')
