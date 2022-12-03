@@ -1,0 +1,25 @@
+{% extends "project/post.html" %}
+{% block title %}All Job Postings{% endblock %}
+<b>
+    <h1>"All Job Postings"</h1>
+</b>
+{% block content %}
+    {% if post_list %}
+    <b>
+        <h1><u>All Job Postings</u></h1>
+    </b>
+        <ul>
+        {% for post in post_list%}
+            <li>
+                <a href="/{{ post.id }}/">{{post.position_title}}, 
+                   <i>{{post.company}}</i>, 
+                   {{post.location}}
+                </a>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No jobs are available.</p>
+    {% endif %}
+
+{% endblock %}

@@ -15,4 +15,6 @@ urlpatterns = [
     path('viewAllPosts/', views.IndexView.as_view(), name='ViewAllPosts'),
     # path('edit_post/', views.edit_post, name='EditPost'),
     path('<int:pk>/',views.PostDetailView.as_view(), name='Post'),
+    path('candidateViewPosts/', views.create_post, name='CandidatePosts'),
+    path('interestedJobs/', views.IndexView.as_view(), name='Interest'),
 ]
