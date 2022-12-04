@@ -104,7 +104,7 @@ def create_post(request):
             
             print(form.instance)
             # filter returns an array either 
-            return redirect("/viewAllPosts")
+            return redirect("/recruiterViewAllPosts")
         else:
             #Add proper error reporting to the user
             #raise ValueError(f"Form is not valid, errors {form.errors}")
@@ -115,7 +115,7 @@ def create_post(request):
 
 
 class CandidateIndexView(ListView):
-    template_name = 'project/candidateViewAllPosts.html'
+    template_name = 'project/candidateViewPosts.html'
     context_object_name = 'post_list'
     def get_queryset(self):
         print(Post.objects.all().order_by('-expiration_date'))
@@ -126,7 +126,9 @@ class RecruiterIndexView(ListView):
     context_object_name = 'post_list'
     def get_queryset(self):
         #filter all the post objects to only include those in which in recruiter's username matched the one logged in
-        return (Post.objects.filter(recruiter.username =request.session['logged_user']).order_by('-expiration_date'))
+        uname_id = RecruiterProfile.objects.filter(username=self.request.session['logged_user'])[0]
+        #need to do return (Post.objects.filter(recruiter.username = uname).order_by('-expiration_date'))
+        return (Post.objects.filter(recruiter= uname_id).order_by('-expiration_date'))
 
 class CandPostDetailView(DetailView):
     model = Post
@@ -139,7 +141,7 @@ def RecPostDetailView(DetailView):
 def delete(request, id):
   post = Post.objects.get(id=id)
   post.delete()
-  return redirect('/viewAllPosts')
+  return redirect('/recruiterViewAllPosts')
 
 def edit(request, id):
     post = Post.objects.get(id=id)
@@ -148,7 +150,7 @@ def edit(request, id):
 
         if form.is_valid():
             form.save()
-            return redirect("/viewAllPosts")
+            return redirect("/recruiterViewAllPosts")
     else:
         form = PostForm(instance=post)
     #if they create a post we want it to take them to view all posts 

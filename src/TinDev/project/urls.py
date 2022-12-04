@@ -20,6 +20,6 @@ urlpatterns = [
     path('interestedJobs/', views.CandidateIndexView.as_view(), name='Interest'),
     path('delete/<int:id>/', views.delete, name='Delete'),
     path('edit/<int:id>', views.edit, name='Edit'),
-    path('post_update/', views.IndexView.as_view(), name='Update')
+    path('post_update/', views.RecruiterIndexView.as_view(), name='Update')
     
 ]
