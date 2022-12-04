@@ -125,15 +125,13 @@ class RecruiterIndexView(ListView):
         #need to do return (Post.objects.filter(recruiter.username = uname).order_by('-expiration_date'))
         return (Post.objects.filter(recruiter= uname_id).order_by('-expiration_date'))
 
-def CandPostDetailView(request, DetailView):
+class CandPostDetailView(DetailView):
     model = Post
     template_name = 'project/cand_post_detail.html'
-    uname = request.POST["username"]
-    pwd = request.POST["password"]
-    cand = CandidateProfile.objects.filter(username=uname, password=pwd)
-        #len(cand) will be 0 if no candidates found and we need to check recruiters
-    if len(cand) == 0:
-        return
+
+class RecPostDetailView(DetailView):
+    model = Post
+    template_name = 'project/rec_post_detail.html'
 
 def delete(request, id):
   post = Post.objects.get(id=id)
