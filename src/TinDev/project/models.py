@@ -37,7 +37,7 @@ class Post(models.Model):
         #return self.title
 
 class Offer(models.Model):
-    recruiter = models.ForeignKey(RecruiterProfile, on_delete=models.CASCADE, default="")
-    candidate = models.ForeignKey(RecruiterProfile, on_delete=models.CASCADE, default="")
+    recruiterOff = models.ForeignKey(RecruiterProfile, on_delete=models.CASCADE, default="")
+    candidateOff = models.ForeignKey(CandidateProfile, on_delete=models.CASCADE, default="")
     salary_info = models.CharField(max_length=200)
     due_date = models.DateTimeField()
