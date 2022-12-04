@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <title>{% block title %}Default title{% endblock %}</title>
-</head>
-<body>
-    <div id="content">
-        {% block content %}{% endblock %}
-    </div>
-</body>
+    <head>
+        <title>
+            {% block title %}Default title{% endblock %}
+        </title>
+        {% load static %}
+        <script src="{% static "filter.js" %}" type="text/javascript"></script>
+    </head>
+    <body>
+        <div id="content">
+            {% block content %}{% endblock %}
+        </div>
+    </body>
 </html>

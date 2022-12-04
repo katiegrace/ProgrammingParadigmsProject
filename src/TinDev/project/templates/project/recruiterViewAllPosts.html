@@ -1,40 +1,52 @@
 {% extends "project/post.html" %}
 {% block title %}Job Postings{% endblock %}
 <b>
-    <head>"Job Postings"
-        <script type="text/javascript" src="filter.js"></script>
+    <head>
+
+        <title>Job Postings</title>
     </head>
 </b>
 {% block content %}
     {% if post_list %}
-    <b>
-        <h1><u>Job Postings</u></h1>
-    </b>
+        <b>
+            <h1>
+                <u>Job Postings</u>
+            </h1>
+        </b>
         <ul>
-        <br>
-        <label for="d">Filter Posts:</label>
-        <select name="filter" id="filter">
-        <option value="all">All Posts</option>
-        <option value="active">Active Posts Only</option>
-        <option value="inactive">Inactive Posts Only</option>
-        <option value="interested">Posts with at least 1 interested Candidate</option>
-        </select>  
-        <button onclick="applyPositionFilter()">Filter</button>
-        <p id="demo"></p>
-        <p id="printfiltered">
-            <!--{% for post in post_list%}-->
-            <li> 
-                <a href="/{{ post.id }}/"><b>{{post.position_title}}</b>, 
-                   <i>{{post.company}}</i>, 
-                   {{post.location}}
-                </a>
-            </li>
-            <!--{% endfor %}-->
-        </p>
-        </ul>
-    {% else %}
-        <p>No jobs are available.</p>
-    {% endif %}
-
+            <br>
+            <label for="d">Filter Posts:</label>
+            <select name="filter" id="filter">
+                <option value="all">
+                    All Posts
+                </option>
+                <option value="active">
+                    Active Posts Only
+                </option>
+                <option value="inactive">
+                    Inactive Posts Only
+                </option>
+                <option value="interested">
+                    Posts with at least 1 interested Candidate
+                </option>
+            </select>
+            <button onclick="applyPositionFilter()">Filter</button>
+            <p id="demo">
+            </p>
+            <p id="printfiltered">
+                <!--{% for post in post_list%}-->
+                <li>
+                <a href="/{{ post.id }}/"><b>{{ post.position_title }}</b>,
+                <i>{{ post.company }}</i>,
+            {{ post.location }}
+        </a>
+    </li>
+    <!--{% endfor %}-->
+</p>
+</ul>
+{% else %}
+<p>
+    No jobs are available.
+</p>
+{% endif %}
 {% endblock %}
-

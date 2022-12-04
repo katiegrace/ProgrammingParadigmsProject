@@ -1,11 +1,10 @@
 // document.getElementById("position-filter").onchange = applyPositionFilter;
-
 function applyPositionFilter() {
     let selectElement = document.getElementById("filter");
     let value = selectElement.value;
     let text = selectElement.options[selectElement.selectedIndex].text;
     // all posts
-    let allPosts = document.getElementsById("printfiltered");
+    let allPosts = document.getElementById("printfiltered");
     // show all elements
     if (text == "All Posts") {
         for (let i = 0; i < allPosts.length; i++) {
