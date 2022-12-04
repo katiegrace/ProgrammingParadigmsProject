@@ -1,16 +1,11 @@
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404, render, redirect
-from django.urls import reverse
+from django.shortcuts import render, redirect
 from project.forms import CandidateForm
 from project.models import CandidateProfile
 from project.forms import RecruiterForm
 from django.views.generic import ListView, DetailView
 from project.models import RecruiterProfile
-from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import login, authenticate, logout
-from django.contrib import messages
-from .forms import NewUserForm
+from django.contrib.auth import login
 from project.forms import Post
 from .forms import Post
 from .forms import PostForm
@@ -130,13 +125,15 @@ class RecruiterIndexView(ListView):
         #need to do return (Post.objects.filter(recruiter.username = uname).order_by('-expiration_date'))
         return (Post.objects.filter(recruiter= uname_id).order_by('-expiration_date'))
 
-class CandPostDetailView(DetailView):
+def CandPostDetailView(request, DetailView):
     model = Post
-    template_name = 'project/base_post_detail.html'
-
-def RecPostDetailView(DetailView):
-    model = Post
-    template_name = 'project/rec_post_detail.html'
+    template_name = 'project/cand_post_detail.html'
+    uname = request.POST["username"]
+    pwd = request.POST["password"]
+    cand = CandidateProfile.objects.filter(username=uname, password=pwd)
+        #len(cand) will be 0 if no candidates found and we need to check recruiters
+    if len(cand) == 0:
+        return
 
 def delete(request, id):
   post = Post.objects.get(id=id)
