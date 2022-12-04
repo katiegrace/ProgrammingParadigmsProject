@@ -1,7 +1,9 @@
 {% extends "project/post.html" %}
 {% block title %}Job Postings{% endblock %}
 <b>
-    <h1>"All Job Postings"</h1>
+    <head>"Job Postings"
+        <script type="text/javascript" src="filter.js"></script>
+    </head>
 </b>
 {% block content %}
     {% if post_list %}
@@ -17,7 +19,7 @@
         <option value="inactive">Inactive Posts Only</option>
         <option value="interested">Posts with at least 1 interested Candidate</option>
         </select>  
-        <button onclick="myFunction()">Filter</button>
+        <button onclick="applyPositionFilter()">Filter</button>
         <p id="demo"></p>
         <p id="printfiltered">
             <!--{% for post in post_list%}-->
@@ -29,25 +31,6 @@
             </li>
             <!--{% endfor %}-->
         </p>
-
-        <script>
-            function myFunction() {
-                // tried this first: var x = document.getElementById("filter").options.text;
-                
-                let selectElement = document.getElementById("filter");
-                let value = selectElement.value;
-                let text = selectElement.options[selectElement.selectedIndex].text;
-                for (post in post_list) {
-                    if (post.status == 'Active' && text == 'Active') {
-                        document.getElementById("demo").innerHTML = document.getElementById("printfiltered");
-                    }
-                    else if(post.status == 'Inactive' && text == 'Inactive') {
-                        document.getElementById("demo").innerHTML = document.getElementById("printfiltered");
-                    }
-                }  
-            }
-        
-        </script>
         </ul>
     {% else %}
         <p>No jobs are available.</p>
