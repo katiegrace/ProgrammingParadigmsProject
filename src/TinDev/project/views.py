@@ -127,9 +127,13 @@ class IndexView(ListView):
         #active/ inactive - status
         #posts with at least 1 interested candidate - num_interested 
 
-class PostDetailView(DetailView):
+class CandPostDetailView(DetailView):
     model = Post
     template_name = 'project/base_post_detail.html'
+
+def RecPostDetailView(DetailView):
+    model = Post
+    template_name = 'project/rec_post_detail.html'
 
 def delete(request, id):
   post = Post.objects.get(id=id)

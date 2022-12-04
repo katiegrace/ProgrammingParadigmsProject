@@ -1,11 +1,38 @@
-{% extends "project/base_post_detail.html" %}
+{% extends "project/post.html" %}
 {% block title %}{{ post.title}}{% endblock %}
 {% block content %}
 	<body>
-		<button type="submit">
-			<a href='/edit/{{post.id}}'>Interested</a>
+		<h1>{{post.position_title}}</h1>
+		<p2> 
+			<b>Company: </b>
+			<i>{{post.company}}</i>
+		
+		</p2>
+		<br><br>
+		<p3>
+			<b>Position Type: </b>
+			{{post.position_type}}
+		</p3><br>
+		<br><b>Job location:</b>
+		<p4>{{post.location}}</p4><br><br>
+		<p5><b>
+			Preferred Skils:
+		</b>{{post.preferred_skills}}</p5><br><br>	 
+		<b>
+			Description:
+		</b>{{post.description}}</p5><br><br>	 
+		<b>
+			Expiration Date:
+		</b>{{post.expiration_date}}</p5><br><br>	 
+		<b>
+			Status:
+		</b>{{post.status}}</p5><br><br><br>	
+        
+        <button type="submit">
+			<a href='/edit/{{post.id}}'> Something Post</a>
 		</button>
 		<button type="submit">
-			<a href='/delete/{{post.id}}/'>Not Interested</a>
+			<a href='/delete/{{post.id}}/'>Delete Post</a>
 	   </button>
+
 {% endblock %}

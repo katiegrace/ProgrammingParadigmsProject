@@ -34,14 +34,9 @@
             function myFunction() {
                 // tried this first: var x = document.getElementById("filter").options.text;
                 
-                const getSelectedText = (el) => {
-                    if (el.selectedIndex === -1) {
-                        return null;
-                    }
-                    return el.options[el.selectedIndex].text;
-                }
-                const select = document.querySelector('select')
-                const text = getSelectedText(select);
+                let selectElement = document.getElementById("filter");
+                let value = selectElement.value;
+                let text = selectElement.options[selectElement.selectedIndex].text;
                 for (post in post_list) {
                     if (post.status == 'Active' && text == 'Active') {
                         document.getElementById("demo").innerHTML = document.getElementById("printfiltered");
