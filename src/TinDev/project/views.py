@@ -114,18 +114,19 @@ def create_post(request):
 
 
 
-class IndexView(ListView):
-    template_name = 'project/viewAllPosts.html'
+class CandidateIndexView(ListView):
+    template_name = 'project/candidateViewAllPosts.html'
     context_object_name = 'post_list'
     def get_queryset(self):
-        ##this is where we put the logic in for the recruiter to filter 
         print(Post.objects.all().order_by('-expiration_date'))
-        #for the recruiter we need to get only the ones they posted! right now we are showing all?
-        #return Post.objects.filter(username=request.session['logged_user'])[0].order_by('-expiration_date')
         return (Post.objects.all().order_by('-expiration_date'))
-        #all posts- expiration date
-        #active/ inactive - status
-        #posts with at least 1 interested candidate - num_interested 
+    
+class RecruiterIndexView(ListView):
+    template_name = 'project/recruiterViewAllPosts.html'
+    context_object_name = 'post_list'
+    def get_queryset(self):
+        #filter all the post objects to only include those in which in recruiter's username matched the one logged in
+        return (Post.objects.filter(recruiter.username =request.session['logged_user']).order_by('-expiration_date'))
 
 class CandPostDetailView(DetailView):
     model = Post
