@@ -37,7 +37,9 @@ class Post(models.Model):
         #return self.title
 
 class Offer(models.Model):
+    #a offer is linked to a post, sent from a recruiter, to a candidate
     recruiterOff = models.ForeignKey(RecruiterProfile, on_delete=models.CASCADE, default="")
     candidateOff = models.ForeignKey(CandidateProfile, on_delete=models.CASCADE, default="")
+    postOff = models.ForeignKey(Post, on_delete=models.CASCADE, default="")
     salary_info = models.CharField(max_length=200)
     due_date = models.DateTimeField()
