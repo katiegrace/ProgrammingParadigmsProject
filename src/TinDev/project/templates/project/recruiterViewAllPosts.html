@@ -1,6 +1,4 @@
-{% extends "project/post.html" %}
-{% block title %}Job Postings{% endblock %}
-<b>
+{% extends "project/post.html" %}<b>
     <head>
 
         <title>Job Postings</title>
@@ -36,7 +34,7 @@
             <p id="printfiltered">
                 <!--{% for post in post_list%}-->
                 <li>
-                <a href="/{{ post.id }}/"><b>{{ post.position_title }}</b>,
+                    <a href="/Rec/{{ post.id }}/"><b>{{post.position_title}}</b>,
                 <i>{{ post.company }}</i>,
             {{ post.location }}
         </a>
