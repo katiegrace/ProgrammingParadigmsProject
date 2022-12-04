@@ -13,10 +13,11 @@ urlpatterns = [
     path('candidateDashboard/', views.candidateDashboard, name='CandidateDashboard'),
     path('recruiterDashboard/', views.recruiterDashboard, name='RecruiterDashboard'),
     path('create_post/', views.create_post, name='CreatePost'),
-    path('viewAllPosts/', views.IndexView.as_view(), name='ViewAllPosts'),
+    path('recruiterViewAllPosts/', views.RecruiterIndexView.as_view(), name='ViewAllPosts'),
     path('<int:pk>/',views.CandPostDetailView.as_view(), name='Post'),
-    path('candidateViewPosts/', views.IndexView.as_view(), name='CandidatePosts'),
-    path('interestedJobs/', views.IndexView.as_view(), name='Interest'),
+    path('candidateViewPosts/', views.CandidateIndexView.as_view(), name='CandidatePosts'),
+    #need to change this
+    path('interestedJobs/', views.CandidateIndexView.as_view(), name='Interest'),
     path('delete/<int:id>/', views.delete, name='Delete'),
     path('edit/<int:id>', views.edit, name='Edit'),
     path('post_update/', views.IndexView.as_view(), name='Update')
