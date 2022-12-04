@@ -5,9 +5,9 @@ from django.db import models
 class CandidateProfile(models.Model):
 
     name = models.CharField(max_length=200)
-    bio = models.TextField(max_length=200) # added
+    bio = models.CharField(max_length=300) # added
     zipcode = models.CharField(max_length=10)
-    skills = models.TextField(max_length=200)
+    skills = models.CharField(max_length=300)
     git_username = models.CharField(max_length=200) # added
     years_exp = models.CharField(max_length=3)
     username =  models.CharField(max_length=200)
@@ -35,3 +35,9 @@ class Post(models.Model):
     recruiter= models.ForeignKey(RecruiterProfile, on_delete=models.CASCADE, default="")
     #def __str__(self):
         #return self.title
+
+class Offer(models.Model):
+    recruiter = models.ForeignKey(RecruiterProfile, on_delete=models.CASCADE, default="")
+    candidate = models.ForeignKey(RecruiterProfile, on_delete=models.CASCADE, default="")
+    salary_info = models.CharField(max_length=200)
+    due_date = models.DateTimeField()
