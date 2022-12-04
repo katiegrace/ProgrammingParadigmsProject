@@ -14,7 +14,7 @@ urlpatterns = [
     path('recruiterDashboard/', views.recruiterDashboard, name='RecruiterDashboard'),
     path('create_post/', views.create_post, name='CreatePost'),
     path('recruiterViewAllPosts/', views.RecruiterIndexView.as_view(), name='ViewAllPosts'),
-    path('<int:pk>/',views.CandPostDetailView.as_view(), name='Post'),
+    path('<int:pk>/',views.CandPostDetailView, name='Post'),
     path('candidateViewPosts/', views.CandidateIndexView.as_view(), name='CandidatePosts'),
     #need to change this
     path('interestedJobs/', views.CandidateIndexView.as_view(), name='Interest'),
