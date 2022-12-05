@@ -156,8 +156,6 @@ def edit(request, id):
 
 def interest(request, id):
     post = Post.objects.get(id=id)
-    can = CandidateProfile.objects.filter(username=self.request.session['logged_user'])[0]
-    #store the Candidate (id) for the likes/dislikes
     is_dislike = False
     for dislike in post.dislikes.all():
         if dislike == CandidateProfile.objects.filter(username=request.session['logged_user'])[0]:
@@ -165,7 +163,6 @@ def interest(request, id):
             break
     if is_dislike:
         post.dislikes.remove(CandidateProfile.objects.filter(username=request.session['logged_user'])[0])
-        can.dislikes.add(post)
 
     is_like = False
     for like in post.likes.all():
@@ -174,18 +171,15 @@ def interest(request, id):
             break
     if not is_like: 
         post.likes.add(CandidateProfile.objects.filter(username=request.session['logged_user'])[0])
-        can.likes.add(post)
     
     if is_like:
         post.likes.remove(CandidateProfile.objects.filter(username=request.session['logged_user'])[0])
-        can.likes.remove(post)
     
     return redirect('/candidateViewPosts')
 
 
 def not_interest(request, id):
     post = Post.objects.get(id=id)
-    uname_id = CandidateProfile.objects.filter(username=self.request.session['logged_user'])[0]
     is_like = False
     for like in post.likes.all():
         if like == CandidateProfile.objects.filter(username=request.session['logged_user'])[0]:
@@ -193,7 +187,6 @@ def not_interest(request, id):
             break
     if is_like:
         post.likes.remove(CandidateProfile.objects.filter(username=request.session['logged_user'])[0])
-        can.likes.remove(post)
 
     is_dislike = False
     for dislike in post.dislikes.all():
@@ -202,11 +195,9 @@ def not_interest(request, id):
             break
     if not is_dislike: 
         post.dislikes.add(CandidateProfile.objects.filter(username=request.session['logged_user'])[0])
-        can.dislikes.add(post)
     
     if is_dislike:
         post.dislikes.remove(CandidateProfile.objects.filter(username=request.session['logged_user'])[0])
-        can.dislikes.remove(post)
     
     return redirect('/candidateViewPosts')
 
@@ -215,4 +206,6 @@ class candidate_likes(ListView):
     context_object_name = 'post_list'
     def get_queryset(self)
         #get the logged in candidate
-        return (CandidateProfile.objects.filter(username=request.session['logged_user'])[0].likes.order_by('-expiration_date'))
+        uname_id = CandidateProfile.objects.filter(username=self.request.session['logged_user'])[0]
+        #help!!
+        return (Posts.objects.filter(likes = uname_id).order_by('-expiration_date'))
