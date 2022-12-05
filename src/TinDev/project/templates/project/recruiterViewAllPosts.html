@@ -14,6 +14,7 @@
         </b>
         <ul>
             <br>
+            <form action="/recruiter_filter" method="get">
             <label for="d">Filter Posts:</label>
             <select name="filter">
                 <option value="all">
@@ -29,9 +30,10 @@
                     Posts with at least 1 interested Candidate
                 </option>
             </select>
-            <button type="submit">
-                <a href='/recruiter_filter/'>Filter</a>
+            <button type="submit" value="FILTER">
+                FILTER
                 </button>
+            </form>
             <p id="demo">
             </p>
             <p class="printfiltered">
@@ -51,6 +53,10 @@
     You have not yet created job postings.
 </p>
 {% endif %}
+
+<button type="submit">
+    <a href='/recruiterDashboard/'>Back</a>
+    </button>
 {% endblock %}
 <!--
 <script id="replace_with_navbar" src="nav.js"></script>
