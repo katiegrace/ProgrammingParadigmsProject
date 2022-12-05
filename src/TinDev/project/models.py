@@ -33,8 +33,9 @@ class Post(models.Model):
     status = models.CharField(max_length=200)
     #num_interested = models.CharField(max_length=100)
     recruiter= models.ForeignKey(RecruiterProfile, on_delete=models.CASCADE, default="")
-    #def __str__(self):
-        #return self.title
+    #for interested v. not
+    interested = models.ManyToManyField(CandidateProfile, blank=True,related_name='interested')
+    not_interested = models.ManyToMantField(CandidateProfile, blank=True, related_name='not_interested')
 
 class Offer(models.Model):
     #a offer is linked to a post, sent from a recruiter, to a candidate
