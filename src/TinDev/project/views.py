@@ -188,10 +188,10 @@ def recruiterFilter(self, request):
 
     filt = request.GET.get('filter')
     if filt == 'active':
-        q_set = Post.objects.filter(recruiter=uname_id, status="Active").order_by('-expiration_date'))
+        q_set = Post.objects.filter(recruiter=uname_id, status="Active").order_by('-expiration_date')
         #q_set = q_set.filter(status='Active')
     elif filt == 'inactive':
-        q_set = Post.objects.filter(recruiter=uname_id, status="Inactive").order_by('-expiration_date'))
+        q_set = Post.objects.filter(recruiter=uname_id, status="Inactive").order_by('-expiration_date')
         #q_set = q_set.filter(status='Inactive')
     elif filt == 'intersted_cands':
         q_set = q_set.filter(likes=1)
