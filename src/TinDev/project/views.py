@@ -204,8 +204,8 @@ def not_interest(request, id):
 class candidate_likes(ListView):
     template_name = 'project/candidateLikedPosts.html'
     context_object_name = 'post_list'
-    def get_queryset(self)
+    def get_queryset(self):
         #get the logged in candidate
         uname_id = CandidateProfile.objects.filter(username=self.request.session['logged_user'])[0]
         #help!!
-        return (Posts.objects.filter(likes = uname_id).order_by('-expiration_date'))
+        return (Post.objects.filter(likes = uname_id).order_by('-expiration_date'))

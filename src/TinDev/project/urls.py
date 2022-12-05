@@ -19,13 +19,12 @@ urlpatterns = [
     path('Rec/<int:pk>/',views.RecPostDetailView.as_view(), name='RecPost'),
     path('candidateViewPosts/', views.CandidateIndexView.as_view(), name='CandidatePosts'),
     #need to change this
-    path('interestedJobs/', views.CandidateIndexView.as_view(), name='Interest'),
     path('delete/<int:id>/', views.delete, name='Delete'),
     path('edit/<int:id>/', views.edit, name='Edit'),
     path('post_update/', views.RecruiterIndexView.as_view(), name='Update'),
     #to like/dislike a post
     path('interested/<int:id>/', views.interest, name='interests'),
     path('not_interested/<int:id>/', views.not_interest, name='not_interests'),
-    path('candidateLikedPosts/', views.candidate_likes, name='likes'),
+    path('candidateLikedPosts/', views.candidate_likes.as_view(), name='likes'),
     
 ]

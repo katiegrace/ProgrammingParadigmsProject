@@ -12,7 +12,7 @@ class CandidateProfile(models.Model):
     years_exp = models.CharField(max_length=3)
     username =  models.CharField(max_length=200)
     password = models.CharField(max_length=200)
-
+   
 class RecruiterProfile(models.Model):
 
     name = models.CharField(max_length=200)
