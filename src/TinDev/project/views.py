@@ -121,7 +121,7 @@ class RecruiterIndexView(ListView):
     context_object_name = 'post_list'
 
     def get_queryset(self):
-        print(Post.objects.all().order_by('-expiration_date'))
+        #return q_set?
         return (Post.objects.all().order_by('-expiration_date'))
 
     
