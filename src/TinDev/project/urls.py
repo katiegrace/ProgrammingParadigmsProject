@@ -28,6 +28,6 @@ urlpatterns = [
     path('candidateLikedPosts/', views.candidate_likes.as_view(), name='likes'),
     path('recruiter_filter/', views.recruiter_filter, name='rec_filter'),
     path('candidate_filter/', views.candidate_filter, name='cand_filter'),
-    path('offer/<int:id>/', views.send_offer, name='offer'),
-    path('candidateOffers', views.candidate_offers, name='CandOffers'),
+   # path('offer/<int:id>/', views.send_offer, name='offer'),
+   # path('candidateOffers', views.candidate_offers, name='CandOffers'),
 ]
