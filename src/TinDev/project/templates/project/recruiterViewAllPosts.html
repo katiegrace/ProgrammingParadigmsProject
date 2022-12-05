@@ -35,12 +35,14 @@
             <p id="demo">
             </p>
             <p class="printfiltered">
+                {% for post in post_list%}
                 <li>
                     <a href="/Rec/{{ post.id }}/"><b>{{post.position_title}}</b>,
                 <i>{{ post.company }}</i>,
             {{ post.location }}
         </a>
     </li>
+    {% endfor %}
    
 </p>
 </ul>
