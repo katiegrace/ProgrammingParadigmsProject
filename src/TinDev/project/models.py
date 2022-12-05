@@ -12,6 +12,8 @@ class CandidateProfile(models.Model):
     years_exp = models.CharField(max_length=3)
     username =  models.CharField(max_length=200)
     password = models.CharField(max_length=200)
+    likes = models.ManyToManyField(CandidateProfile, blank=True,related_name='likes')
+    dislikes = models.ManyToManyField(CandidateProfile, blank=True, related_name='dislikes')
 
 class RecruiterProfile(models.Model):
 

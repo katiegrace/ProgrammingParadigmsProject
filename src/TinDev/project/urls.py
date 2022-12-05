@@ -26,5 +26,6 @@ urlpatterns = [
     #to like/dislike a post
     path('interested/<int:id>/', views.interest, name='interests'),
     path('not_interested/<int:id>/', views.not_interest, name='not_interests'),
+    path('candidateLikedPosts/', views.candidate_likes, name='likes'),
     
 ]
