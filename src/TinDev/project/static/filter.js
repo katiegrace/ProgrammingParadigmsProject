@@ -4,7 +4,7 @@ function applyPositionFilter() {
     let value = selectElement.value;
     let text = selectElement.options[selectElement.selectedIndex].text;
     // all posts
-    let allPosts = document.getElementById("printfiltered");
+    let allPosts = document.getElementsByClassName("printfiltered");
     // show all elements
     if (text == "All Posts") {
         for (let i = 0; i < allPosts.length; i++) {
