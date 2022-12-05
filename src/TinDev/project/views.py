@@ -164,7 +164,7 @@ class filterPosts(ListView):
     posts = Post.objects.filter(status="Active")
     return render(request, 'recruiterViewAllPosts.html', {'posts':posts})
 '''
-
+'''
 # do we need something that will tell us which url they are coming from?
 def get_filters(self, request):
     uname_id = RecruiterProfile.objects.filter(username=self.request.session['logged_user'])[0]
@@ -179,23 +179,24 @@ def get_filters(self, request):
         #return render(request, '/recruiterViewAllPosts', {'postsfilt':q_set})
     if request.path == '/candidateViewPosts/':
         filter_set = ('all', 'active', 'inactive', 'location', 'keywords')
+'''
 
+def recruiterFilter(self, request):
+    #get all the recruiters posts 
+    uname_id = RecruiterProfile.objects.filter(username=self.request.session['logged_user'])[0]
+    q_set = Post.objects.filter(recruiter= uname_id).order_by('-expiration_date')
 
-def filters(self, request):
-    #q_set = Post.objects.filter(recruiter=request.user)
-    
-    print(list(request.POST.items()))
     filt = request.GET.get('filter')
     if filt == 'active':
-        q_set = Post.objects.filter(recruiter=request.user, status="Active")
+        q_set = Post.objects.filter(recruiter=uname_id, status="Active").order_by('-expiration_date'))
         #q_set = q_set.filter(status='Active')
     elif filt == 'inactive':
-        q_set = Post.objects.filter(recruiter=request.user, status="Inactive")
+        q_set = Post.objects.filter(recruiter=uname_id, status="Inactive").order_by('-expiration_date'))
         #q_set = q_set.filter(status='Inactive')
     elif filt == 'intersted_cands':
         q_set = q_set.filter(likes=1)
 
-    return (q_set, filt if filt else 'all')
+    return q_set
 
 '''
 elif "all" in request.POST:
