@@ -34,9 +34,9 @@
 			Interested Candidates:
 			</b>
 				<ul>
-				{% for post in post_list%}
+				{% for candidate in post.likes__all}
 					<li>
-						{{post.likes}}
+						{{candidate.name}}
 					</li>
 				{% endfor %}
 				</ul>
