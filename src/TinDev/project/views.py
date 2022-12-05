@@ -158,10 +158,9 @@ def interest(request, id):
     post = Post.objects.get(id=id)
 
     #store the Candidate (id) for the likes/dislikes
-
     is_dislike = False
     for dislike in post.dislikes.all():
-        if dislike == CandidateProfile.objects.filter(username=request.session['logged_user'])[0]
+        if dislike == CandidateProfile.objects.filter(username=request.session['logged_user'])[0]:
             is_dislike = True
             break
     if is_dislike:
@@ -177,7 +176,7 @@ def interest(request, id):
     if is_like:
         post.likes.remove(CandidateProfile.objects.filter(username=request.session['logged_user'])[0])
     
-    return redirect('/recruiterViewAllPosts')
+    return redirect('/candidateViewPosts')
 
 
 def not_interest(request, id):
@@ -200,4 +199,4 @@ def not_interest(request, id):
     if is_dislike:
         post.dislikes.remove(CandidateProfile.objects.filter(username=request.session['logged_user'])[0])
     
-    return redirect('/recruiterViewAllPosts')
+    return redirect('/candidateViewPosts')

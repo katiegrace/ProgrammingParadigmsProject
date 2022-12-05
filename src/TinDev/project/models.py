@@ -34,8 +34,8 @@ class Post(models.Model):
     #num_interested = models.CharField(max_length=100)
     recruiter= models.ForeignKey(RecruiterProfile, on_delete=models.CASCADE, default="")
     #for interested v. not
-    interested = models.ManyToManyField(CandidateProfile, blank=True,related_name='interested')
-    not_interested = models.ManyToMantField(CandidateProfile, blank=True, related_name='not_interested')
+    likes = models.ManyToManyField(CandidateProfile, blank=True,related_name='likes')
+    dislikes = models.ManyToManyField(CandidateProfile, blank=True, related_name='dislikes')
 
 class Offer(models.Model):
     #a offer is linked to a post, sent from a recruiter, to a candidate

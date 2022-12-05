@@ -21,10 +21,10 @@ urlpatterns = [
     #need to change this
     path('interestedJobs/', views.CandidateIndexView.as_view(), name='Interest'),
     path('delete/<int:id>/', views.delete, name='Delete'),
-    path('edit/<int:id>', views.edit, name='Edit'),
+    path('edit/<int:id>/', views.edit, name='Edit'),
     path('post_update/', views.RecruiterIndexView.as_view(), name='Update'),
     #to like/dislike a post
-    path('interested', views.interest, name='interest')
-    path('not_interested', views.not_interest, name='not_interest')
+    path('interested/<int:id>/', views.interest, name='interests'),
+    path('not_interested/<int:id>/', views.not_interest, name='not_interests'),
     
 ]
