@@ -278,3 +278,7 @@ class candidate_likes(ListView):
         uname_id = CandidateProfile.objects.filter(username=self.request.session['logged_user'])[0]
         #help!!
         return (Post.objects.filter(likes = uname_id).order_by('-expiration_date'))
+
+def send_offer(request):
+
+def candidate_offers(request):
