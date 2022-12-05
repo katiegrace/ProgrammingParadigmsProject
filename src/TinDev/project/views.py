@@ -168,23 +168,29 @@ class filterPosts(ListView):
 # do we need something that will tell us which url they are coming from?
 def get_filters(self, request):
     q_set = Post.objects.filter(recruiter=request.user)
+    print(list(request.POST.items()))
     # why can i not get q_set
+    # if for if cand or recruiter so can change filters depending on user
     if request.path == '/recruiterViewAllPosts/':
         filter_set = ('all', 'active', 'inactive', 'interested_cands')
-        q_set, filter_set = self.filters(request)
-        return render(request, '/recruiterViewAllPosts', {'postsfilt':q_set})
+        #q_set, filter_set = self.filters(request)
+        #return render(request, '/recruiterViewAllPosts')
+        #return render(request, '/recruiterViewAllPosts', {'postsfilt':q_set})
     if request.path == '/candidateViewPosts/':
         filter_set = ('all', 'active', 'inactive', 'location', 'keywords')
 
 
 def filters(self, request):
-    q_set = Post.objects.filter(recruiter=request.user)
-
+    #q_set = Post.objects.filter(recruiter=request.user)
+    
+    print(list(request.POST.items()))
     filt = request.GET.get('filter')
     if filt == 'active':
-        q_set = q_set.filter(status='Active')
+        q_set = Post.objects.filter(recruiter=request.user, status="Active")
+        #q_set = q_set.filter(status='Active')
     elif filt == 'inactive':
-        q_set = q_set.filter(status='Inactive')
+        q_set = Post.objects.filter(recruiter=request.user, status="Inactive")
+        #q_set = q_set.filter(status='Inactive')
     elif filt == 'intersted_cands':
         q_set = q_set.filter(likes=1)
 
