@@ -120,23 +120,30 @@ class RecruiterIndexView(ListView):
     template_name = 'project/recruiterViewAllPosts.html'
     context_object_name = 'post_list'
 
-    def get_queryset(self, request):
-        #filter all the post objects to only include those in which in recruiter's username matched the one logged in
-        uname_id = RecruiterProfile.objects.filter(username=self.request.session['logged_user'])[0]
-        #need to do return (Post.objects.filter(recruiter.username = uname).order_by('-expiration_date'))
-        q_set = Post.objects.filter(recruiter= uname_id).order_by('-expiration_date')
+    def get_queryset(self):
+        print(Post.objects.all().order_by('-expiration_date'))
+        return (Post.objects.all().order_by('-expiration_date'))
 
-        #filt = "all" in request.POST
-        if 'active' in request.POST:
-            q_set = Post.objects.filter(recruiter=uname_id, status="Active").order_by('-expiration_date')
-            #q_set = q_set.filter(status='Active')
-        elif 'inactive' in request.POST:
-            q_set = Post.objects.filter(recruiter=uname_id, status="Inactive").order_by('-expiration_date')
-            #q_set = q_set.filter(status='Inactive')
-        #elif filt == 'intersted_cands':
-        #    q_set = Post.objects.filter(recruiter= uname_id, likes>=1).order_by('-expiration_date')
+    
+def recruiter_filter(self, request):
+    #filter all the post objects to only include those in which in recruiter's username matched the one logged in
+    uname_id = RecruiterProfile.objects.filter(username=self.request.session['logged_user'])[0]
+    #need to do return (Post.objects.filter(recruiter.username = uname).order_by('-expiration_date'))
+    q_set = Post.objects.filter(recruiter= uname_id).order_by('-expiration_date')
 
-        return q_set
+    filt = request.GET.get('filter')
+
+    if filt == 'active':
+        q_set = Post.objects.filter(recruiter=uname_id, status="Active").order_by('-expiration_date')
+        #q_set = q_set.filter(status='Active')
+    elif filt == 'inactive':
+        q_set = Post.objects.filter(recruiter=uname_id, status="Inactive").order_by('-expiration_date')
+        #q_set = q_set.filter(status='Inactive')
+    #elif filt == 'intersted_cands':
+    #    q_set = Post.objects.filter(recruiter= uname_id, likes>=1).order_by('-expiration_date')
+
+    return render(request, 'project/recruiterViewAllPosts.html',{'posts':q_set} )
+
 
 class CandPostDetailView(DetailView):
     model = Post
