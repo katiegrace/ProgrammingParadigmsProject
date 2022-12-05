@@ -128,11 +128,13 @@ class RecruiterIndexView(ListView):
 def recruiter_filter(self, request):
     #filter all the post objects to only include those in which in recruiter's username matched the one logged in
     uname_id = RecruiterProfile.objects.filter(username=self.request.session['logged_user'])[0]
-    #need to do return (Post.objects.filter(recruiter.username = uname).order_by('-expiration_date'))
+
+    #automatically goes to all posts
     q_set = Post.objects.filter(recruiter= uname_id).order_by('-expiration_date')
 
     filt = request.GET.get('filter')
 
+    #only changes if it is set to something else 
     if filt == 'active':
         q_set = Post.objects.filter(recruiter=uname_id, status="Active").order_by('-expiration_date')
         #q_set = q_set.filter(status='Active')
