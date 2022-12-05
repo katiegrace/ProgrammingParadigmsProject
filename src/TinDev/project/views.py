@@ -167,7 +167,8 @@ class filterPosts(ListView):
 
 # do we need something that will tell us which url they are coming from?
 def get_filters(self, request):
-    q_set = Post.objects.filter(recruiter=request.user)
+    uname_id = RecruiterProfile.objects.filter(username=self.request.session['logged_user'])[0]
+    q_set = (Post.objects.filter(recruiter= uname_id).order_by('-expiration_date'))
     print(list(request.POST.items()))
     # why can i not get q_set
     # if for if cand or recruiter so can change filters depending on user
