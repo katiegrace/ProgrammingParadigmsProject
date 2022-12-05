@@ -152,6 +152,18 @@ def edit(request, id):
     return render(request, 'project/post_update.html', {'form':form})
     return redirect('')
 
+'''
+class filterPosts(ListView):
+    template_name = 'project/recruiterViewAllPosts.html'
+    context_object_name = 'post_list'
+    post = Post.objects.get(id=id)
+
+    #def get_queryset(self):
+     #   print(Post.objects.all().order_by('-expiration_date'))
+     #   return (Post.objects.all().order_by('-expiration_date'))
+    posts = Post.objects.filter(status="Active")
+    return render(request, 'recruiterViewAllPosts.html', {'posts':posts})
+'''
 
 
 def interest(request, id):
