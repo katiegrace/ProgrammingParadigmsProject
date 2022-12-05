@@ -144,8 +144,8 @@ def recruiter_filter(request):
     elif filt == 'inactive':
         q_set = Post.objects.filter(recruiter=uname_id, status="Inactive").order_by('-expiration_date')
         #q_set = q_set.filter(status='Inactive')
-    #elif filt == 'intersted_cands':
-    #    q_set = Post.objects.filter(recruiter= uname_id, likes>=1).order_by('-expiration_date')
+    elif filt == 'intersted_cands':
+        q_set = Post.objects.filter(recruiter= uname_id, likes_gte=1).order_by('-expiration_date')
 
     return render(request, 'project/recruiterViewAllPosts.html',{'post_list':q_set})
 
