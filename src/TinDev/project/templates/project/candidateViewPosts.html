@@ -9,6 +9,31 @@
         <h1><u>All Job Postings</u></h1>
     </b>
         <ul>
+        <form action="/canidate_filter" method="get">
+        <label for="d">Filter Posts:</label>
+        <select name="filter">
+            <option value="all">
+                All Posts
+            </option>
+            <option value="active">
+                Active Posts Only
+            </option>
+            <option value="inactive">
+                Inactive Posts Only
+            </option>
+        </select>
+
+            <label for="Location">Location:</label>
+            <input type="text" placeholder="City, State" name="Location" required>
+            <label for="keywords">Keywords:</label>
+            <input type="text" placeholder="Keywords" name="keywords" required>
+            <button type="submit" value="FILTER">
+                FILTER
+                </button>
+        </form>
+        <p id="demo">
+        </p>
+        <p class="printfiltered">
         {% for post in post_list%}
             <li>
                 <a href="/Cand/{{ post.id }}/"><b>{{post.position_title}}</b>, 
@@ -17,12 +42,15 @@
                 </a>
             </li>
         {% endfor %}
+        </p>
         </ul>
     {% else %}
-        <p>No jobs are available.</p>
+        <p>
+            No jobs available.
+        </p>
     {% endif %}
+
     <button type="submit">
         <a href='/candidateDashboard/'>Back</a>
         </button>
-
 {% endblock %}
