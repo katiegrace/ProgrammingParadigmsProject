@@ -136,7 +136,7 @@ def candidate_filter(request):
         q_set = Post.objects.filter(status="Inactive").order_by('-expiration_date')
         #q_set = q_set.filter(status='Inactive')
     if user_keyword:
-        q_set = q_set.filter(location=user_location).order_by('-expiration_date')
+        q_set = q_set.filter(keyword__icontains=user_keyword).order_by('-expiration_date')
     if user_location:
         q_set = q_set.filter(location=user_location).order_by('-expiration_date')
 
