@@ -15,7 +15,7 @@
         <ul>
             <br>
             <label for="d">Filter Posts:</label>
-            <select name="filter" id="filter">
+            <select name="filter">
                 <option value="all">
                     All Posts
                 </option>
@@ -25,22 +25,24 @@
                 <option value="inactive">
                     Inactive Posts Only
                 </option>
-                <option value="interested">
+                <option value="interested_cands">
                     Posts with at least 1 interested Candidate
                 </option>
             </select>
-            <button onclick="applyPositionFilter()">Filter</button>
+            <button type="submit">
+                <a href='/recruiterViewAllPosts/'>Filter</a>
+                </button>
             <p id="demo">
             </p>
             <p class="printfiltered">
-                <!--{% for post in post_list%}-->
+                {{postsfilt}}
                 <li>
                     <a href="/Rec/{{ post.id }}/"><b>{{post.position_title}}</b>,
                 <i>{{ post.company }}</i>,
             {{ post.location }}
         </a>
     </li>
-    <!--{% endfor %}-->
+   
 </p>
 </ul>
 {% else %}
@@ -49,8 +51,9 @@
 </p>
 {% endif %}
 {% endblock %}
-
+<!--
 <script id="replace_with_navbar" src="nav.js"></script>
-	<!-- Import's Bootstrap JS -->
+	<!- Import's Bootstrap JS -
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
 <script type="text/javascript" src="filter.js"></script>
+-->

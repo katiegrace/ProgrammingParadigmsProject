@@ -165,6 +165,44 @@ class filterPosts(ListView):
     return render(request, 'recruiterViewAllPosts.html', {'posts':posts})
 '''
 
+# do we need something that will tell us which url they are coming from?
+def get_filters(self, request):
+    q_set = Post.objects.filter(recruiter=request.user)
+    # why can i not get q_set
+    if request.path == '/recruiterViewAllPosts/':
+        filter_set = ('all', 'active', 'inactive', 'interested_cands')
+        q_set, filter_set = self.filters(request)
+        return render(request, '/recruiterViewAllPosts', {'postsfilt':q_set})
+    if request.path == '/candidateViewPosts/':
+        filter_set = ('all', 'active', 'inactive', 'location', 'keywords')
+
+
+def filters(self, request):
+    q_set = Post.objects.filter(recruiter=request.user)
+
+    filt = request.GET.get('filter')
+    if filt == 'active':
+        q_set = q_set.filter(status='Active')
+    elif filt == 'inactive':
+        q_set = q_set.filter(status='Inactive')
+    elif filt == 'intersted_cands':
+        q_set = q_set.filter(likes=1)
+
+    return (q_set, filt if filt else 'all')
+
+'''
+elif "all" in request.POST:
+    context = {"recruiter": RecruiterProfile.objects.filter(id=pk).first(), "posts": JobPosting.objects.filter(recruiter_id=request.session["id"])}
+    return HttpResponse(user_dashboard.render(context, request))
+# if they click the button to show all activate posts, refresh their homepage with active posts
+elif "active" in request.POST:
+    context = {"recruiter": RecruiterProfile.objects.filter(id=pk).first(), "posts": JobPosting.objects.filter(recruiter_id=request.session["id"]).filter(status=True)}
+    return HttpResponse(user_dashboard.render(context, request))
+        # if they click the button to show all inactivate posts, refresh their homepage with inactive posts
+elif "inactive" in request.POST:
+    context = {"recruiter": RecruiterProfile.objects.filter(id=pk).first(), "posts": JobPosting.objects.filter(recruiter_id=request.session["id"]).filter(status=False)}
+    return HttpResponse(user_dashboard.render(context, request))
+'''
 
 def interest(request, id):
     post = Post.objects.get(id=id)

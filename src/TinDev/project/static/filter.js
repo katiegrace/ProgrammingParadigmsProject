@@ -21,8 +21,8 @@ function applyPositionFilter() {
         for (let i = 0; i < allPosts.length; i++) {
             let status = allPosts[i].status;
             // STATUS is not accesible -- back end vs front end jaunt
-            alert(allPosts[i].value) // HTMLParagraph Element
-            alert(typeof allPosts[i]) // object
+           // alert(allPosts[i].value) // HTMLParagraph Element
+            //alert(typeof allPosts[i]) // object
             // status is undefined so this is our issue
             //let pstatus = {{allPosts[i]|status}};
             if (status == "Active") {
@@ -35,6 +35,7 @@ function applyPositionFilter() {
 
         }
     }
+    /*
     else if (text == "Inactive Posts Only"){
         let status = allPosts[i].status;
         if (status == "Active") {
@@ -44,7 +45,7 @@ function applyPositionFilter() {
         else {
             allPosts[i].style.visibility = "visible";
         }
-    }
+    }*/
 }
     /*else {
         for (let i = 0; i < allPosts.length; i++) {
