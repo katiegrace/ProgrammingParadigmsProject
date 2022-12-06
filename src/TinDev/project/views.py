@@ -187,7 +187,7 @@ def compatabilityScore(request):
         k = []
         words = str.split()
         z = words
-        with open('stopwords.txt', 'r') as f:
+        with open('src/TinDev/project/templates/project/stopwords.txt', 'r') as f:
             for word in f:
                 word = word.split('\n')
                 k.append(word[0])
