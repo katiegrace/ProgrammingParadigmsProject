@@ -1,0 +1,26 @@
+{%extends "project/base.html" %}
+{% block title %}
+TinDev - Create Post
+{% endblock %}
+{% block content %}
+<script id="replace_with_navbar" src="nav.js"></script>
+
+
+<div class="container">
+  <div class="page-header">
+      <h1>Create an Offer</h1>
+  </div>
+</div>
+
+<form method="POST" action="{% url 'offer' %}" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{form}}
+  {%if error%}
+    Error: {{error}}
+  {%endif%}
+  <button class="btn btn-info">
+      Create
+  </button>
+</form>
+{% endblock %}
+<script id="replace_with_navbar" src="nav.js"></script>

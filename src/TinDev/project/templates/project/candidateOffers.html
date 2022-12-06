@@ -1,0 +1,30 @@
+{% extends "project/post.html" %}
+{% block title %}All Offers{% endblock %}
+<b>
+    <h1>"All Offers"</h1>
+</b>
+{% block content %}
+    {% if post_list %}
+    <b>
+        <h1><u>All Offers</u></h1>
+    </b>
+        <ul>
+        {% for offer in offer_list%}
+            <li>
+                    {{offer.post}}
+                   {{offer.salary_info}}, 
+                   {{offer.due_date}}
+            </li>
+        {% endfor %}
+        </p>
+        </ul>
+    {% else %}
+        <p>
+            No offers available.
+        </p>
+    {% endif %}
+
+    <button type="submit">
+        <a href='/candidateDashboard/'>Back</a>
+        </button>
+{% endblock %}

@@ -64,9 +64,10 @@ class PostForm(ModelForm):
         fields = ['position_title', 'position_type', 'location', 'preferred_skills', 'description', 'company', 'expiration_date', 'status']
 
 class OfferForm(ModelForm):
+    candidate_name = forms.CharField(max_length=200, widget = forms.TextInput(attrs={'placeholder': 'Candidate', 'style': 'width: 300px;', 'class': 'form-control'}))
     salary_info = forms.CharField(max_length=200, widget = forms.TextInput(attrs={'placeholder': 'Salary', 'style': 'width: 300px;', 'class': 'form-control'}))
     due_date = forms.DateTimeField(widget=forms.DateTimeInput(attrs={'placeholder': 'Due Date (mm/dd/yyyy)', 'style': 'width: 300px;', 'class': 'form-control'}))
 
     class Meta:
         #model = Offer
-        fields = ['salary_info', 'due_date']
+        fields = ['salary_info', 'due_date', 'candidate_name']
