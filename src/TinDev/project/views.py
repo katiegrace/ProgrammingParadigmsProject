@@ -10,6 +10,8 @@ from project.forms import Post
 from .forms import Post
 from .forms import PostForm
 from django.db.models import Q
+from project.forms import OfferForm
+from project.models import Offer
 #from .models import post
 #from django.views.generic import ListView
 
