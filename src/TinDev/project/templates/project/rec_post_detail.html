@@ -39,7 +39,7 @@
 				{% for candidate in post.likes.all %}
 					
 					<button type="submit"> <a href='/offer/{{post.id}}/{{candidate.id}}/'>{{candidate.name}}</a></button><br><br>
-					
+					<button type="text"> <a href='/compatabilityScore/{{post.id}}/{{candidate.id}}/'>{{score[candidate.id]}}</a></button><br><br>
 				{% endfor %}
 				</ul>
 			{% else %}
