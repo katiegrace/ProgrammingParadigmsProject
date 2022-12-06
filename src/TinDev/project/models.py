@@ -44,3 +44,7 @@ class Offer(models.Model):
     postOff = models.ForeignKey(Post, on_delete=models.CASCADE, default="")
     salary_info = models.CharField(max_length=200)
     due_date = models.DateTimeField()
+    #to accept/deny
+    #true = accept
+    #fale = deny
+    response = models.BooleanField

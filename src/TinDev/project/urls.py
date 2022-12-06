@@ -18,7 +18,6 @@ urlpatterns = [
     #path('<int:pk>/',views.CandPostDetailView.as_view(), name='CandPost'),
     path('Rec/<int:pk>/',views.RecPostDetailView.as_view(), name='RecPost'),
     path('candidateViewPosts/', views.CandidateIndexView.as_view(), name='CandidatePosts'),
-    #need to change this
     path('delete/<int:id>/', views.delete, name='Delete'),
     path('edit/<int:id>/', views.edit, name='Edit'),
     path('post_update/', views.RecruiterIndexView.as_view(), name='Update'),
@@ -31,5 +30,6 @@ urlpatterns = [
     path('offer/<int:id>/<int:pk>/', views.send_offer, name='offer'),
     path('candidateOffers/', views.CandidateOffers.as_view(), name='CandOffers'),
     path('Cand/offer/<int:pk>/', views.CandOfferDetailView.as_view(), name='CandOffer'),
-    
+    path('accept/<int:id>/', views.accept, name='Accept'),
+    path('decline/<int:id>/', views.decline, name='Decline'),
 ]

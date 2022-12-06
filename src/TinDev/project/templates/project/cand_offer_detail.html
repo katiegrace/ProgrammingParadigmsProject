@@ -25,13 +25,14 @@
 			Salary:
 		</b>{{offer.salary_info}}</p5><br><br>	 
 		<b>
+			<!-- need to account for expired or not -->
 			Due Date:
 		</b>{{offer.due_date}}</p5><br><br><br>	
-        
-		<button type="image"><img src="https://www.pngfind.com/pngs/b/38-380037_x-mark-png.png" width="15" height="15" href='/edit/{{post.id}}'>
+        <!-- should only be able to accept / delcine if not expired -->
+		<button type="image"><img src="https://www.pngfind.com/pngs/b/38-380037_x-mark-png.png" width="15" height="15" href='/accept/{{ofer.id}}'>
 			<a href=''>Accept</a>
 		</button>
-		<button type="image"><img src="https://www.pngfind.com/pngs/b/42-423721_green-check-png.png" width="15" height="15" href='/edit/{{post.id}}'>
+		<button type="image"><img src="https://www.pngfind.com/pngs/b/42-423721_green-check-png.png" width="15" height="15" href='/decline/{{ofer.id}}'>
 			<a href=''>Decline</a>
 	   </button>
 {% endblock %}

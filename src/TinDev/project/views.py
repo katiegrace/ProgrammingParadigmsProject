@@ -327,3 +327,20 @@ class CandidateOffers(ListView):
 class CandOfferDetailView(DetailView):
     model = Offer
     template_name = 'project/cand_offer_detail.html'
+
+#candidate accept an offet
+def accept(request, id):
+    #find the offer object
+    offer = Offer.objects.get(id=id)
+
+    #update the response field to true
+    offer.response = True
+
+
+#candidate decline an offer
+def decline(request, id):
+    #find the offer object
+    offer = Offer.objects.get(id=id)
+
+    #update the response field to false
+    offer.response = False
