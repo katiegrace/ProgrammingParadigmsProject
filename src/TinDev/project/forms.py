@@ -6,20 +6,7 @@ from .models import Post
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from .models import Post
-
-class NewUserForm(UserCreationForm):
-	email = forms.EmailField(required=True)
-
-	class Meta:
-		model = User
-		fields = ("username", "email", "password1", "password2")
-
-	def save(self, commit=True):
-		user = super(NewUserForm, self).save(commit=False)
-		user.email = self.cleaned_data['email']
-		if commit:
-			user.save()
-		return user
+from .models import Offer
 
 class CandidateForm(ModelForm):
     name = forms.CharField(max_length=200,widget=forms.TextInput(attrs={'placeholder': 'Name', 'style': 'width: 300px;', 'class': 'form-control'}))
@@ -57,17 +44,15 @@ class PostForm(ModelForm):
     company = forms.CharField(max_length=200,widget=forms.TextInput(attrs={'placeholder': 'Company', 'style': 'width: 300px;', 'class': 'form-control'}))
     expiration_date = forms.DateTimeField(widget=forms.DateTimeInput(attrs={'placeholder': 'Date (mm/dd/yyyy)', 'style': 'width: 300px;', 'class': 'form-control'}))
     status = forms.CharField(max_length=200,widget=forms.TextInput(attrs={'placeholder': 'Status (Active/Inactive)', 'style': 'width: 300px;', 'class': 'form-control'}))
-    #num_interested = forms.CharField(max_length=100)
 
     class Meta:
         model = Post
         fields = ['position_title', 'position_type', 'location', 'preferred_skills', 'description', 'company', 'expiration_date', 'status']
 
 class OfferForm(ModelForm):
-    candidate_name = forms.CharField(max_length=200, widget = forms.TextInput(attrs={'placeholder': 'Candidate', 'style': 'width: 300px;', 'class': 'form-control'}))
     salary_info = forms.CharField(max_length=200, widget = forms.TextInput(attrs={'placeholder': 'Salary', 'style': 'width: 300px;', 'class': 'form-control'}))
     due_date = forms.DateTimeField(widget=forms.DateTimeInput(attrs={'placeholder': 'Due Date (mm/dd/yyyy)', 'style': 'width: 300px;', 'class': 'form-control'}))
 
     class Meta:
-        #model = Offer
-        fields = ['salary_info', 'due_date', 'candidate_name']
+        model = Offer
+        fields = ['salary_info', 'due_date']

@@ -1,3 +1,17 @@
+{%extends "project/base.html" %}
+{% block title %}
+TinDev - Create Recruiter
+{% endblock %}
+{% block content %}
+<script id="replace_with_navbar" src="nav.js"></script>
+
+
+<div class="container">
+  <div class="page-header">
+      <h1>Sign up as a recruiter</h1>
+  </div>
+</div>
+
 <form method="POST" action="{% url 'RecruiterProfile' %}" enctype="multipart/form-data">
     {% csrf_token %}
     {{form}}
@@ -5,3 +19,6 @@
         Create
     </button>
 </form>
+
+{% endblock %}
+<script id="replace_with_navbar" src="nav.js"></script>

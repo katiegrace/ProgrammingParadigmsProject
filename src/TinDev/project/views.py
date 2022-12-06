@@ -281,7 +281,7 @@ class candidate_likes(ListView):
         uname_id = CandidateProfile.objects.filter(username=self.request.session['logged_user'])[0]
         return (Post.objects.filter(likes = uname_id).order_by('-expiration_date'))
 
-def send_offer(request, id):
+def send_offer(request, id, pk):
     if request.POST:
         form = OfferForm(request.POST)
         
@@ -291,8 +291,7 @@ def send_offer(request, id):
             form.instance.recruiterOff = recruiter
 
             #link candidate based on the name they input
-            candidate = CandidateProfile.objects.filter(name = form.instance.candidate_name)
-            form.instance.candidateOff = candidate
+            candidateOff = CandidateProfile.objects.get(id = pk)
 
             #link post to this post id
             postOff = Post.objects.get(id=id)
