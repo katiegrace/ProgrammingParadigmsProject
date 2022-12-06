@@ -1,4 +1,4 @@
-{% extends "project/post.html" %}
+{% extends "project/base_cand.html" %}
 {% block title %}All Offers{% endblock %}
 <b>
     <h1>"All Offers"</h1>
@@ -11,7 +11,7 @@
         <ul>
         {% for offer in offer_list%}
             <li>
-                    {{offer.post}}
+                   {{offer.post}}
                    {{offer.salary_info}}, 
                    {{offer.due_date}}
             </li>

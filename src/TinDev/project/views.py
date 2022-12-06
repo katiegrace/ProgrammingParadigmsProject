@@ -15,15 +15,13 @@ from project.models import Offer
 #from .models import post
 #from django.views.generic import ListView
 
+#first page of webpage
 def index(request):
     return render(request, 'project/index.html', {'title':'index'})
   
 def login(request):
-    #This ONLY works if someone has entered login details
-    #When first opening the page, the browser will send a GET request
-    #This will make request.POST, which is similar to a dict
     if request.POST:
-        #This case makes sense only if these is post data
+        #get the username and password 
         uname = request.POST["username"]
         pwd = request.POST["password"]
         cand = CandidateProfile.objects.filter(username=uname, password=pwd)
@@ -39,7 +37,7 @@ def login(request):
                 request.session["logged_user"] = uname
                 return redirect("/recruiterDashboard")
         else:
-                #We should have 0 or 1 candidates, never more
+            #We should have 0 or 1 candidates, never more
             assert len(cand) > 0
                 # the candidate authenticated
             request.session["logged_user"] = uname
@@ -53,6 +51,7 @@ def logout(request):
     del request.session["logged_user"]
     return redirect("/login")
 
+#creating a candidate profile
 def candidateProfile(request):
     if request.POST:
         form = CandidateForm(request.POST)
@@ -61,6 +60,7 @@ def candidateProfile(request):
         return redirect(login)
     return render(request, 'project/candidateProfile.html', {'form':CandidateForm}) 
 
+#creating a recruiter profile
 def recruiterProfile(request):
     if request.POST:
         form = RecruiterForm(request.POST)
@@ -82,20 +82,13 @@ def recruiterDashboard(request):
     }
     return render(request, 'project/recruiterDashboard.html',{'title':'Recruiter'} )
 
-'''
-dont know if u need this 
-    # redirct to view all posts
-        return redirect("/viewAllPosts")
-        #return redirect(create_post)
-        by line 100
-'''
-
+#recruiter creating a post
 def create_post(request):
-    
     if request.POST:
         form = PostForm(request.POST)
         
         if form.is_valid():
+            #set the recruiter of the post to the logged in recruiter 
             recruiter = RecruiterProfile.objects.filter(username=request.session['logged_user'])[0]
             form.instance.recruiter = recruiter
             form.save()
@@ -104,7 +97,6 @@ def create_post(request):
             # filter returns an array either 
             return redirect("/recruiterViewAllPosts")
         else:
-            #Add proper error reporting to the user
             #raise ValueError(f"Form is not valid, errors {form.errors}")
             return render(request, 'project/create_post.html', {'form':form,"error":"Form is invalid"})
         #if they create a post we want it to take them to view all posts 
@@ -147,40 +139,18 @@ def candidate_filter(request):
 # MAKE IT NOT REQUIRED
 
     return render(request, 'project/candidateViewPosts.html',{'post_list':q_set}) 
-    
-'''
-elif "city" in request.POST:
-    refCity = request.POST.get ('city')
-    refState = request.POST.get ('state')
-    context = {"candidate": CandidateProfile.objects.filter(id=pk). first(),
-    "posts": JobPosting.objects.filter(city=refCity, state=?
-    return HttpResponse (user dashboard. render (context, request))
-# if they click the button to show all posts with a specific keyword(s), refresh their homepage with posts containing specific kej
-elif "keywords" in request.POST:
-    keywords = request.POST.get('keywords') .split(" ")
-    jobPostings = list (JobPosting.objects.all())
-    jobwKeywords = []
-    for keyword in keywords:
-        for job in jobPostings:
-            if keyword in job.description:
-                jobwKeywords.append(job)
-    context = ("candidate": CandidateProfile.objects.filter(id=pk).first(),
-    "posts": jobwKeywords}
-    return HttpResponse(user_dashboard. render (context, request))
-'''
+
 
 class RecruiterIndexView(ListView):
     template_name = 'project/recruiterViewAllPosts.html'
     context_object_name = 'post_list'
 
     def get_queryset(self):
-        #return posts
+        #return posts by the logged in recruiter
         uname_id = RecruiterProfile.objects.filter(username=self.request.session['logged_user'])[0]
         return (Post.objects.filter(recruiter=uname_id).order_by('-expiration_date'))
 
 
-
-    
 def recruiter_filter(request):
     #filter all the post objects to only include those in which in recruiter's username matched the one logged in
     uname_id = RecruiterProfile.objects.filter(username=request.session['logged_user'])[0]
@@ -210,16 +180,23 @@ class RecPostDetailView(DetailView):
     model = Post
     template_name = 'project/rec_post_detail.html'
 
+#delete a post
 def delete(request, id):
+  #find the post from the id
   post = Post.objects.get(id=id)
+  #delete it from the database
   post.delete()
   return redirect('/recruiterViewAllPosts')
 
+#update a post
 def edit(request, id):
+    #find the post from the id
     post = Post.objects.get(id=id)
     if request.method == 'POST':
+        #create a filled out form to edit, fill it with this isntance of post
         form = PostForm(request.POST, instance = post)
 
+        #if it is valid, save it
         if form.is_valid():
             form.save()
             return redirect("/recruiterViewAllPosts")
@@ -229,51 +206,72 @@ def edit(request, id):
     return render(request, 'project/post_update.html', {'form':form})
     return redirect('')
 
+#like a post
 def interest(request, id):
+    #get the specific post from the objects
     post = Post.objects.get(id=id)
     is_dislike = False
+    #go through all the dislikes for the post
     for dislike in post.dislikes.all():
+        #if the candidate disliked it
         if dislike == CandidateProfile.objects.filter(username=request.session['logged_user'])[0]:
             is_dislike = True
             break
     if is_dislike:
+        #remove the dislike
         post.dislikes.remove(CandidateProfile.objects.filter(username=request.session['logged_user'])[0])
 
     is_like = False
+    # go through all the likes
     for like in post.likes.all():
+        #if the candidate liked it
         if like == CandidateProfile.objects.filter(username=request.session['logged_user'])[0]:
             is_like = True
             break
+    #if not already liked, add like
     if not is_like: 
         post.likes.add(CandidateProfile.objects.filter(username=request.session['logged_user'])[0])
     
+    #if liked, and clicked like again, remove like
     if is_like:
         post.likes.remove(CandidateProfile.objects.filter(username=request.session['logged_user'])[0])
     
+    #maybe try not redirecting?
     return redirect('/candidateViewPosts')
 
 
+#dislike a post
 def not_interest(request, id):
+    #get the specific post from the objects
     post = Post.objects.get(id=id)
     is_like = False
+    #go through all the likes for this post
     for like in post.likes.all():
+        #if the logged in candidate liked it, set is_like flag to true
         if like == CandidateProfile.objects.filter(username=request.session['logged_user'])[0]:
             is_like = True
             break
+    #if the user already liked it and just clicked like again, unlike, so remove from likes
     if is_like:
         post.likes.remove(CandidateProfile.objects.filter(username=request.session['logged_user'])[0])
 
     is_dislike = False
+    #go through all dislikes for this post
     for dislike in post.dislikes.all():
+        #if the candidate disliked it
         if dislike == CandidateProfile.objects.filter(username=request.session['logged_user'])[0]:
+            #set is_dislike flag to tru
             is_dislike = True
             break
+    #if user hasn't disliked it yet, dislike it
     if not is_dislike: 
         post.dislikes.add(CandidateProfile.objects.filter(username=request.session['logged_user'])[0])
     
+    #if they already disliked it, and click the button again, undo, so remove from dislikes
     if is_dislike:
         post.dislikes.remove(CandidateProfile.objects.filter(username=request.session['logged_user'])[0])
     
+    #maybe don't redirect them?
     return redirect('/candidateViewPosts')
 
 class candidate_likes(ListView):
@@ -282,6 +280,7 @@ class candidate_likes(ListView):
     def get_queryset(self):
         #get the logged in candidate
         uname_id = CandidateProfile.objects.filter(username=self.request.session['logged_user'])[0]
+        #filter posts objects to return posts that this user has liked
         return (Post.objects.filter(likes = uname_id).order_by('-expiration_date'))
 
 def send_offer(request, id, pk):
@@ -296,12 +295,14 @@ def send_offer(request, id, pk):
             #link candidate based on the name they input
             candidateOff = CandidateProfile.objects.get(id = pk)
             form.instance.candidateOff = candidateOff
+
             #link post to this post id
             postOff = Post.objects.get(id=id)
             form.instance.postOff = postOff
 
             # same form
             form.save()
+            
             return redirect("/recruiterViewAllPosts")
         else:
             #Add proper error reporting to the user
@@ -317,7 +318,9 @@ class CandidateOffers(ListView):
 
     def get_queryset(self):
         #return all offers for this candidate
+        #get the candidate id logged in
         uname_id = CandidateProfile.objects.filter(username=self.request.session['logged_user'])[0]
+        #return all offers to that candidate
         return (Offer.objects.filter(candidateOff=uname_id).order_by('-due_date'))
 
 
