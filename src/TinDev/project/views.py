@@ -9,6 +9,7 @@ from django.contrib.auth import login
 from project.forms import Post
 from .forms import Post
 from .forms import PostForm
+from django.db.models import Q
 #from .models import post
 #from django.views.generic import ListView
 
@@ -130,10 +131,10 @@ def candidate_filter(request):
     # do we need to have another variable and get for the other boxes
     #only changes if it is set to something else 
     if filt == 'active':
-        q_set = Post.objects.filter(status="Active").order_by('-expiration_date')
+        q_set = Post.objects.filter(Q(status="Active") | Q(status="active"))
         #q_set = q_set.filter(status='Active')
     elif filt == 'inactive':
-        q_set = Post.objects.filter(status="Inactive").order_by('-expiration_date')
+        q_set = Post.objects.filter(Q(status="Inactive") | Q(status="inactive")).order_by('-expiration_date')
         #q_set = q_set.filter(status='Inactive')
     if user_keyword:
         q_set = q_set.filter(keyword__icontains=user_keyword).order_by('-expiration_date')
@@ -185,10 +186,10 @@ def recruiter_filter(request):
     filt = request.GET.get('filter')
     #only changes if it is set to something else 
     if filt == 'active':
-        q_set = Post.objects.filter(recruiter=uname_id, status="Active").order_by('-expiration_date')
+        q_set = Post.objects.filter(Q(recruiter=uname_id, status="Active") | Q(recruiter=uname_id, status="active"))
         #q_set = q_set.filter(status='Active')
     elif filt == 'inactive':
-        q_set = Post.objects.filter(recruiter=uname_id, status="Inactive").order_by('-expiration_date')
+        q_set = Post.objects.filter(Q(recruiter=uname_id, status="Inactive") | Q(recruiter=uname_id, status="inactive")).order_by('-expiration_date')
         #q_set = q_set.filter(status='Inactive')
     elif filt == 'interested_cands':
         q_set = Post.objects.filter(recruiter= uname_id, likes__gte=1).order_by('-expiration_date')
