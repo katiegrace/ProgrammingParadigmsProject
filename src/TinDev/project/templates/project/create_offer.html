@@ -11,8 +11,8 @@ TinDev - Create Post
       <h1>Create an Offer</h1>
   </div>
 </div>
-
-<form method="POST" action="{% url 'offer' 22 27%}" enctype="multipart/form-data">
+TSTINGH {{request.resolver_match.kwargs.slug}}
+<form method="POST" action="{% url 'offer' post_id candidate_id %}" enctype="multipart/form-data">
   {% csrf_token %}
   {{form}}
   {%if error%}

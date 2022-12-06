@@ -127,9 +127,9 @@ def candidate_filter(request):
     #q_set = Post.objects.filter(recruiter= uname_id).order_by('-expiration_date')
     q_set = Post.objects.all().order_by('-expiration_date')
     filt = request.GET.get('filter')
-    user_keyword = request.GET.get('key')
-    user_location = request.GET.get('loc')
-
+    user_keyword = request.GET.get('keywords')
+    user_location = request.GET.get('location')
+    print("keyword", user_keyword)
     # do we need to have another variable and get for the other boxes
     #only changes if it is set to something else 
     if filt == 'active':
@@ -139,7 +139,7 @@ def candidate_filter(request):
         q_set = Post.objects.filter(Q(status="Inactive") | Q(status="inactive")).order_by('-expiration_date')
         #q_set = q_set.filter(status='Inactive')
     if user_keyword:
-        q_set = q_set.filter(keyword__icontains=user_keyword).order_by('-expiration_date')
+        q_set = q_set.filter(description__icontains=user_keyword).order_by('-expiration_date')
     if user_location:
         q_set = q_set.filter(location=user_location).order_by('-expiration_date')
 
@@ -194,7 +194,8 @@ def recruiter_filter(request):
         q_set = Post.objects.filter(Q(recruiter=uname_id, status="Inactive") | Q(recruiter=uname_id, status="inactive")).order_by('-expiration_date')
         #q_set = q_set.filter(status='Inactive')
     elif filt == 'interested_cands':
-        q_set = Post.objects.filter(recruiter= uname_id, likes__gte=1).order_by('-expiration_date')
+        q_set = Post.objects.filter(recruiter= uname_id, likes__gte=1).order_by('-expiration_date').distinct()
+        print(q_set)
 
     return render(request, 'project/recruiterViewAllPosts.html',{'post_list':q_set})
 
@@ -292,19 +293,19 @@ def send_offer(request, id, pk):
 
             #link candidate based on the name they input
             candidateOff = CandidateProfile.objects.get(id = pk)
-
+            form.instance.candidateOff = candidateOff
             #link post to this post id
             postOff = Post.objects.get(id=id)
-
+            form.instance.postOff = postOff
             # same form
             form.save()
             return redirect("/recruiterViewAllPosts")
         else:
             #Add proper error reporting to the user
             #raise ValueError(f"Form is not valid, errors {form.errors}")
-            return render(request, 'project/create_offer.html', {'form':form,"error":"Form is invalid"})
+            return render(request, 'project/create_offer.html', {'form':form,"error":"Form is invalid", "post_id":id, "candidate_id":pk})
         #if they create a post we want it to take them to view all posts 
-    return render(request, 'project/create_offer.html', {'form':OfferForm}) 
+    return render(request, 'project/create_offer.html', {'form':OfferForm, "post_id":id, "candidate_id":pk}) 
 
 
 class CandidateOffers(ListView):
