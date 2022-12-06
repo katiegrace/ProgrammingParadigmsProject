@@ -218,21 +218,44 @@ class RecPostDetailView(DetailView):
 def compatabilityScore(request):
         #filter all the post objects to only include those in which in recruiter's username matched the one logged in
         #uname_id = RecruiterProfile.objects.filter(username=request.session['logged_user'])[0]
+    def remove_stopWords(str):
+        k = []
+        words = str.split()
+        z = words
+        with open('src/TinDev/project/templates/project/stopwords.txt', 'r') as f:
+            for word in f:
+                word = word.split('\n')
+                k.append(word[0])
+
+        p = [t for t in z if t not in k]
+        return p
+    
     q_set = Post.objects.all().order_by('-expiration_date')
-    likes = Post.likes
+    likes = Post.likes # list of cands that liked the post
+    #from the post
     preferred_skills = Post.preferred_skills
     position_title = Post.position_title
     description = Post.description
-    bagOfSkills={}
-    scores={}
+    post_str_list= position_title + preferred_skills + description
+    post_SW= remove_stopWords(post_str_list) # SW = stopwords
+
+    scores={} # our scores dict that we will return
+    
+    #from cand
+    
     for cand in likes:
         skills = cand.skills
         bio = cand.bio
-        score=5
+        cand_str_list = bio + skills
+        cand_SW = remove_stopWords(cand_str_list)
+        lenTotal= len(post_SW) + len(cand_SW)
+        counter=0
+        for word in post_SW:
+            for skill in cand_SW:
+                if word==skill:
+                    counter+=1
+        score = (counter  / lenTotal) * 100 # this is an arbitrary multiplication so the number isn't tiny
         scores[cand]=score
-
-
-    user_keyword = request.GET.get('keywords') 
 
     return render(request, 'project/rec_post_detail.html', {'scores':scores})
 
