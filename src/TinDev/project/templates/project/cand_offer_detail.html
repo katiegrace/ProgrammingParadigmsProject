@@ -1,0 +1,37 @@
+{% extends "project/base_cand.html" %}
+{% block title %}{{ offer.postOff.position_title}}{% endblock %}
+{% block content %}
+	<body>
+		<h1>{{offer.postOff.position_title}}</h1>
+		<p2> 
+			<b>Company: </b>
+			<i>{{offer.postOff.company}}</i>
+		
+		</p2>
+		<br><br>
+		<p3>
+			<b>Position Type: </b>
+			{{offer.postOff.position_type}}
+		</p3><br>
+		<br><b>Job location:</b>
+		<p4>{{offer.postOff.location}}</p4><br><br>
+		<p5><b>
+			Preferred Skils:
+		</b>{{offer.postOff.preferred_skills}}</p5><br><br>	 
+		<b>
+			Description:
+		</b>{{offer.postOff.description}}</p5><br><br>	 
+		<b>
+			Salary:
+		</b>{{offer.salary_info}}</p5><br><br>	 
+		<b>
+			Due Date:
+		</b>{{offer.due_date}}</p5><br><br><br>	
+        
+		<button type="image"><img src="https://www.pngfind.com/pngs/b/682-6827427_thumbs-down-emoji-png.png" width="15" height="15" href='/edit/{{post.id}}'>
+			<a href=''>Accept</a>
+		</button>
+		<button type="image"><img src="https://www.pngfind.com/pngs/b/5-59489_thumbs-up-icon-png.png" width="15" height="15" href='/edit/{{post.id}}'>
+			<a href=''>Decline</a>
+	   </button>
+{% endblock %}

@@ -30,4 +30,6 @@ urlpatterns = [
     path('candidate_filter/', views.candidate_filter, name='cand_filter'),
     path('offer/<int:id>/<int:pk>/', views.send_offer, name='offer'),
     path('candidateOffers/', views.CandidateOffers.as_view(), name='CandOffers'),
+    path('Cand/offer/<int:pk>/', views.CandOfferDetailView.as_view(), name='CandOffer'),
+    
 ]

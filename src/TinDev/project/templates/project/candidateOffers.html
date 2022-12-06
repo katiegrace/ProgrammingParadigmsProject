@@ -10,11 +10,12 @@
     </b>
         <ul>
         {% for offer in offer_list%}
-            <li>
-                   {{offer.post}}
-                   {{offer.salary_info}}, 
-                   {{offer.due_date}}
-            </li>
+            <a href="/Cand/offer/{{ offer.id }}/"><b>{{offer.postOff.position_title}}</b>, 
+                <i>{{offer.postOff.company}}</i>, 
+                ${{offer.salary_info}}, {{offer.due_date}} <br>
+            </a>
+                   <!-- {{offer.salary_info}}, 
+                   {{offer.due_date}} -->
         {% endfor %}
         </p>
         </ul>

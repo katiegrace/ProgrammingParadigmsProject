@@ -324,3 +324,6 @@ class CandidateOffers(ListView):
         return (Offer.objects.filter(candidateOff=uname_id).order_by('-due_date'))
 
 
+class CandOfferDetailView(DetailView):
+    model = Offer
+    template_name = 'project/cand_offer_detail.html'
