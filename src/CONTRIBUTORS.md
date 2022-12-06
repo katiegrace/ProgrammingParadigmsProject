@@ -1,5 +1,8 @@
 Project contributors (sorted alphabetically)
 ============================================
+* **[All]**
+* We all worked on the sign up as candidate, recruiter, and login
+* We all worked together on the HTML files 
 
 * **[Sarah Cullinan](https://github.com/sarahcullinan)**
 
@@ -12,10 +15,12 @@ Project contributors (sorted alphabetically)
   * make an offer to interested candidates (recruiter)
   * viewing offers (candidates)
   * accepting/declining offers (candidates)
+  * date/time for posts
+  * date/time for offers 
 
 * **[Sofia Dillhoff](https://github.com/sdillho2)**
 
-  * SQL database
+  * adding candidate, recuiters, jobs, offers on SQL database
   * reports (milestone, final)
 
 * **[Katie Grace](https://github.com/katiegrace)**
@@ -24,15 +29,12 @@ Project contributors (sorted alphabetically)
   * Candidate view all posts (filtering)
   * Recruiter view all posts (filtering)
   * added icons to buttons 
-  * solved a lot of errors 
+  * solved a lot of errors
+  * debugging
+  * date/time for posts
+  * date/time for offers 
 
 * **[Celina Ryan](https://github.com/celinaryan)**
 
   * Nav bar
   * compatabiliity score 
-
-
-  we all like worked together on the sign up as candidate, sign up as recruiter, and login so idk where we want to put that??
-  we also all kind of edited all of the htmls sooo like idk 
-
-  also this was just my first thoughts, obviously everyone edit ur own !
