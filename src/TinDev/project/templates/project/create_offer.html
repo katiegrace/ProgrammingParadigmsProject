@@ -1,4 +1,4 @@
-{%extends "project/base.html" %}
+{%extends "project/base_cand.html" %}
 {% block title %}
 TinDev - Create Post
 {% endblock %}
@@ -12,7 +12,7 @@ TinDev - Create Post
   </div>
 </div>
 
-<form method="POST" action="{% url 'offer' 22 27%}" enctype="multipart/form-data">
+<form method="POST" action="{% url 'offer' post_id candidate_id%}" enctype="multipart/form-data">
   {% csrf_token %}
   {{form}}
   {%if error%}
