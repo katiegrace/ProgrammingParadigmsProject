@@ -336,6 +336,8 @@ def accept(request, id):
     #update the response field to true
     offer.response = True
 
+    return redirect("/candidateOffers")
+
 
 #candidate decline an offer
 def decline(request, id):
@@ -344,3 +346,5 @@ def decline(request, id):
 
     #update the response field to false
     offer.response = False
+
+    return redirect("/candidateOffers")
