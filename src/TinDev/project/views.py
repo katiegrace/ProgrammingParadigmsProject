@@ -278,6 +278,40 @@ class candidate_likes(ListView):
         uname_id = CandidateProfile.objects.filter(username=self.request.session['logged_user'])[0]
         return (Post.objects.filter(likes = uname_id).order_by('-expiration_date'))
 
-#def send_offer(request):
+def send_offer(request, id):
+    if request.POST:
+        form = OfferForm(request.POST)
+        
+        if form.is_valid():
+            #link recruiter
+            recruiter = RecruiterProfile.objects.filter(username=request.session['logged_user'])[0]
+            form.instance.recruiterOff = recruiter
 
-#def candidate_offers(request):
+            #link candidate based on the name they input
+            candidate = CandidateProfile.objects.filter(name = form.instance.candidate_name)
+            form.instance.candidateOff = candidate
+
+            #link post to this post id
+            postOff = Post.objects.get(id=id)
+
+            # same form
+            form.save()
+            return redirect("/recruiterViewAllPosts")
+        else:
+            #Add proper error reporting to the user
+            #raise ValueError(f"Form is not valid, errors {form.errors}")
+            return render(request, 'project/create_offer.html', {'form':form,"error":"Form is invalid"})
+        #if they create a post we want it to take them to view all posts 
+    return render(request, 'project/create_offer.html', {'form':OfferForm}) 
+
+
+class CandidateOffers(ListView):
+    template_name = 'project/candidateOffers.html'
+    context_object_name = 'offer_list'
+
+    def get_queryset(self):
+        #return all offers for this candidate
+        uname_id = CandidateProfile.objects.filter(username=self.request.session['logged_user'])[0]
+        return (Offer.objects.filter(candidateOff=uname_id).order_by('-due_date'))
+
+
