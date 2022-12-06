@@ -179,6 +179,29 @@ class CandPostDetailView(DetailView):
 class RecPostDetailView(DetailView):
     model = Post
     template_name = 'project/rec_post_detail.html'
+    
+def compatabilityScore(request):
+        #filter all the post objects to only include those in which in recruiter's username matched the one logged in
+        #uname_id = RecruiterProfile.objects.filter(username=request.session['logged_user'])[0]
+    q_set = Post.objects.all().order_by('-expiration_date')
+    likes = Post.likes
+    preferred_skills = Post.preferred_skills
+    position_title = Post.position_title
+    description = Post.description
+    bagOfSkills={}
+    scores={}
+    for cand in likes:
+        skills = cand.skills
+        bio = cand.bio
+        score=5
+        scores[cand]=score
+
+
+    user_keyword = request.GET.get('keywords') 
+
+    return render(request, 'project/rec_post_detail.html', {'scores':scores})
+
+
 
 #delete a post
 def delete(request, id):
@@ -204,7 +227,7 @@ def edit(request, id):
         form = PostForm(instance=post)
     #if they create a post we want it to take them to view all posts 
     return render(request, 'project/post_update.html', {'form':form})
-    return redirect('')
+
 
 #like a post
 def interest(request, id):
