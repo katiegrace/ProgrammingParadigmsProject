@@ -115,7 +115,53 @@ class CandidateIndexView(ListView):
     def get_queryset(self):
         print(Post.objects.all().order_by('-expiration_date'))
         return (Post.objects.all().order_by('-expiration_date'))
+
+def candidate_filter(request):
+    #filter all the post objects to only include those in which in recruiter's username matched the one logged in
+    uname_id = CandidateProfile.objects.filter(username=request.session['logged_user'])[0]
+
+    #automatically goes to all posts
+    #q_set = Post.objects.filter(recruiter= uname_id).order_by('-expiration_date')
+    q_set = Post.objects.all().order_by('-expiration_date')
+    filt = request.GET.get('filter')
+    user_keyword = request.GET.get('key')
+    user_location = request.GET.get('loc')
+
+    # do we need to have another variable and get for the other boxes
+    #only changes if it is set to something else 
+    if filt == 'active':
+        q_set = Post.objects.filter(status="Active").order_by('-expiration_date')
+        #q_set = q_set.filter(status='Active')
+    elif filt == 'inactive':
+        q_set = Post.objects.filter(status="Inactive").order_by('-expiration_date')
+        #q_set = q_set.filter(status='Inactive')
+    if user_keyword:
+        q_set = q_set.filter(keyword__icontains=user_keyword).order_by('-expiration_date')
+    if user_location:
+        q_set = q_set.filter(location=user_location).order_by('-expiration_date')
+
+    return render(request, 'project/candidateViewPosts.html',{'post_list':q_set}) 
     
+'''
+elif "city" in request.POST:
+    refCity = request.POST.get ('city')
+    refState = request.POST.get ('state')
+    context = {"candidate": CandidateProfile.objects.filter(id=pk). first(),
+    "posts": JobPosting.objects.filter(city=refCity, state=?
+    return HttpResponse (user dashboard. render (context, request))
+# if they click the button to show all posts with a specific keyword(s), refresh their homepage with posts containing specific kej
+elif "keywords" in request.POST:
+    keywords = request.POST.get('keywords') .split(" ")
+    jobPostings = list (JobPosting.objects.all())
+    jobwKeywords = []
+    for keyword in keywords:
+        for job in jobPostings:
+            if keyword in job.description:
+                jobwKeywords.append(job)
+    context = ("candidate": CandidateProfile.objects.filter(id=pk).first(),
+    "posts": jobwKeywords}
+    return HttpResponse(user_dashboard. render (context, request))
+'''
 
 class RecruiterIndexView(ListView):
     template_name = 'project/recruiterViewAllPosts.html'
@@ -144,8 +190,8 @@ def recruiter_filter(request):
     elif filt == 'inactive':
         q_set = Post.objects.filter(recruiter=uname_id, status="Inactive").order_by('-expiration_date')
         #q_set = q_set.filter(status='Inactive')
-    #elif filt == 'intersted_cands':
-    #    q_set = Post.objects.filter(recruiter= uname_id, likes>=1).order_by('-expiration_date')
+    elif filt == 'interested_cands':
+        q_set = Post.objects.filter(recruiter= uname_id, likes__gte=1).order_by('-expiration_date')
 
     return render(request, 'project/recruiterViewAllPosts.html',{'post_list':q_set})
 
@@ -176,50 +222,6 @@ def edit(request, id):
     #if they create a post we want it to take them to view all posts 
     return render(request, 'project/post_update.html', {'form':form})
     return redirect('')
-
-'''
-class filterPosts(ListView):
-    template_name = 'project/recruiterViewAllPosts.html'
-    context_object_name = 'post_list'
-    post = Post.objects.get(id=id)
-
-    #def get_queryset(self):
-     #   print(Post.objects.all().order_by('-expiration_date'))
-     #   return (Post.objects.all().order_by('-expiration_date'))
-    posts = Post.objects.filter(status="Active")
-    return render(request, 'recruiterViewAllPosts.html', {'posts':posts})
-'''
-'''
-# do we need something that will tell us which url they are coming from?
-def get_filters(self, request):
-    uname_id = RecruiterProfile.objects.filter(username=self.request.session['logged_user'])[0]
-    q_set = (Post.objects.filter(recruiter= uname_id).order_by('-expiration_date'))
-    print(list(request.POST.items()))
-    # why can i not get q_set
-    # if for if cand or recruiter so can change filters depending on user
-    if request.path == '/recruiterViewAllPosts/':
-        filter_set = ('all', 'active', 'inactive', 'interested_cands')
-        #q_set, filter_set = self.filters(request)
-        #return render(request, '/recruiterViewAllPosts')
-        #return render(request, '/recruiterViewAllPosts', {'postsfilt':q_set})
-    if request.path == '/candidateViewPosts/':
-        filter_set = ('all', 'active', 'inactive', 'location', 'keywords')
-'''
-
-
-'''
-elif "all" in request.POST:
-    context = {"recruiter": RecruiterProfile.objects.filter(id=pk).first(), "posts": JobPosting.objects.filter(recruiter_id=request.session["id"])}
-    return HttpResponse(user_dashboard.render(context, request))
-# if they click the button to show all activate posts, refresh their homepage with active posts
-elif "active" in request.POST:
-    context = {"recruiter": RecruiterProfile.objects.filter(id=pk).first(), "posts": JobPosting.objects.filter(recruiter_id=request.session["id"]).filter(status=True)}
-    return HttpResponse(user_dashboard.render(context, request))
-        # if they click the button to show all inactivate posts, refresh their homepage with inactive posts
-elif "inactive" in request.POST:
-    context = {"recruiter": RecruiterProfile.objects.filter(id=pk).first(), "posts": JobPosting.objects.filter(recruiter_id=request.session["id"]).filter(status=False)}
-    return HttpResponse(user_dashboard.render(context, request))
-'''
 
 def interest(request, id):
     post = Post.objects.get(id=id)
@@ -274,5 +276,8 @@ class candidate_likes(ListView):
     def get_queryset(self):
         #get the logged in candidate
         uname_id = CandidateProfile.objects.filter(username=self.request.session['logged_user'])[0]
-        #help!!
         return (Post.objects.filter(likes = uname_id).order_by('-expiration_date'))
+
+#def send_offer(request):
+
+#def candidate_offers(request):

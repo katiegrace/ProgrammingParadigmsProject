@@ -29,13 +29,34 @@
 			Status:
 		</b>{{post.status}}</p5><br><br>
 		<b>
+			<!-- {% if post.likes %} -->
+			<b>
 			Interested Candidates:
-		</b>{{post.likes}}</p5><br><br><br><br>
+			<!-- {{post.likes}} -->
+			<!-- {{post.likes.all}} -->
+			<!-- {{post.likes__set_all}} -->
+			</b>
+				<ul>
+				{% for candidate in post.likes.all %}
+					<li>
+						{{candidate.name}}
+					</li>
+				{% endfor %}
+				</ul>
+			<!-- {% else %}
+				<p>No interested candidates.</p>
+			{% endif %} -->
+		</p5><br><br><br><br>
 
 		<button type="submit">
-			<a href='/edit/{{post.id}}'>Edit Post</a>
+			<a href='/edit/{{post.id}}/'>Edit Post</a>
 		</button>
 		<button type="submit">
 			<a href='/delete/{{post.id}}/'>Delete Post</a>
 	   </button>
+	   <button type="make an offer">
+		<a href='/offer/{{post.id}}/'>Send an Offer</a>
+   </button>
 {% endblock %}
+
+
