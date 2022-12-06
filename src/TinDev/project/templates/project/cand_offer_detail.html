@@ -28,6 +28,11 @@
 			<!-- need to account for expired or not -->
 			Due Date:
 		</b>{{offer.due_date}}</p5><br><br><br>	
+		{% if offer.expired %}
+			<p style="color:#FF0000"><b> Offer has expired on {{offer.due_date}}</b></p>
+
+		{% else %}
+			<!-- say when it expired -->
         <!-- should only be able to accept / delcine if not expired -->
 		<button type="image"><img src="https://www.pngfind.com/pngs/b/38-380037_x-mark-png.png" width="15" height="15" href='/accept/{{offer.id}}'>
 			<a href='/accept/{{offer.id}}'>Accept</a>
@@ -35,4 +40,5 @@
 		<button type="image"><img src="https://www.pngfind.com/pngs/b/42-423721_green-check-png.png" width="15" height="15" href='/decline/{{offer.id}}'>
 			<a href='/decline/{{offer.id}}'>Decline</a>
 	   </button>
+	   {% endif %}
 {% endblock %}

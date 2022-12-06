@@ -31,9 +31,11 @@
 			{% if post.likes.all %}
 			<b>
 			<!-- add number of candidates here  -->
-			Interested Candidates:  
 
-			</b><br>
+			Interested Candidates: 
+
+			</b> {{post.likes.all.count}}
+			<br>
 			(Click to send an offer)<br>
 				<ul>
 				{% for candidate in post.likes.all %}

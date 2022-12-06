@@ -12,6 +12,9 @@ from .forms import PostForm
 from django.db.models import Q
 from project.forms import OfferForm
 from project.models import Offer
+from datetime import datetime
+from django.utils import timezone
+
 #from .models import post
 #from django.views.generic import ListView
 
@@ -25,9 +28,21 @@ def login(request):
         uname = request.POST["username"]
         pwd = request.POST["password"]
         cand = CandidateProfile.objects.filter(username=uname, password=pwd)
+
+        #when the user logs in, update all posts to check if they have expired 
+        for post in Post.objects.all():
+            if post.expiration_date < timezone.now():
+                post.status = 'Inactive'  
+                post.save()
+        for offer in Offer.objects.all():
+            if offer.due_date < timezone.now():
+                offer.expired = True  
+                offer.save()
+        # computer time zone is London time (GMT)
+        print(timezone.now())
         #len(cand) will be 0 if no candidates found and we need to check recruiters
         if len(cand) == 0:
-            recruiter = RecruiterProfile.objects.filter(username=uname, password=pwd)
+            recruiter = RecruiterProfile.objects.filter(username=uname, password=pwd)   
             #len(recruiter) will be 0 if no recruiters found
             if len(recruiter) == 0:
                 return render(request, 'project/login.html', {"error":"Incorrect username or password"})
@@ -112,6 +127,12 @@ class CandidateIndexView(ListView):
         return (Post.objects.all().order_by('-expiration_date'))
 
 def candidate_filter(request):
+    #when the user wants to view posts, update all posts to check if they have expired 
+    for post in Post.objects.all():
+        if post.expiration_date < timezone.now():
+            post.status = 'Inactive'  
+            post.save()
+
     #filter all the post objects to only include those in which in recruiter's username matched the one logged in
     uname_id = CandidateProfile.objects.filter(username=request.session['logged_user'])[0]
 
@@ -119,8 +140,10 @@ def candidate_filter(request):
     #q_set = Post.objects.filter(recruiter= uname_id).order_by('-expiration_date')
     q_set = Post.objects.all().order_by('-expiration_date')
     filt = request.GET.get('filter')
-    user_keyword = request.GET.get('keywords') #keywords
+    user_keywords = request.GET.get('keywords') #keywords
+    user_keywords = user_keywords.split(" ")
     user_location = request.GET.get('location') #location
+    print(user_keywords)
     # get rid of required 
 
     # do we need to have another variable and get for the other boxes
@@ -131,8 +154,13 @@ def candidate_filter(request):
     elif filt == 'inactive':
         q_set = Post.objects.filter(Q(status="Inactive") | Q(status="inactive")).order_by('-expiration_date')
         #q_set = q_set.filter(status='Inactive')
-    if user_keyword: # location should be LC, 141 desciption not keyword, 
-        q_set = q_set.filter(description__icontains=user_keyword).order_by('-expiration_date')
+    if user_keywords: # location should be LC, 141 desciption not keyword, 
+        #set an empty query set
+        q_set = Post.objects.none()
+        #create union for query set with every word 
+        for word in user_keywords:
+            q_set |= (Post.objects.all().filter(description__icontains=word).order_by('-expiration_date'))
+        print(q_set)
     if user_location:
         q_set = q_set.filter(location=user_location).order_by('-expiration_date').distinct()
 
@@ -152,6 +180,12 @@ class RecruiterIndexView(ListView):
 
 
 def recruiter_filter(request):
+     #when the user wants to view posts, update all posts to check if they have expired 
+    for post in Post.objects.all():
+        if post.expiration_date < timezone.now():
+            post.status = 'Inactive'  
+            post.save()
+
     #filter all the post objects to only include those in which in recruiter's username matched the one logged in
     uname_id = RecruiterProfile.objects.filter(username=request.session['logged_user'])[0]
 
@@ -170,6 +204,7 @@ def recruiter_filter(request):
         q_set = Post.objects.filter(recruiter= uname_id, likes__gte=1).order_by('-expiration_date').distinct()
 
     return render(request, 'project/recruiterViewAllPosts.html',{'post_list':q_set})
+    #render(request, 'project/create_offer.html', {'form':OfferForm, "post_id":id, "candidate_id":pk}
 
 
 class CandPostDetailView(DetailView):
@@ -323,6 +358,8 @@ def send_offer(request, id, pk):
             postOff = Post.objects.get(id=id)
             form.instance.postOff = postOff
 
+            #when they create it offer, it is not yet expired 
+            form.instance.expired = False
             # same form
             form.save()
             
@@ -343,6 +380,10 @@ class CandidateOffers(ListView):
         #return all offers for this candidate
         #get the candidate id logged in
         uname_id = CandidateProfile.objects.filter(username=self.request.session['logged_user'])[0]
+        for offer in Offer.objects.all():
+            if offer.due_date < timezone.now():
+                offer.expired = True  
+                offer.save()
         #return all offers to that candidate
         return (Offer.objects.filter(candidateOff=uname_id).order_by('-due_date'))
 
