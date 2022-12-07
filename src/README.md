@@ -14,8 +14,7 @@ List here all the dependencies of your project (including version). For example:
 
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+We created this project on a GitHub respoitory. To access the respository and follow the steps below and ensure that you have the an updated verion of python.
 
 ### Prerequisites
 
