@@ -1,6 +1,6 @@
 Project contributors (sorted alphabetically)
 ============================================
-* **[All]**
+* **All**
 * We all worked on the sign up as candidate, recruiter, and login
 * We all worked together on the HTML files 
 

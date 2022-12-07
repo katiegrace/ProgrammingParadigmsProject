@@ -23,14 +23,14 @@ To utilize full functionality of our TinDev webpage, you will need to download D
 * npm
   ```sh
   npm install npm@latest -g
+  npm install bootstrap@3
   pip3 install django-admin-list-filter-dropdown
-
   ```
 
 ### Access to our repositiory
 
 To access our GitHub Repository, please click on the following link:
-* note that Prof. Santos and the Grad TAs for programing paradimgs have previously been granted access to our respositoy. 
+* note that Prof. Santos and the Grad TAs for programing paradigms have previously been granted access to our respositoy. 
 ```sh
 https://github.com/katiegrace/ProgrammingParadigmsProject
 ```
