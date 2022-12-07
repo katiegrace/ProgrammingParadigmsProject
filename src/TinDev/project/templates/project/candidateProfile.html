@@ -5,7 +5,6 @@ TinDev - Create Candidate
 {% block content %}
 <script id="replace_with_navbar" src="nav.js"></script>
 
-
 <div class="container">
   <div class="page-header">
       <h1>Sign up as a candidate</h1>
@@ -15,6 +14,7 @@ TinDev - Create Candidate
 <form method="POST" action="{% url 'CandidateProfile' %}" enctype="multipart/form-data">
     {% csrf_token %}
     {{form}}
+    <br>
     <button>
         Create
     </button>

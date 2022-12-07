@@ -1,8 +1,9 @@
 {% extends "project/cand_post_base.html" %}
 {% block title %}All Job Postings{% endblock %}
-<b>
-    <h1>"All Job Postings"</h1>
-</b>
+<div class="container">
+    <div class="page-header">
+        <h1>Candidate Dashboard</h1>
+    </div>
 {% block content %}
     {% if post_list %}
     <b>
@@ -53,4 +54,5 @@
     <button type="submit">
         <a href='/candidateDashboard/'>Back</a>
         </button>
+    </div>
 {% endblock %}

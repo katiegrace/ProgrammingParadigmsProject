@@ -38,7 +38,7 @@ def login(request):
                 offer.expired = True  
                 offer.save()
         # computer time zone is London time (GMT)
-        print(timezone.now())
+    
         #len(cand) will be 0 if no candidates found and we need to check recruiters
         if len(cand) == 0:
             recruiter = RecruiterProfile.objects.filter(username=uname, password=pwd)   
@@ -107,7 +107,6 @@ def create_post(request):
             form.instance.recruiter = recruiter
             form.save()
             
-            print(form.instance)
             # filter returns an array either 
             return redirect("/recruiterViewAllPosts")
         else:
@@ -122,7 +121,7 @@ class CandidateIndexView(ListView):
     template_name = 'project/candidateViewPosts.html'
     context_object_name = 'post_list'
     def get_queryset(self):
-        print(Post.objects.all().order_by('-expiration_date'))
+        
         return (Post.objects.all().order_by('-expiration_date'))
 
 def candidate_filter(request):
@@ -142,7 +141,6 @@ def candidate_filter(request):
     user_keywords = request.GET.get('keywords') #keywords
     user_keywords = user_keywords.split(" ")
     user_location = request.GET.get('location') #location
-    print(user_keywords)
     # get rid of required 
 
     # do we need to have another variable and get for the other boxes
@@ -159,7 +157,7 @@ def candidate_filter(request):
         #create union for query set with every word 
         for word in user_keywords:
             q_set |= (Post.objects.all().filter(description__icontains=word).order_by('-expiration_date'))
-        print(q_set)
+
     if user_location:
         q_set = q_set.filter(location=user_location).order_by('-expiration_date').distinct()
 
