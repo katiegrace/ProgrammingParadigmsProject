@@ -24,7 +24,8 @@ Project contributors (sorted alphabetically)
   * reports (milestone, final)
   * debugging
   * added error notifications
-  * fixing HTMLS --> adding forms etc. 
+  * fixing HTMLS --> adding forms etc.
+  * created superuser & managed database 
 
 * **[Katie Grace](https://github.com/katiegrace)**
 
