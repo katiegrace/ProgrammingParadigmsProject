@@ -33,10 +33,12 @@ Project contributors (sorted alphabetically)
   * Candidate view all posts (filtering)
   * Recruiter view all posts (filtering)
   * added icons to buttons 
+  * added back buttons to enhance UX 
   * solved a lot of errors
   * debugging
   * date/time for posts
-  * date/time for offers 
+  * date/time for offers
+
 
 * **[Celina Ryan](https://github.com/celinaryan)**
 
