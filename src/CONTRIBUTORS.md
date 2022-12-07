@@ -17,6 +17,7 @@ Project contributors (sorted alphabetically)
   * accepting/declining offers (candidates)
   * date/time for posts
   * date/time for offers 
+  * debugging 
 
 * **[Sofia Dillhoff](https://github.com/sdillho2)**
 
