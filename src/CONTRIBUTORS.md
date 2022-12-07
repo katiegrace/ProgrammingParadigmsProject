@@ -21,7 +21,8 @@ Project contributors (sorted alphabetically)
 * **[Sofia Dillhoff](https://github.com/sdillho2)**
 
   * adding candidate, recuiters, jobs, offers on SQL database
-  * reports (milestone, final)
+  * Phase 1 Report
+  * Final Report
   * debugging
   * added error notifications
   * created superuser & managed database 
