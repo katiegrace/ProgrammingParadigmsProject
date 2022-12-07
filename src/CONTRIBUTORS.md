@@ -1,8 +1,8 @@
 Project contributors (sorted alphabetically)
 ============================================
-* **[All]**
-* We all worked on the sign up as candidate, recruiter, and login
-* We all worked together on the HTML files 
+* **All**
+  * We all worked on the sign up as candidate, recruiter, and login
+  * We all worked together on the HTML files 
 
 * **[Sarah Cullinan](https://github.com/sarahcullinan)**
 
