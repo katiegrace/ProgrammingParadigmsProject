@@ -3,8 +3,6 @@ from django import forms
 from .models import CandidateProfile
 from .models import RecruiterProfile
 from .models import Post
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
 from .models import Post
 from .models import Offer
 

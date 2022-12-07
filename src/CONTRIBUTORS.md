@@ -21,7 +21,8 @@ Project contributors (sorted alphabetically)
 * **[Sofia Dillhoff](https://github.com/sdillho2)**
 
   * adding candidate, recuiters, jobs, offers on SQL database
-  * reports (milestone, final)
+  * Phase 1 Report
+  * Final Report
   * debugging
   * added error notifications
   * created superuser & managed database 
@@ -32,11 +33,16 @@ Project contributors (sorted alphabetically)
   * Candidate view all posts (filtering)
   * Recruiter view all posts (filtering)
   * added icons to buttons 
+  * worked on creating some of the models
+  * attempted to work on log in but had some trouble
+  * worked on front end of user profiles
   * added back buttons to enhance UX 
   * solved a lot of errors
   * debugging
   * date/time for posts
   * date/time for offers
+  * added BootStrap to multple urls
+  * enhanced more UX features for users
 
 
 * **[Celina Ryan](https://github.com/celinaryan)**

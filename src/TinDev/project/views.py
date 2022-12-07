@@ -5,7 +5,6 @@ from project.models import CandidateProfile
 from project.forms import RecruiterForm
 from django.views.generic import ListView, DetailView
 from project.models import RecruiterProfile
-from django.contrib.auth import login
 from project.forms import Post
 from .forms import Post
 from .forms import PostForm
@@ -39,7 +38,7 @@ def login(request):
                 offer.expired = True  
                 offer.save()
         # computer time zone is London time (GMT)
-        print(timezone.now())
+    
         #len(cand) will be 0 if no candidates found and we need to check recruiters
         if len(cand) == 0:
             recruiter = RecruiterProfile.objects.filter(username=uname, password=pwd)   
@@ -108,7 +107,6 @@ def create_post(request):
             form.instance.recruiter = recruiter
             form.save()
             
-            print(form.instance)
             # filter returns an array either 
             return redirect("/recruiterViewAllPosts")
         else:
@@ -123,7 +121,7 @@ class CandidateIndexView(ListView):
     template_name = 'project/candidateViewPosts.html'
     context_object_name = 'post_list'
     def get_queryset(self):
-        print(Post.objects.all().order_by('-expiration_date'))
+        
         return (Post.objects.all().order_by('-expiration_date'))
 
 def candidate_filter(request):
@@ -143,7 +141,6 @@ def candidate_filter(request):
     user_keywords = request.GET.get('keywords') #keywords
     user_keywords = user_keywords.split(" ")
     user_location = request.GET.get('location') #location
-    print(user_keywords)
     # get rid of required 
 
     # do we need to have another variable and get for the other boxes
@@ -160,7 +157,7 @@ def candidate_filter(request):
         #create union for query set with every word 
         for word in user_keywords:
             q_set |= (Post.objects.all().filter(description__icontains=word).order_by('-expiration_date'))
-        print(q_set)
+
     if user_location:
         q_set = q_set.filter(location=user_location).order_by('-expiration_date').distinct()
 
@@ -215,49 +212,49 @@ class RecPostDetailView(DetailView):
     model = Post
     template_name = 'project/rec_post_detail.html'
     
-def compatabilityScore(request):
-        #filter all the post objects to only include those in which in recruiter's username matched the one logged in
-        #uname_id = RecruiterProfile.objects.filter(username=request.session['logged_user'])[0]
-    def remove_stopWords(str):
-        k = []
-        words = str.split()
-        z = words
-        with open('src/TinDev/project/templates/project/stopwords.txt', 'r') as f:
-            for word in f:
-                word = word.split('\n')
-                k.append(word[0])
+# def compatabilityScore(request):
+#         #filter all the post objects to only include those in which in recruiter's username matched the one logged in
+#         #uname_id = RecruiterProfile.objects.filter(username=request.session['logged_user'])[0]
+#     def remove_stopWords(str):
+#         k = []
+#         words = str.split()
+#         z = words
+#         with open('src/TinDev/project/templates/project/stopwords.txt', 'r') as f:
+#             for word in f:
+#                 word = word.split('\n')
+#                 k.append(word[0])
 
-        p = [t for t in z if t not in k]
-        return p
+#         p = [t for t in z if t not in k]
+#         return p
     
-    q_set = Post.objects.all().order_by('-expiration_date')
-    likes = Post.likes # list of cands that liked the post
-    #from the post
-    preferred_skills = Post.preferred_skills
-    position_title = Post.position_title
-    description = Post.description
-    post_str_list= position_title + preferred_skills + description
-    post_SW= remove_stopWords(post_str_list) # SW = stopwords
+#     q_set = Post.objects.all().order_by('-expiration_date')
+#     likes = Post.likes # list of cands that liked the post
+#     #from the post
+#     preferred_skills = Post.preferred_skills
+#     position_title = Post.position_title
+#     description = Post.description
+#     post_str_list= position_title + preferred_skills + description
+#     post_SW= remove_stopWords(post_str_list) # SW = stopwords
 
-    scores={} # our scores dict that we will return
+#     scores={} # our scores dict that we will return
     
-    #from cand
+#     #from cand
     
-    for cand in likes:
-        skills = cand.skills
-        bio = cand.bio
-        cand_str_list = bio + skills
-        cand_SW = remove_stopWords(cand_str_list)
-        lenTotal= len(post_SW) + len(cand_SW)
-        counter=0
-        for word in post_SW:
-            for skill in cand_SW:
-                if word==skill:
-                    counter+=1
-        score = (counter  / lenTotal) * 100 # this is an arbitrary multiplication so the number isn't tiny
-        scores[cand]=score
+#     for cand in likes:
+#         skills = cand.skills
+#         bio = cand.bio
+#         cand_str_list = bio + skills
+#         cand_SW = remove_stopWords(cand_str_list)
+#         lenTotal= len(post_SW) + len(cand_SW)
+#         counter=0
+#         for word in post_SW:
+#             for skill in cand_SW:
+#                 if word==skill:
+#                     counter+=1
+#         score = (counter  / lenTotal) * 100 # this is an arbitrary multiplication so the number isn't tiny
+#         scores[cand]=score
 
-    return render(request, 'project/rec_post_detail.html', {'scores':scores})
+#     return render(request, 'project/rec_post_detail.html', {'scores':scores})
 
 
 

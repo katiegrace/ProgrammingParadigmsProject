@@ -41,7 +41,6 @@
 				{% for candidate in post.likes.all %}
 					
 					<button type="submit"> <a href='/offer/{{post.id}}/{{candidate.id}}/'>{{candidate.name}}</a></button><br><br>
-					<!-- <button type="text"> <a href='/compatabilityScore/{{post.id}}/{{candidate.id}}/'>{{score[candidate]}}</a></button><br><br> -->
 				{% endfor %}
 				</ul>
 			{% else %}
@@ -55,6 +54,13 @@
 		<button type="submit">
 			<a href='/delete/{{post.id}}/'>Delete Post</a>
 	   </button>
+	   <br><br>
+
+	   <button type="submit">
+        <a href='/recruiter_filter/'>Back</a>
+        </button>
+
+	   
 {% endblock %}
 
 

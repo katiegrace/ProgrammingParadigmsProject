@@ -1,6 +1,6 @@
 # About The Project
 
-For this project, we created a website called TinDev, that allows recruiters and canidates searching for jobs to connect virtually. Our website include .....
+For this project, we created a website called TinDev, that allows recruiters and canidates searching for jobs to connect virtually. Our website includes job posting and other features such as making job offers, demonstrating interest in job postings and much more. 
 
 ## Built With
 List here all the dependencies of your project (including version). For example:
@@ -8,7 +8,7 @@ List here all the dependencies of your project (including version). For example:
 * [Python](https://www.python.org/)
 * [Django](https://www.djangoproject.com/)
 * [Bootstrap](https://getbootstrap.com)
-* [JQuery](https://jquery.com)
+* [SQLite](https://www.sqlite.org/)
 
 
 
@@ -33,7 +33,7 @@ Describe here the list of steps to get your project running. For example:
 1. Get a free API Key at [https://example.com](https://example.com)
 2. Clone the repo
    ```sh
-   git clone https://github.com/github_username/repo_name.git
+   git clone https://github.com/katiegrace/ProgrammingParadigmsProject
    ```
 3. Install NPM packages
    ```sh
