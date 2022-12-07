@@ -5,7 +5,6 @@ from project.models import CandidateProfile
 from project.forms import RecruiterForm
 from django.views.generic import ListView, DetailView
 from project.models import RecruiterProfile
-from django.contrib.auth import login
 from project.forms import Post
 from .forms import Post
 from .forms import PostForm
