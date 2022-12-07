@@ -37,6 +37,8 @@ Project contributors (sorted alphabetically)
   * debugging
   * date/time for posts
   * date/time for offers
+  * added BootStrap to multple urls
+  * enhanced more UX features for users
 
 
 * **[Celina Ryan](https://github.com/celinaryan)**
