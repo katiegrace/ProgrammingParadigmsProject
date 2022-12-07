@@ -6,18 +6,21 @@ Project contributors (sorted alphabetically)
 
 * **[Sarah Cullinan](https://github.com/sarahcullinan)**
 
-  * Update a post
-  * Delete a post
+  * Update a post (function in vieww.py, post_update html)
+  * Delete a post (function in views.py)
   * Recruiter view all posts (only posts they created)
   * Candidate view all posts (all)
-  * Interested / not interested (added to post model, added functions to views.py to update database when thumbs up/down clicked, showed to the recruiter who liked their posts, candidate view to see all posts they are interested in )
-  * Offer (model, form, html) 
-  * make an offer to interested candidates (recruiter)
-  * viewing offers (candidates)
-  * accepting/declining offers (candidates)
-  * date/time for posts
-  * date/time for offers 
-  * debugging 
+  * Interested / not interested (added to attributes to post model, added functions to views.py to update database when thumbs up/down clicked)
+  * Candidate view all posts they are interested in
+  * Recruiter view the number and all candidates interested in their posts 
+  * Offer (model, form)
+  * Create_offer html
+  * Make an offer to interested candidates (recruiter)
+  * Viewing offers (candidates, index view and detail view, functions in views.py)
+  * Accepting/declining offers (candidates)
+  * Date/time for posts
+  * Date/time for offers 
+  * Debugging 
 
 * **[Sofia Dillhoff](https://github.com/sdillho2)**
 
