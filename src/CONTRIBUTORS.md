@@ -22,6 +22,9 @@ Project contributors (sorted alphabetically)
 
   * adding candidate, recuiters, jobs, offers on SQL database
   * reports (milestone, final)
+  * debugging
+  * added error notifications
+  * fixing HTMLS --> adding forms etc. 
 
 * **[Katie Grace](https://github.com/katiegrace)**
 
