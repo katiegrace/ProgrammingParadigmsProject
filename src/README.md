@@ -1,6 +1,6 @@
 # About The Project
 
-For this project, we created a website called TinDev, that allows recruiters and canidates searching for jobs to connect virtually. Our website include .....
+For this project, we created a website called TinDev, that allows recruiters and canidates searching for jobs to connect virtually. Our website includes job posting and other features such as making job offers, demonstrating interest in job postings and much more. 
 
 ## Built With
 List here all the dependencies of your project (including version). For example:
@@ -8,7 +8,7 @@ List here all the dependencies of your project (including version). For example:
 * [Python](https://www.python.org/)
 * [Django](https://www.djangoproject.com/)
 * [Bootstrap](https://getbootstrap.com)
-* [JQuery](https://jquery.com)
+* [SQLite](https://www.sqlite.org/)
 
 
 
