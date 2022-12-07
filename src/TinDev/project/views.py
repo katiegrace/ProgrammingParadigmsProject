@@ -315,7 +315,7 @@ def interest(request, id):
         post.likes.remove(CandidateProfile.objects.filter(username=request.session['logged_user'])[0])
     
     #maybe try not redirecting?
-    return redirect('/candidateViewPosts')
+    return redirect('/candidateLikedPosts')
 
 
 #dislike a post
@@ -350,7 +350,7 @@ def not_interest(request, id):
         post.dislikes.remove(CandidateProfile.objects.filter(username=request.session['logged_user'])[0])
     
     #maybe don't redirect them?
-    return redirect('/candidateViewPosts')
+    return redirect('/candidateLikedPosts')
 
 class candidate_likes(ListView):
     template_name = 'project/candidateLikedPosts.html'
