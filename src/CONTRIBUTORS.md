@@ -8,9 +8,9 @@ Project contributors (sorted alphabetically)
 
   * Update a post
   * Delete a post
-  * Recruiter view all posts (only their posts)
-  * Candidate view all posts 
-  * Likes/ dislikes (added to model, added functions to views, showed on recruiters end and candidates end)
+  * Recruiter view all posts (only posts they created)
+  * Candidate view all posts (all)
+  * Interested / not interested (added to post model, added functions to views.py to update database when thumbs up/down clicked, showed to the recruiter who liked their posts, candidate view to see all posts they are interested in )
   * Offer (model, form, html) 
   * make an offer to interested candidates (recruiter)
   * viewing offers (candidates)
@@ -24,7 +24,6 @@ Project contributors (sorted alphabetically)
   * reports (milestone, final)
   * debugging
   * added error notifications
-  * fixing HTMLS --> adding forms etc.
   * created superuser & managed database 
 
 * **[Katie Grace](https://github.com/katiegrace)**
@@ -44,3 +43,4 @@ Project contributors (sorted alphabetically)
 
   * Nav bar
   * compatabiliity score 
+  * create post (model, form, views)

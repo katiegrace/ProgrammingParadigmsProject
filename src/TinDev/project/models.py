@@ -47,6 +47,5 @@ class Offer(models.Model):
     # to see if the offer has expired
     expired = models.BooleanField(default=False)
     #to accept/deny
-    #true = accept
-    #fale = deny
-    response = models.BooleanField(default=False)
+    #will either be "accept" or "decline"
+    response = models.CharField(max_length=200)

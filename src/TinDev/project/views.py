@@ -421,7 +421,7 @@ def accept(request, id):
     offer = Offer.objects.get(id=id)
 
     #update the response field to true
-    offer.response = True
+    offer.response = 'accept'
 
     return redirect("/candidateOffers")
 
@@ -432,6 +432,6 @@ def decline(request, id):
     offer = Offer.objects.get(id=id)
 
     #update the response field to false
-    offer.response = False
+    offer.response = 'decline'
 
     return redirect("/candidateOffers")
