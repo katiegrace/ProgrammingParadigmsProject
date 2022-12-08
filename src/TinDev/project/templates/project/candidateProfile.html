@@ -1,23 +1,30 @@
-{%extends "project/base_cand.html" %}
-{% block title %}
+<!-- {% block title %}
 TinDev - Create Candidate
-{% endblock %}
+{% endblock %} -->
 {% block content %}
-<script id="replace_with_navbar" src="nav.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 
 <div class="container">
   <div class="page-header">
       <h1>Sign up as a candidate</h1>
   </div>
-</div>
+
 
 <form method="POST" action="{% url 'CandidateProfile' %}" enctype="multipart/form-data">
     {% csrf_token %}
+    {%if error%}
+    Error: {{error}}
+    <br><button>
+        <a href='/candidateProfile/'>Try Again</a>
+    </button>
+    {% else %}
     {{form}}
     <br>
     <button>
         Create
     </button>
+    {%endif%}
 </form> 
+</div>
 {% endblock %}
-<script id="replace_with_navbar" src="nav.js"></script>
