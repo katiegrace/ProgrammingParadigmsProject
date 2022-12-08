@@ -6,7 +6,7 @@ Project contributors (sorted alphabetically)
 
 * **[Sarah Cullinan](https://github.com/sarahcullinan)**
 
-  * Update a post (function in vieww.py, post_update html)
+  * Update a post (function in views.py, post_update html)
   * Delete a post (function in views.py)
   * Recruiter view all posts (only posts they created)
   * Candidate view all posts (all)
