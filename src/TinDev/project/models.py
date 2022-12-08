@@ -7,7 +7,7 @@ def remove_stopWords(str):
     k = []
     words = str.split()
     z = words
-    with open('/Users/celinaryan/Documents/GitHub/ProgrammingParadigmsProject/src/TinDev/project/templates/project/stopwords.txt', 'r') as f:
+    with open('project/templates/project/stopwords.txt', 'r') as f:
         for word in f:
             word = word.split('\n')
             k.append(word[0])
