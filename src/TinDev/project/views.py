@@ -69,18 +69,23 @@ def logout(request):
 def candidateProfile(request):
     if request.POST:
         form = CandidateForm(request.POST)
-        if form.is_valid():
+        # and username is unique
+        if form.is_valid() and RecruiterProfile.objects.filter(username=form.instance.username == 0) and CandidateProfile.objects.filter(username=form.instance.username == 0):
             form.save()
-        return redirect(login)
+            return redirect(login)
+        else:
+            return render(request, 'project/candidateProfile.html', {"error":"Username is already in use."})
     return render(request, 'project/candidateProfile.html', {'form':CandidateForm}) 
 
 #creating a recruiter profile
 def recruiterProfile(request):
     if request.POST:
         form = RecruiterForm(request.POST)
-        if form.is_valid():
+        if form.is_valid() and RecruiterProfile.objects.filter(username=form.instance.username == 0) and CandidateProfile.objects.filter(username=form.instance.username == 0):
             form.save()
-        return redirect(login)
+            return redirect(login)
+        else:
+            return render(request, 'project/recruiterProfile.html', {"error":"Username is already in use."})
     return render(request, 'project/recruiterProfile.html', {'form':RecruiterForm}) 
 
 # added context for scaalbility, before it said {'title':'Candidate'} but added context dictionary
@@ -269,7 +274,7 @@ def interest(request, id):
         post.likes.remove(CandidateProfile.objects.filter(username=request.session['logged_user'])[0])
     
     #maybe try not redirecting?
-    return redirect('/candidateViewPosts')
+    return redirect('/candidateLikedPosts')
 
 
 #dislike a post
@@ -304,7 +309,7 @@ def not_interest(request, id):
         post.dislikes.remove(CandidateProfile.objects.filter(username=request.session['logged_user'])[0])
     
     #maybe don't redirect them?
-    return redirect('/candidateViewPosts')
+    return redirect('/candidateLikedPosts')
 
 class candidate_likes(ListView):
     template_name = 'project/candidateLikedPosts.html'
